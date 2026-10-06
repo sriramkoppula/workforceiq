@@ -1,0 +1,330 @@
+/* ================= SKILLS PAGE ================= */
+
+.skills-page {
+    min-height: calc(100vh - 75px);
+    padding: 60px 7%;
+    background: #f7f9fc;
+}
+
+.skills-container {
+    max-width: 950px;
+    margin: auto;
+}
+
+
+/* ================= HEADING ================= */
+
+.skills-heading {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.skills-heading h1 {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.skills-heading > p:last-child {
+    color: #70798a;
+}
+
+
+/* ================= TARGET CAREER ================= */
+
+.target-career {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #f0efff;
+
+    padding: 20px 25px;
+
+    border: 1px solid #dedcff;
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+}
+
+.target-career small {
+    color: #77718f;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.target-career h2 {
+    color: #4f46e5;
+    font-size: 20px;
+    margin-top: 6px;
+}
+
+.change-btn {
+    border: 1px solid #4f46e5;
+    background: white;
+    color: #4f46e5;
+
+    padding: 9px 17px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+
+/* ================= ADD SKILL ================= */
+
+.add-skill-box,
+.current-skills {
+    background: white;
+
+    padding: 30px;
+
+    border: 1px solid #e8ebf1;
+
+    border-radius: 14px;
+
+    margin-bottom: 20px;
+}
+
+.add-skill-box h2,
+.current-skills h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.add-skill-box > p,
+.current-skills p {
+    color: #7a8393;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.add-skill-form {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr auto;
+    gap: 15px;
+    align-items: end;
+}
+
+.add-skill-form select {
+    padding: 13px;
+
+    border: 1px solid #dfe3ea;
+
+    border-radius: 8px;
+
+    background: white;
+
+    font-size: 14px;
+}
+
+.confidence-input {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.confidence-input label {
+    font-size: 12px;
+    color: #6e7788;
+    white-space: nowrap;
+}
+
+.confidence-input input {
+    width: 130px;
+    cursor: pointer;
+}
+
+.confidence-input span {
+    min-width: 42px;
+
+    color: #4f46e5;
+
+    font-weight: bold;
+}
+
+
+/* ================= SKILLS LIST ================= */
+
+.skills-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.skills-list-header p {
+    margin: 0;
+}
+
+.skills-list-header > strong {
+    color: #4f46e5;
+    font-size: 14px;
+}
+
+
+/* ================= SKILL CARD ================= */
+
+.skill-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px;
+
+    border: 1px solid #e8ebf1;
+
+    border-radius: 10px;
+
+    margin-bottom: 12px;
+}
+
+.skill-info {
+    min-width: 130px;
+}
+
+.skill-info h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.skill-status {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.skill-status.strong {
+    color: #19713a;
+}
+
+.skill-status.developing {
+    color: #9a6400;
+}
+
+.skill-status.basic {
+    color: #b23a3a;
+}
+
+
+.skill-progress {
+    flex: 1;
+
+    margin: 0 25px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 8px;
+
+    background: #edf0f4;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+
+    background: #4f46e5;
+
+    border-radius: 20px;
+}
+
+.skill-percentage {
+    font-size: 14px;
+    font-weight: bold;
+
+    color: #4f46e5;
+
+    min-width: 45px;
+}
+
+
+.delete-btn {
+    border: none;
+
+    background: #fff0f0;
+
+    color: #b23a3a;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    margin-left: 15px;
+}
+
+
+/* ================= EMPTY STATE ================= */
+
+.empty-state {
+    text-align: center;
+
+    padding: 45px 20px;
+
+    border: 1px dashed #dfe3ea;
+
+    border-radius: 10px;
+
+    color: #8a93a2;
+}
+
+.empty-state div {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.empty-state h3 {
+    color: #4d5666;
+    margin-bottom: 7px;
+}
+
+.empty-state p {
+    margin: 0;
+}
+
+
+/* ================= ACTIONS ================= */
+
+.skills-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 30px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 800px) {
+
+    .add-skill-form {
+        grid-template-columns: 1fr;
+    }
+
+    .confidence-input {
+        justify-content: space-between;
+    }
+
+    .confidence-input input {
+        flex: 1;
+    }
+
+    .skill-card {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .skill-progress {
+        order: 3;
+        width: 100%;
+        flex-basis: 100%;
+        margin: 0;
+    }
+}

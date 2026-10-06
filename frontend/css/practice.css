@@ -1,0 +1,597 @@
+/* =========================================
+   WorkforceIQ Practice
+========================================= */
+
+.practice-page {
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 35px 20px 60px;
+
+}
+
+
+/* =========================================
+   BACK
+========================================= */
+
+.back-link {
+
+    display: inline-block;
+
+    margin-bottom: 25px;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.practice-hero {
+
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #f8fafc
+    );
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.practice-label {
+
+    display: inline-block;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #2563eb;
+
+    margin-bottom: 10px;
+
+}
+
+
+.practice-hero h1 {
+
+    margin: 0 0 10px;
+
+    color: #0f172a;
+
+    font-size: 32px;
+
+}
+
+
+.practice-hero p {
+
+    color: #64748b;
+
+    margin-bottom: 20px;
+
+}
+
+
+.practice-info {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+
+.practice-info span {
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 20px;
+
+    padding: 7px 13px;
+
+    font-size: 13px;
+
+    color: #475569;
+
+}
+
+
+/* =========================================
+   PROGRESS
+========================================= */
+
+.practice-progress-card {
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.progress-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.progress-heading h2 {
+
+    margin: 0 0 5px;
+
+    font-size: 20px;
+
+    color: #0f172a;
+
+}
+
+
+.progress-heading p {
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+
+#practiceProgressPercent {
+
+    font-size: 24px;
+
+    color: #2563eb;
+
+}
+
+
+.practice-progress-bar {
+
+    height: 10px;
+
+    background: #e2e8f0;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-top: 18px;
+
+}
+
+
+.practice-progress-fill {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: #2563eb;
+
+    border-radius: 20px;
+
+    transition: width 0.3s ease;
+
+}
+
+
+/* =========================================
+   PROBLEM
+========================================= */
+
+.problem-section {
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+}
+
+
+.problem-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+#problemNumber {
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.difficulty {
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.problem-section h2 {
+
+    margin: 0 0 12px;
+
+    color: #0f172a;
+
+    font-size: 25px;
+
+}
+
+
+#problemDescription {
+
+    color: #475569;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================
+   EXAMPLE
+========================================= */
+
+.problem-example {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    background: #f8fafc;
+
+    border-radius: 12px;
+
+}
+
+
+.problem-example h3 {
+
+    margin: 0 0 10px;
+
+    font-size: 15px;
+
+    color: #334155;
+
+}
+
+
+.problem-example pre {
+
+    margin: 0;
+
+    white-space: pre-wrap;
+
+    font-family: Consolas, monospace;
+
+    color: #475569;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   SOLUTION
+========================================= */
+
+.solution-area {
+
+    margin-top: 25px;
+
+}
+
+
+.solution-area label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+    color: #334155;
+
+}
+
+
+.solution-area textarea {
+
+    width: 100%;
+
+    min-height: 180px;
+
+    box-sizing: border-box;
+
+    resize: vertical;
+
+    padding: 15px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    font-family: Consolas, monospace;
+
+    font-size: 14px;
+
+    outline: none;
+
+}
+
+
+.solution-area textarea:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.practice-message {
+
+    margin-top: 15px;
+
+    min-height: 20px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.problem-actions {
+
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top: 20px;
+
+}
+
+
+.primary-button,
+.secondary-button {
+
+    display: inline-block;
+
+    padding: 11px 18px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    border: none;
+
+}
+
+
+.primary-button {
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+}
+
+
+.primary-button:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+.secondary-button {
+
+    background: #f1f5f9;
+
+    color: #334155;
+
+}
+
+
+.secondary-button:hover {
+
+    background: #e2e8f0;
+
+}
+
+
+/* =========================================
+   COMPLETION
+========================================= */
+
+.completion-section {
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    padding: 45px 25px;
+
+}
+
+
+.completion-icon {
+
+    font-size: 48px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.completion-section h2 {
+
+    color: #0f172a;
+
+}
+
+
+.completion-section p {
+
+    color: #64748b;
+
+}
+
+
+.completion-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top: 25px;
+
+}
+
+
+/* =========================================
+   BOTTOM
+========================================= */
+
+.bottom-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top: 30px;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .practice-page {
+
+        padding: 25px 15px 45px;
+
+    }
+
+
+    .practice-hero {
+
+        padding: 25px 20px;
+
+    }
+
+
+    .practice-hero h1 {
+
+        font-size: 26px;
+
+    }
+
+
+    .problem-section {
+
+        padding: 22px;
+
+    }
+
+
+    .progress-heading {
+
+        align-items: flex-start;
+
+    }
+
+}

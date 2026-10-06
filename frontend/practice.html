@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practice | WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/practice.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        WorkforceIQ
+    </div>
+
+    <div class="nav-links">
+
+        <a href="dashboard.html">Dashboard</a>
+        <a href="skills.html">Skills</a>
+        <a href="evidence.html">Evidence</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="learning.html">Learning</a>
+        <a href="progress.html">Progress</a>
+
+    </div>
+
+    <div class="user-circle">
+        U
+    </div>
+
+</nav>
+
+
+<main class="practice-page">
+
+    <a href="learning.html" class="back-link">
+        ← Back to Learning
+    </a>
+
+
+    <!-- HEADER -->
+
+    <section class="practice-hero">
+
+        <span class="practice-label">
+            PRACTICE
+        </span>
+
+        <h1 id="practiceTitle">
+            Practice Problems
+        </h1>
+
+        <p id="practiceDescription">
+            Strengthen your understanding by solving practical problems.
+        </p>
+
+        <div class="practice-info">
+
+            <span id="practiceSkill">
+                Skill
+            </span>
+
+            <span id="practiceTopic">
+                Topic
+            </span>
+
+            <span id="practiceCount">
+                0 Problems
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROGRESS -->
+
+    <section class="practice-progress-card">
+
+        <div class="progress-heading">
+
+            <div>
+
+                <h2>Your Practice Progress</h2>
+
+                <p id="practiceProgressText">
+                    0 of 0 problems completed
+                </p>
+
+            </div>
+
+            <strong id="practiceProgressPercent">
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="practice-progress-bar">
+
+            <div
+                id="practiceProgressBar"
+                class="practice-progress-fill"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROBLEM -->
+
+    <section
+        id="problemSection"
+        class="problem-section"
+    >
+
+        <div class="problem-header">
+
+            <span id="problemNumber">
+                Problem 1
+            </span>
+
+            <span
+                id="problemDifficulty"
+                class="difficulty"
+            >
+                Easy
+            </span>
+
+        </div>
+
+
+        <h2 id="problemTitle">
+            Loading problem...
+        </h2>
+
+
+        <p id="problemDescription">
+            Loading...
+        </p>
+
+
+        <div class="problem-example">
+
+            <h3>Example</h3>
+
+            <pre id="problemExample"></pre>
+
+        </div>
+
+
+        <div class="solution-area">
+
+            <label for="solutionInput">
+                Your Answer
+            </label>
+
+            <textarea
+                id="solutionInput"
+                placeholder="Write your solution or explanation here..."
+            ></textarea>
+
+        </div>
+
+
+        <div
+            id="practiceMessage"
+            class="practice-message"
+        ></div>
+
+
+        <div class="problem-actions">
+
+            <button
+                id="submitProblemButton"
+                class="primary-button"
+            >
+                Submit Solution
+            </button>
+
+            <button
+                id="nextProblemButton"
+                class="secondary-button"
+                style="display:none;"
+            >
+                Next Problem →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMPLETION -->
+
+    <section
+        id="completionSection"
+        class="completion-section"
+        style="display:none;"
+    >
+
+        <div class="completion-icon">
+            🎉
+        </div>
+
+        <h2>Practice Complete!</h2>
+
+        <p id="completionText">
+            You completed your practice session.
+        </p>
+
+        <div class="completion-actions">
+
+            <button
+                id="retryPracticeButton"
+                class="primary-button"
+            >
+                Practice Again
+            </button>
+
+            <button
+                id="evidenceButton"
+                class="secondary-button"
+            >
+                Add Practice Evidence
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM ACTIONS -->
+
+    <section class="bottom-actions">
+
+        <a
+            href="learning.html"
+            class="secondary-button"
+        >
+            Learning Center
+        </a>
+
+        <a
+            href="roadmap.html"
+            class="secondary-button"
+        >
+            View Roadmap
+        </a>
+
+    </section>
+
+</main>
+
+
+<script src="js/auth.js"></script>
+<script src="js/practice.js"></script>
+
+</body>
+</html>

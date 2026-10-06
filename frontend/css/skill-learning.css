@@ -1,0 +1,326 @@
+/* =====================================================
+   WORKFORCEIQ - SKILL LEARNING
+===================================================== */
+
+.learning-page {
+    background: #f5f7fb;
+    min-height: calc(100vh - 70px);
+    padding: 35px 20px 60px;
+}
+
+.learning-page > * {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.skill-learning-header {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.learning-label {
+    display: block;
+    color: #4f46e5;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.skill-learning-header h1 {
+    margin: 0 0 8px;
+    color: #111827;
+    font-size: 34px;
+}
+
+.skill-learning-header p {
+    margin: 0;
+    color: #64748b;
+}
+
+.confidence-card {
+    min-width: 150px;
+    text-align: center;
+    background: #eef2ff;
+    border-radius: 14px;
+    padding: 18px;
+}
+
+.confidence-card span {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.confidence-card strong {
+    color: #4f46e5;
+    font-size: 28px;
+}
+
+.learning-progress-card,
+.learning-card,
+.completion-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 20px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    margin: 0 0 5px;
+    color: #111827;
+    font-size: 23px;
+}
+
+.section-heading p {
+    margin: 0;
+    color: #64748b;
+}
+
+.learning-status {
+    background: #eef2ff;
+    color: #4f46e5;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.progress-value {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.progress-value strong {
+    font-size: 30px;
+    color: #4f46e5;
+}
+
+.progress-value span {
+    color: #64748b;
+}
+
+.progress-track {
+    width: 100%;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    background: #4f46e5;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+
+.prerequisites-list {
+    display: grid;
+    gap: 10px;
+}
+
+.prerequisite-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.prerequisite-item span:last-child {
+    color: #16a34a;
+    font-weight: 700;
+}
+
+.curriculum-list {
+    display: grid;
+    gap: 12px;
+}
+
+.topic-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+    padding: 16px;
+    background: #fff;
+}
+
+.topic-item > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.topic-number {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #4f46e5;
+    border-radius: 50%;
+    font-weight: 800;
+}
+
+.topic-item strong {
+    color: #111827;
+}
+
+.topic-button,
+.activity-card button,
+.primary-button {
+    border: none;
+    background: #4f46e5;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.topic-button:hover,
+.activity-card button:hover,
+.primary-button:hover {
+    background: #4338ca;
+}
+
+.resource-grid,
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.resource-card,
+.activity-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.resource-icon,
+.activity-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.resource-card h3,
+.activity-card h3 {
+    margin: 0 0 7px;
+    color: #111827;
+}
+
+.resource-card p,
+.activity-card p {
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.resource-card a {
+    color: #4f46e5;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.completion-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.completion-icon {
+    font-size: 40px;
+}
+
+.completion-card h2 {
+    margin: 0 0 5px;
+}
+
+.completion-card p {
+    margin: 0;
+    color: #64748b;
+}
+
+.completion-card .primary-button {
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.bottom-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.secondary-button {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #111827;
+    padding: 11px 17px;
+    border-radius: 9px;
+    font-weight: 700;
+}
+
+@media (max-width: 800px) {
+
+    .skill-learning-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .confidence-card {
+        width: 100%;
+    }
+
+    .resource-grid,
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .completion-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .completion-card .primary-button {
+        margin-left: 0;
+    }
+}

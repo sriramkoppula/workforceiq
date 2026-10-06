@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mini Projects | WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/projects.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="logo">
+            Workforce<span>IQ</span>
+        </div>
+
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="skills.html">Skills</a>
+            <a href="evidence.html">Evidence</a>
+            <a href="roadmap.html">Roadmap</a>
+            <a href="learning.html">Learning</a>
+            <a href="progress.html">Progress</a>
+        </nav>
+
+        <div class="user-circle" id="userCircle">U</div>
+
+    </header>
+
+
+    <main class="projects-page">
+
+        <!-- BACK -->
+        <a href="learning.html" class="back-link">
+            ← Back to Learning
+        </a>
+
+
+        <!-- HERO -->
+        <section class="projects-hero">
+
+            <div>
+
+                <span class="project-label">
+                    MINI PROJECT
+                </span>
+
+                <h1 id="projectTitle">
+                    Build Your Project
+                </h1>
+
+                <p id="projectDescription">
+                    Apply what you learned by building a practical project.
+                </p>
+
+            </div>
+
+            <div class="difficulty-box">
+
+                <span>Difficulty</span>
+
+                <strong id="projectDifficulty">
+                    Beginner
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECT INFO -->
+        <section class="project-summary">
+
+            <div class="summary-card">
+
+                <span>🎯 Skill</span>
+
+                <strong id="projectSkill">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>📚 Topic</span>
+
+                <strong id="projectTopic">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>⏱️ Estimated Time</span>
+
+                <strong id="projectTime">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>📊 Status</span>
+
+                <strong id="projectStatus">
+                    Not Started
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- OBJECTIVE -->
+        <section class="project-card">
+
+            <span class="section-label">
+                PROJECT OBJECTIVE
+            </span>
+
+            <h2>What You Will Build</h2>
+
+            <p id="objectiveText">
+                Build a practical application using the concepts you learned.
+            </p>
+
+        </section>
+
+
+        <!-- REQUIREMENTS -->
+        <section class="project-card">
+
+            <span class="section-label">
+                REQUIREMENTS
+            </span>
+
+            <h2>What You Need To Implement</h2>
+
+            <div id="requirementsList" class="requirements-list">
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+        <section class="project-card">
+
+            <span class="section-label">
+                FEATURES
+            </span>
+
+            <h2>Recommended Features</h2>
+
+            <div id="featuresList" class="features-list">
+            </div>
+
+        </section>
+
+
+        <!-- CHECKLIST -->
+        <section class="project-card">
+
+            <span class="section-label">
+                PROJECT CHECKLIST
+            </span>
+
+            <h2>Track Your Work</h2>
+
+            <p class="section-description">
+                Complete the tasks as you build your project.
+            </p>
+
+            <div id="checklist" class="checklist">
+            </div>
+
+            <div class="checklist-progress">
+
+                <div class="progress-header">
+
+                    <span>Project Progress</span>
+
+                    <strong id="checklistProgressText">
+                        0%
+                    </strong>
+
+                </div>
+
+                <div class="progress-track">
+
+                    <div
+                        id="checklistProgressBar"
+                        class="progress-fill">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECT SUBMISSION -->
+        <section class="project-card submission-card">
+
+            <span class="section-label">
+                PROJECT EVIDENCE
+            </span>
+
+            <h2>Show What You Built</h2>
+
+            <p>
+                Once you complete the project, add it as evidence
+                to your WorkforceIQ profile.
+            </p>
+
+            <div class="submission-actions">
+
+                <button
+                    id="completeProjectButton"
+                    class="primary-button">
+                    ✓ Mark Project Complete
+                </button>
+
+                <button
+                    id="evidenceButton"
+                    class="secondary-button">
+                    Add Project Evidence →
+                </button>
+
+            </div>
+
+            <p
+                id="completionMessage"
+                class="completion-message">
+            </p>
+
+        </section>
+
+
+        <!-- WHAT THIS BUILDS -->
+        <section class="project-card">
+
+            <span class="section-label">
+                WORKFORCEIQ INSIGHT
+            </span>
+
+            <h2>Why This Project Matters</h2>
+
+            <div class="insight-box">
+
+                <div class="insight-icon">
+                    💡
+                </div>
+
+                <p id="insightText">
+                    Projects provide practical evidence of your
+                    ability to apply a skill.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACTIONS -->
+        <section class="bottom-actions">
+
+            <a
+                href="learning.html"
+                class="secondary-button">
+                ← Learning Center
+            </a>
+
+            <a
+                href="roadmap.html"
+                class="primary-button">
+                View Roadmap →
+            </a>
+
+        </section>
+
+    </main>
+
+
+<script src="js/auth.js"></script>
+<script src="js/projects.js"></script>
+
+</body>
+
+</html>

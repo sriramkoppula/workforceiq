@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Plan | WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/study-plan.css">
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-brand">
+            <a href="dashboard.html">
+                WorkforceIQ
+            </a>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="skills.html">
+                Skills
+            </a>
+
+            <a href="evidence.html">
+                Evidence
+            </a>
+
+            <a href="roadmap.html">
+                Roadmap
+            </a>
+
+            <a href="learning.html" class="active">
+                Learning
+            </a>
+
+            <a href="progress.html">
+                Progress
+            </a>
+
+        </div>
+
+        <div class="user-circle">
+            U
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="study-plan-container">
+
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <section class="study-plan-hero">
+
+            <div>
+
+                <span class="page-label">
+                    PERSONALIZED LEARNING
+                </span>
+
+                <h1>
+                    Your Study Plan 📚
+                </h1>
+
+                <p id="planDescription">
+                    A personalized learning schedule based on
+                    your career goal and available study time.
+                </p>
+
+            </div>
+
+            <div class="career-badge">
+
+                <span>
+                    🎯 Target Career
+                </span>
+
+                <strong id="careerName">
+                    Loading...
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SUMMARY
+        ====================================== -->
+
+        <section class="plan-summary-grid">
+
+
+            <div class="plan-summary-card">
+
+                <div class="summary-icon">
+                    ⏱️
+                </div>
+
+                <div>
+
+                    <span>
+                        Daily Study
+                    </span>
+
+                    <strong id="dailyHours">
+                        0 hrs
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="plan-summary-card">
+
+                <div class="summary-icon">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        Study Days
+                    </span>
+
+                    <strong id="studyDays">
+                        0 days
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="plan-summary-card">
+
+                <div class="summary-icon">
+                    📚
+                </div>
+
+                <div>
+
+                    <span>
+                        Weekly Hours
+                    </span>
+
+                    <strong id="weeklyHours">
+                        0 hrs
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="plan-summary-card">
+
+                <div class="summary-icon">
+                    🎯
+                </div>
+
+                <div>
+
+                    <span>
+                        Current Readiness
+                    </span>
+
+                    <strong id="readiness">
+                        0%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             TODAY
+        ====================================== -->
+
+        <section class="today-plan-card">
+
+            <div class="today-header">
+
+                <div>
+
+                    <span class="today-label">
+                        TODAY'S FOCUS
+                    </span>
+
+                    <h2 id="todayTitle">
+                        Loading today's plan...
+                    </h2>
+
+                    <p id="todayDescription">
+                        Your personalized tasks will appear here.
+                    </p>
+
+                </div>
+
+                <div class="today-icon">
+                    🎯
+                </div>
+
+            </div>
+
+
+            <div
+                id="todayActivities"
+                class="today-activities"
+            ></div>
+
+        </section>
+
+
+        <!-- =====================================
+             WEEKLY PLAN
+        ====================================== -->
+
+        <section class="weekly-plan-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        📅 Weekly Study Plan
+                    </h2>
+
+                    <p>
+                        Follow this schedule to build your
+                        career skills step by step.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="weeklyPlan"
+                class="weekly-plan"
+            ></div>
+
+        </section>
+
+
+        <!-- =====================================
+             LEARNING PRIORITIES
+        ====================================== -->
+
+        <section class="priorities-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        ⭐ Learning Priorities
+                    </h2>
+
+                    <p>
+                        Skills are ordered according to your
+                        current readiness and prerequisites.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="learningPriorities"
+                class="learning-priorities"
+            ></div>
+
+        </section>
+
+
+        <!-- =====================================
+             STUDY TIPS
+        ====================================== -->
+
+        <section class="study-tips-card">
+
+            <div class="tips-icon">
+                💡
+            </div>
+
+            <div>
+
+                <h2>
+                    Make the most of your study time
+                </h2>
+
+                <ul>
+
+                    <li>
+                        Complete prerequisites before moving
+                        to advanced skills.
+                    </li>
+
+                    <li>
+                        Practice what you learn instead of
+                        only watching or reading.
+                    </li>
+
+                    <li>
+                        Add projects and assessments as
+                        evidence of your skills.
+                    </li>
+
+                    <li>
+                        Keep practicing regularly to reduce
+                        skill decay.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ACTIONS
+        ====================================== -->
+
+        <section class="study-plan-actions">
+
+            <a
+                href="learning.html"
+                class="secondary-button"
+            >
+                ← Learning Center
+            </a>
+
+            <a
+                href="roadmap.html"
+                class="primary-button"
+            >
+                View Skill Roadmap →
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================================
+         SCRIPTS
+    ========================================== -->
+
+    <script src="js/auth.js"></script>
+    <script src="js/study-plan.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Skills | Intelligent Workforce</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/skills.css">
+
+</head>
+
+
+<body>
+
+    <!-- ==============================
+         NAVBAR
+    =============================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Workforce<span>IQ</span>
+        </div>
+
+
+        <nav class="nav-links">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="skills.html" class="active">
+                Skills
+            </a>
+
+            <a href="evidence.html">
+                Evidence
+            </a>
+
+            <a href="roadmap.html">
+                Roadmap
+            </a>
+
+            <a href="progress.html">
+                Progress
+            </a>
+
+        </nav>
+
+
+        <div class="profile-step">
+            Step 2 of 3
+        </div>
+
+    </header>
+
+
+
+    <!-- ==============================
+         MAIN
+    =============================== -->
+
+    <main class="skills-page">
+
+        <div class="skills-container">
+
+
+            <!-- ==============================
+                 HEADING
+            =============================== -->
+
+            <div class="skills-heading">
+
+                <p class="section-label">
+                    YOUR CURRENT SKILLS
+                </p>
+
+                <h1>
+                    What Do You Know?
+                </h1>
+
+                <p>
+                    Add the skills you currently have and
+                    estimate your confidence in each skill.
+                </p>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 TARGET CAREER
+            =============================== -->
+
+            <div class="target-career">
+
+                <div>
+
+                    <small>
+                        TARGET CAREER
+                    </small>
+
+                    <h2 id="targetCareer">
+                        Loading...
+                    </h2>
+
+                </div>
+
+
+                <button
+                    onclick="window.location.href='profile.html'"
+                    class="change-btn"
+                >
+                    Change
+                </button>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 ADD SKILL
+            =============================== -->
+
+            <div class="add-skill-box">
+
+                <h2>
+                    Add Your Skills
+                </h2>
+
+                <p>
+                    Select a skill and tell us your current level.
+                </p>
+
+
+                <div class="add-skill-form">
+
+
+                    <!-- SKILL SELECT -->
+
+                    <select id="skillSelect">
+
+                        <option value="">
+                            Select a skill
+                        </option>
+
+                        <option value="Java">
+                            Java
+                        </option>
+
+                        <option value="OOP">
+                            OOP
+                        </option>
+
+                        <option value="DSA">
+                            DSA
+                        </option>
+
+                        <option value="SQL">
+                            SQL
+                        </option>
+
+                        <option value="DBMS">
+                            DBMS
+                        </option>
+
+                        <option value="Git">
+                            Git
+                        </option>
+
+                        <option value="HTML">
+                            HTML
+                        </option>
+
+                        <option value="CSS">
+                            CSS
+                        </option>
+
+                        <option value="JavaScript">
+                            JavaScript
+                        </option>
+
+                        <option value="Python">
+                            Python
+                        </option>
+
+                        <option value="C++">
+                            C++
+                        </option>
+
+                        <option value="AWS">
+                            AWS
+                        </option>
+
+                        <option value="REST API">
+                            REST API
+                        </option>
+
+                        <option value="Spring Boot">
+                            Spring Boot
+                        </option>
+
+                        <option value="Docker">
+                            Docker
+                        </option>
+
+                        <option value="React">
+                            React
+                        </option>
+
+                        <option value="Excel">
+                            Excel
+                        </option>
+
+                        <option value="Data Visualization">
+                            Data Visualization
+                        </option>
+
+                        <option value="Linux">
+                            Linux
+                        </option>
+
+                        <option value="Networking">
+                            Networking
+                        </option>
+
+                    </select>
+
+
+
+                    <!-- CONFIDENCE -->
+
+                    <div class="confidence-input">
+
+                        <label>
+                            Confidence
+                        </label>
+
+                        <input
+                            type="range"
+                            id="confidenceRange"
+                            min="0"
+                            max="100"
+                            value="50"
+                            oninput="updateConfidence()"
+                        >
+
+                        <span id="confidenceValue">
+                            50%
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- ADD BUTTON -->
+
+                    <button
+                        class="primary-btn add-btn"
+                        onclick="addSkill()"
+                    >
+                        + Add Skill
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 CURRENT SKILLS
+            =============================== -->
+
+            <div class="current-skills">
+
+                <div class="skills-list-header">
+
+                    <div>
+
+                        <h2>
+                            Your Skills
+                        </h2>
+
+                        <p>
+                            Skills you've added to your profile.
+                        </p>
+
+                    </div>
+
+
+                    <strong id="skillCount">
+                        0 Skills
+                    </strong>
+
+                </div>
+
+
+
+                <!-- SKILLS LIST -->
+
+                <div id="skillsList">
+
+                    <div class="empty-state">
+
+                        <div>
+                            🎯
+                        </div>
+
+                        <h3>
+                            No skills added yet
+                        </h3>
+
+                        <p>
+                            Add your first skill above.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 ACTIONS
+            =============================== -->
+
+            <div class="skills-actions">
+
+                <a
+                    href="profile.html"
+                    class="back-btn"
+                >
+                    ← Back
+                </a>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="continueToEvidence()"
+                >
+                    Continue to Evidence →
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ==============================
+         JAVASCRIPT
+    =============================== -->
+<script src="js/auth.js"></script>
+<script src="js/skills.js"></script>
+
+</body>
+
+</html>

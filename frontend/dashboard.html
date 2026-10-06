@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-brand">
+            <a href="dashboard.html">WorkforceIQ</a>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="dashboard.html" class="active">
+                Dashboard
+            </a>
+
+            <a href="skills.html">
+                Skills
+            </a>
+
+            <a href="evidence.html">
+                Evidence
+            </a>
+
+            <a href="roadmap.html">
+                Roadmap
+            </a>
+
+            <a href="learning.html">
+                Learning
+            </a>
+
+            <a href="progress.html">
+                Progress
+            </a>
+
+        </div>
+
+        <div class="user-circle">
+            U
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="dashboard-container">
+
+        <!-- Welcome -->
+
+        <section class="dashboard-welcome">
+
+            <div>
+
+                <p class="welcome-label">
+                    WorkforceIQ Dashboard
+                </p>
+
+                <h1>
+                    Welcome back,
+                    <span id="userName">
+                        User
+                    </span> 👋
+                </h1>
+
+                <p id="careerText">
+                    Let's continue building your career readiness.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SUMMARY CARDS
+        ====================================== -->
+
+        <section class="dashboard-grid">
+
+            <!-- Readiness -->
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    🎯
+                </div>
+
+                <h3>
+                    Overall Readiness
+                </h3>
+
+                <div
+                    id="readinessScore"
+                    class="big-number"
+                >
+                    0%
+                </div>
+
+                <p id="readinessMessage">
+                    Start adding your skills.
+                </p>
+
+            </div>
+
+
+            <!-- Skills -->
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    🧠
+                </div>
+
+                <h3>
+                    Skills Tracked
+                </h3>
+
+                <div
+                    id="skillsCount"
+                    class="big-number"
+                >
+                    0
+                </div>
+
+                <p>
+                    Skills currently tracked
+                </p>
+
+            </div>
+
+
+            <!-- Evidence -->
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Evidence Items
+                </h3>
+
+                <div
+                    id="evidenceCount"
+                    class="big-number"
+                >
+                    0
+                </div>
+
+                <p>
+                    Evidence submitted
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ANALYSIS
+        ====================================== -->
+
+        <section class="dashboard-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Skill Analysis
+                    </h2>
+
+                    <p>
+                        Understand your current career readiness.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="gap-summary">
+
+                <div class="gap-box strong-box">
+
+                    <span>
+                        💪
+                    </span>
+
+                    <h3>
+                        Strong
+                    </h3>
+
+                    <div
+                        id="strongCount"
+                        class="gap-count"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="gap-box developing-box">
+
+                    <span>
+                        📈
+                    </span>
+
+                    <h3>
+                        Developing
+                    </h3>
+
+                    <div
+                        id="developingCount"
+                        class="gap-count"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="gap-box missing-box">
+
+                    <span>
+                        ⚠️
+                    </span>
+
+                    <h3>
+                        Missing
+                    </h3>
+
+                    <div
+                        id="missingCount"
+                        class="gap-count"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="detailedGap"
+                class="detailed-gap"
+            ></div>
+
+        </section>
+
+
+        <!-- =====================================
+             NEXT BEST SKILL
+        ====================================== -->
+
+        <section class="dashboard-card next-skill-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        ⭐ Next Best Skill
+                    </h2>
+
+                    <p>
+                        WorkforceIQ recommends what you should
+                        learn next.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="next-skill-content">
+
+                <div>
+
+                    <h3 id="nextSkill">
+                        Complete your profile
+                    </h3>
+
+                    <p id="nextSkillDescription">
+                        Add your skills to receive a personalized
+                        recommendation.
+                    </p>
+
+                </div>
+
+                <button
+                    id="startLearningButton"
+                    class="primary-button"
+                >
+                    Start Learning →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             RECOMMENDED LEARNING
+        ====================================== -->
+
+        <section class="dashboard-card recommended-learning-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        🎓 Recommended Learning
+                    </h2>
+
+                    <p>
+                        Focus on the skill that can improve
+                        your career readiness next.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="recommendedLearning"
+                class="recommended-learning"
+            >
+
+                <div class="learning-recommendation">
+
+                    <div class="recommendation-icon">
+                        🎯
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Personalized learning will appear here
+                        </h3>
+
+                        <p>
+                            Add your skills and evidence to receive
+                            a recommendation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SKILL RADAR
+        ====================================== -->
+
+        <section class="dashboard-card radar-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Skill Radar
+                    </h2>
+
+                    <p>
+                        Visual overview of your current skill confidence
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="radar-container">
+
+                <canvas id="skillRadar"></canvas>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             RECENT EVIDENCE
+        ====================================== -->
+
+        <section class="dashboard-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Recent Evidence
+                    </h2>
+
+                    <p>
+                        Your latest proof of skill development.
+                    </p>
+
+                </div>
+
+                <a
+                    href="evidence.html"
+                    class="text-link"
+                >
+                    View All →
+                </a>
+
+            </div>
+
+
+            <div
+                id="recentEvidence"
+                class="recent-evidence"
+            >
+
+                <p>
+                    No evidence added yet.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ACTIONS
+        ====================================== -->
+
+        <section class="dashboard-actions">
+
+            <a
+                href="skills.html"
+                class="dashboard-action-card"
+            >
+
+                <span>
+                    🧠
+                </span>
+
+                <div>
+
+                    <h3>
+                        Manage Skills
+                    </h3>
+
+                    <p>
+                        Add or update your skills.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="evidence.html"
+                class="dashboard-action-card"
+            >
+
+                <span>
+                    📋
+                </span>
+
+                <div>
+
+                    <h3>
+                        Add Evidence
+                    </h3>
+
+                    <p>
+                        Show proof of your abilities.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="roadmap.html"
+                class="dashboard-action-card"
+            >
+
+                <span>
+                    🗺️
+                </span>
+
+                <div>
+
+                    <h3>
+                        View Roadmap
+                    </h3>
+
+                    <p>
+                        Follow your personalized skill path.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="learning.html"
+                class="dashboard-action-card"
+            >
+
+                <span>
+                    📚
+                </span>
+
+                <div>
+
+                    <h3>
+                        Learning Center
+                    </h3>
+
+                    <p>
+                        Continue learning your next skill.
+                    </p>
+
+                </div>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         SCRIPTS
+    ========================================== -->
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

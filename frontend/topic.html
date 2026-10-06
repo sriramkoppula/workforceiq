@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Learn Topic - WorkforceIQ</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <link rel="stylesheet"
+          href="css/topic.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        Workforce<span>IQ</span>
+    </div>
+
+
+    <nav class="nav-links">
+
+        <a href="dashboard.html">Dashboard</a>
+
+        <a href="skills.html">Skills</a>
+
+        <a href="evidence.html">Evidence</a>
+
+        <a href="roadmap.html">Roadmap</a>
+
+        <a href="learning.html"
+           class="active">
+            Learning
+        </a>
+
+        <a href="progress.html">Progress</a>
+
+    </nav>
+
+
+    <div class="user-circle"
+         id="userCircle">
+        U
+    </div>
+
+</header>
+
+
+
+<main class="topic-page">
+
+
+    <!-- BACK -->
+
+    <a href="skill-learning.html"
+       class="back-link"
+       id="backButton">
+
+        ← Back to Skill
+
+    </a>
+
+
+
+    <!-- TOPIC HEADER -->
+
+    <section class="topic-hero">
+
+        <div>
+
+            <span class="topic-label">
+                LEARNING TOPIC
+            </span>
+
+            <h1 id="topicName">
+                Loading...
+            </h1>
+
+            <p id="topicDescription">
+                Loading topic description...
+            </p>
+
+        </div>
+
+
+        <div class="topic-time-box">
+
+            <span>
+                Estimated Time
+            </span>
+
+            <strong id="topicHours">
+                0 hrs
+            </strong>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- TOPIC PROGRESS -->
+
+    <section class="topic-card">
+
+        <div class="topic-progress-header">
+
+            <div>
+
+                <span class="topic-label">
+                    YOUR PROGRESS
+                </span>
+
+                <h2>
+                    Topic Progress
+                </h2>
+
+            </div>
+
+
+            <strong id="topicProgress">
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="topic-progress-track">
+
+            <div id="topicProgressBar"
+                 class="topic-progress-fill">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CONCEPTS -->
+
+    <section class="topic-card">
+
+        <span class="topic-label">
+            CONCEPTS
+        </span>
+
+        <h2>
+            What You Will Learn
+        </h2>
+
+        <p>
+            Understand these concepts before moving
+            to practice.
+        </p>
+
+
+        <div id="conceptsList"
+             class="concepts-list">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- LEARNING CONTENT -->
+
+    <section class="topic-card">
+
+        <span class="topic-label">
+            LEARNING CONTENT
+        </span>
+
+        <h2>
+            Learn the Topic
+        </h2>
+
+
+        <div id="learningContent"
+             class="learning-content">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- STUDY SESSION -->
+
+    <section class="topic-card study-session-card">
+
+        <span class="topic-label">
+            STUDY SESSION
+        </span>
+
+        <h2>
+            Focus Session
+        </h2>
+
+        <p>
+            Track the actual time you spend learning
+            this topic.
+        </p>
+
+
+        <div class="study-timer">
+
+            <div id="timerDisplay">
+                00:00:00
+            </div>
+
+
+            <div class="timer-status"
+                 id="timerStatus">
+
+                Ready to start
+
+            </div>
+
+
+            <div class="timer-buttons">
+
+                <button
+                    id="startTimerButton"
+                    class="primary-button">
+
+                    ▶ Start Learning
+
+                </button>
+
+
+                <button
+                    id="stopTimerButton"
+                    class="secondary-button"
+                    disabled>
+
+                    ■ Stop Session
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="study-stats">
+
+            <div class="study-stat">
+
+                <span>
+                    Today's Study Time
+                </span>
+
+                <strong id="todayStudyTime">
+                    0 min
+                </strong>
+
+            </div>
+
+
+            <div class="study-stat">
+
+                <span>
+                    Total Study Time
+                </span>
+
+                <strong id="totalStudyTime">
+                    0 min
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- RESOURCES -->
+
+    <section class="topic-card">
+
+        <span class="topic-label">
+            LEARNING RESOURCES
+        </span>
+
+        <h2>
+            Continue Learning
+        </h2>
+
+        <p>
+            Use these resources to understand the
+            topic from different perspectives.
+        </p>
+
+
+        <div id="resourcesList"
+             class="resources-list">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- PRACTICE -->
+
+<section class="topic-card">
+
+    <span class="topic-label">
+        PRACTICE
+    </span>
+
+    <h2>
+        Apply What You Learned
+    </h2>
+
+
+    <div class="practice-grid">
+
+
+        <!-- PRACTICE PROBLEMS -->
+
+        <div class="practice-card">
+
+            <div class="practice-icon">
+                💻
+            </div>
+
+            <h3>
+                Practice Problems
+            </h3>
+
+            <p>
+                Solve coding and concept-based
+                problems to strengthen your knowledge.
+            </p>
+
+            <button
+                id="practiceButton"
+                class="secondary-button">
+
+                Start Practice →
+
+            </button>
+
+        </div>
+
+
+
+        <!-- MINI PROJECT -->
+
+        <div class="practice-card">
+
+            <div class="practice-icon">
+                🛠️
+            </div>
+
+            <h3>
+                Mini Project
+            </h3>
+
+            <p>
+                Apply this topic by building a small
+                practical project.
+            </p>
+
+            <button
+                id="projectButton"
+                class="secondary-button">
+
+                View Project →
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ASSESSMENT -->
+
+        <div class="practice-card">
+
+            <div class="practice-icon">
+                🧠
+            </div>
+
+            <h3>
+                Skill Assessment
+            </h3>
+
+            <p>
+                Test your understanding and measure
+                your knowledge of this topic.
+            </p>
+
+            <button
+                id="assessmentButton"
+                class="secondary-button">
+
+                Start Assessment →
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+    <!-- QUIZ -->
+
+    <section class="topic-card">
+
+        <span class="topic-label">
+            QUICK ASSESSMENT
+        </span>
+
+        <h2>
+            Test Your Understanding
+        </h2>
+
+
+        <div class="quiz-box">
+
+            <h3 id="quizQuestion">
+                Loading question...
+            </h3>
+
+
+            <div id="quizOptions"
+                 class="quiz-options">
+
+            </div>
+
+
+            <button
+                id="checkAnswerButton"
+                class="primary-button">
+
+                Check Answer
+
+            </button>
+
+
+            <div id="quizResult"
+                 class="quiz-result">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- COMPLETE -->
+
+    <section class="completion-card">
+
+        <div>
+
+            <span class="topic-label">
+                FINISH TOPIC
+            </span>
+
+            <h2>
+                Completed this topic?
+            </h2>
+
+            <p>
+                Mark the topic complete after learning,
+                practicing and testing your understanding.
+            </p>
+
+        </div>
+
+
+        <button
+            id="completeTopicButton"
+            class="primary-button">
+
+            ✓ Mark Topic Complete
+
+        </button>
+
+    </section>
+
+
+
+    <!-- ACTIONS -->
+
+    <div class="topic-actions">
+
+        <a href="skill-learning.html"
+           class="secondary-button"
+           id="bottomBackButton">
+
+            ← Back to Skill
+
+        </a>
+
+
+        <a href="learning.html"
+           class="primary-button">
+
+            Learning Center →
+
+        </a>
+
+    </div>
+
+
+</main>
+
+
+
+<script src="js/auth.js"></script>
+<script src="js/learning-progress.js"></script>
+<script src="js/topic.js"></script>
+
+
+</body>
+
+</html>

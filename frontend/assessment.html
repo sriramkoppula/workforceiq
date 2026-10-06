@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Assessment | WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/assessment.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        Workforce<span>IQ</span>
+    </div>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="skills.html">Skills</a>
+        <a href="evidence.html">Evidence</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="learning.html">Learning</a>
+        <a href="progress.html">Progress</a>
+    </nav>
+
+    <div class="user-circle" id="userCircle">U</div>
+
+</header>
+
+
+<main class="assessment-page">
+
+    <a href="learning.html" class="back-link">
+        ← Back to Learning
+    </a>
+
+
+    <!-- HERO -->
+
+    <section class="assessment-hero">
+
+        <div>
+
+            <span class="assessment-label">
+                SKILL ASSESSMENT
+            </span>
+
+            <h1 id="assessmentTitle">
+                Topic Assessment
+            </h1>
+
+            <p id="assessmentDescription">
+                Test your understanding of the topic.
+            </p>
+
+        </div>
+
+        <div class="assessment-info">
+
+            <div>
+                <span>Skill</span>
+                <strong id="assessmentSkill">-</strong>
+            </div>
+
+            <div>
+                <span>Topic</span>
+                <strong id="assessmentTopic">-</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- START SCREEN -->
+
+    <section
+        id="startSection"
+        class="assessment-card start-card">
+
+        <div class="start-icon">
+            🧠
+        </div>
+
+        <h2>Ready to Test Yourself?</h2>
+
+        <p>
+            This assessment checks how well you understand
+            the concepts covered in this topic.
+        </p>
+
+        <div class="assessment-rules">
+
+            <div>
+                <strong>10</strong>
+                <span>Questions</span>
+            </div>
+
+            <div>
+                <strong>1</strong>
+                <span>Attempt</span>
+            </div>
+
+            <div>
+                <strong>100%</strong>
+                <span>Maximum Score</span>
+            </div>
+
+        </div>
+
+        <button
+            id="startAssessmentButton"
+            class="primary-button">
+            Start Assessment →
+        </button>
+
+    </section>
+
+
+    <!-- QUESTION SECTION -->
+
+    <section
+        id="questionSection"
+        class="assessment-card question-card"
+        style="display:none;">
+
+        <div class="question-header">
+
+            <span>
+                Question
+                <strong id="questionNumber">1</strong>
+                of
+                <strong id="totalQuestions">10</strong>
+            </span>
+
+            <span
+                id="questionDifficulty"
+                class="difficulty">
+                Beginner
+            </span>
+
+        </div>
+
+
+        <div class="question-progress">
+
+            <div
+                id="questionProgressBar"
+                class="question-progress-fill">
+            </div>
+
+        </div>
+
+
+        <h2 id="questionText">
+            Question text
+        </h2>
+
+
+        <div id="questionOptions" class="question-options">
+        </div>
+
+
+        <div class="answer-area">
+
+            <p id="answerResult"></p>
+
+            <button
+                id="submitAnswerButton"
+                class="primary-button">
+                Submit Answer
+            </button>
+
+            <button
+                id="nextQuestionButton"
+                class="secondary-button"
+                style="display:none;">
+                Next Question →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULT -->
+
+    <section
+        id="resultSection"
+        class="assessment-card result-card"
+        style="display:none;">
+
+        <div class="result-icon">
+            🎯
+        </div>
+
+        <span class="assessment-label">
+            ASSESSMENT COMPLETE
+        </span>
+
+        <h2>Your Assessment Result</h2>
+
+        <div class="score-circle">
+
+            <strong id="finalScore">
+                0%
+            </strong>
+
+        </div>
+
+        <p id="resultMessage">
+            Assessment completed.
+        </p>
+
+
+        <div class="result-stats">
+
+            <div>
+                <span>Correct</span>
+                <strong id="correctAnswers">0</strong>
+            </div>
+
+            <div>
+                <span>Wrong</span>
+                <strong id="wrongAnswers">0</strong>
+            </div>
+
+            <div>
+                <span>Accuracy</span>
+                <strong id="finalAccuracy">0%</strong>
+            </div>
+
+        </div>
+
+
+        <div class="result-actions">
+
+            <button
+                id="retryButton"
+                class="secondary-button">
+                ↻ Retake Assessment
+            </button>
+
+            <button
+                id="evidenceButton"
+                class="primary-button">
+                Add Assessment Evidence →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- INSIGHT -->
+
+    <section class="assessment-card insight-card">
+
+        <span class="assessment-label">
+            WORKFORCEIQ INSIGHT
+        </span>
+
+        <h2>Why Assessments Matter</h2>
+
+        <p>
+            Your assessment result provides evidence of your
+            understanding of the topic. WorkforceIQ can use
+            assessment performance together with projects,
+            practice and other evidence to build a stronger
+            picture of your skill confidence.
+        </p>
+
+    </section>
+
+
+    <div class="bottom-actions">
+
+        <a
+            href="learning.html"
+            class="secondary-button">
+            ← Learning Center
+        </a>
+
+        <a
+            href="roadmap.html"
+            class="primary-button">
+            View Roadmap →
+        </a>
+
+    </div>
+
+</main>
+
+
+<script src="js/auth.js"></script>
+<script src="js/assessment.js"></script>
+
+</body>
+
+</html>

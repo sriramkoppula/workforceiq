@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Center - WorkforceIQ</title>
+
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <link rel="stylesheet"
+          href="css/learning.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        Workforce<span>IQ</span>
+    </div>
+
+
+    <nav class="nav-links">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="skills.html">
+            Skills
+        </a>
+
+        <a href="evidence.html">
+            Evidence
+        </a>
+
+        <a href="roadmap.html">
+            Roadmap
+        </a>
+
+        <a href="learning.html"
+           class="active">
+            Learning
+        </a>
+
+        <a href="progress.html">
+            Progress
+        </a>
+
+    </nav>
+
+
+    <div class="user-circle"
+         id="userCircle">
+
+        U
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="learning-page">
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <section class="learning-hero">
+
+        <div>
+
+            <span class="topic-label">
+                PERSONALIZED LEARNING
+            </span>
+
+            <h1>
+                Your Learning Center
+            </h1>
+
+            <p id="careerDescription">
+                Your personalized learning path.
+            </p>
+
+        </div>
+
+
+        <div class="learning-hero-icon">
+            📚
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         SUMMARY
+    ====================================== -->
+
+    <section class="learning-summary-grid">
+
+
+        <div class="learning-summary-card">
+
+            <span>
+                Learning Progress
+            </span>
+
+            <strong id="learningProgress">
+                0%
+            </strong>
+
+            <small>
+                Across your career skills
+            </small>
+
+        </div>
+
+
+        <div class="learning-summary-card">
+
+            <span>
+                Skills to Learn
+            </span>
+
+            <strong id="skillsRemaining">
+                0
+            </strong>
+
+            <small>
+                Skills below strong confidence
+            </small>
+
+        </div>
+
+
+        <div class="learning-summary-card">
+
+            <span>
+                Estimated Time
+            </span>
+
+            <strong id="estimatedTime">
+                0 weeks
+            </strong>
+
+            <small>
+                Based on your study schedule
+            </small>
+
+        </div>
+
+
+        <div class="learning-summary-card">
+
+            <span>
+                Study Schedule
+            </span>
+
+            <strong id="studyTime">
+                2 hrs/day
+            </strong>
+
+            <small>
+                Based on your profile
+            </small>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         CONTINUE LEARNING
+    ====================================== -->
+
+    <section class="learning-card continue-learning-card">
+
+        <div class="learning-card-header">
+
+            <div>
+
+                <span class="topic-label">
+                    CONTINUE LEARNING
+                </span>
+
+                <h2 id="continueSkill">
+                    Loading...
+                </h2>
+
+                <p id="continueDescription">
+                    Finding your next learning focus...
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="continue-progress">
+
+            <div class="continue-progress-top">
+
+                <span>
+                    Current Confidence
+                </span>
+
+                <strong id="continueProgressText">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div id="continueProgress"
+                     class="progress-fill">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <a id="continueButton"
+           href="#"
+           class="primary-button">
+
+            Start Learning →
+
+        </a>
+
+    </section>
+
+
+
+    <!-- =====================================
+         DAILY LEARNING GOAL
+    ====================================== -->
+
+    <section class="daily-goal-card">
+
+        <div class="daily-goal-header">
+
+            <div>
+
+                <span class="topic-label">
+                    TODAY'S GOAL
+                </span>
+
+                <h2>
+                    Your Daily Learning Goal
+                </h2>
+
+                <p>
+                    Track how much of your planned study
+                    time you have completed today.
+                </p>
+
+            </div>
+
+
+            <div class="goal-icon">
+                🎯
+            </div>
+
+        </div>
+
+
+        <div class="daily-goal-main">
+
+            <div class="goal-progress-circle">
+
+                <div class="goal-circle-inner">
+
+                    <strong id="dailyGoalPercent">
+                        0%
+                    </strong>
+
+                    <span>
+                        Complete
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="daily-goal-details">
+
+                <div class="goal-time">
+
+                    <strong id="dailyGoalStudied">
+                        0 min
+                    </strong>
+
+                    <span>
+                        studied today
+                    </span>
+
+                </div>
+
+
+                <div class="goal-time">
+
+                    <strong id="dailyGoalTarget">
+                        2 hrs
+                    </strong>
+
+                    <span>
+                        daily target
+                    </span>
+
+                </div>
+
+
+                <div class="goal-time">
+
+                    <strong id="dailyGoalRemaining">
+                        2 hrs
+                    </strong>
+
+                    <span>
+                        remaining
+                    </span>
+
+                </div>
+
+
+                <div class="goal-message"
+                     id="dailyGoalMessage">
+
+                    Start a learning session to
+                    work toward today's goal.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="daily-goal-progress">
+
+            <div class="daily-goal-progress-top">
+
+                <span>
+                    Daily Progress
+                </span>
+
+                <strong id="dailyGoalProgressText">
+                    0 / 2 hrs
+                </strong>
+
+            </div>
+
+
+            <div class="daily-goal-track">
+
+                <div id="dailyGoalProgressBar"
+                     class="daily-goal-fill">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="daily-goal-footer">
+
+            <span id="weeklyScheduleText">
+                Your schedule: 2 hours/day ·
+                6 days/week
+            </span>
+
+            <a href="profile.html">
+                Update Schedule →
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         TODAY'S PLAN
+    ====================================== -->
+
+    <section class="learning-card today-plan-card">
+
+        <div class="learning-card-header">
+
+            <div>
+
+                <span class="topic-label">
+                    TODAY'S PLAN
+                </span>
+
+                <h2 id="todayTitle">
+                    Loading today's plan...
+                </h2>
+
+                <p id="todayDescription">
+                    Preparing your personalized learning activity.
+                </p>
+
+            </div>
+
+
+            <div class="today-plan-meta">
+
+                <span id="todayType">
+                    📖 Learn + Practice
+                </span>
+
+                <strong id="todayTime">
+                    ⏱ 2 hours
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         LEARNING PATH
+    ====================================== -->
+
+    <section class="learning-card">
+
+        <div class="learning-card-header">
+
+            <div>
+
+                <span class="topic-label">
+                    PERSONALIZED PATH
+                </span>
+
+                <h2>
+                    Your Skill Learning Path
+                </h2>
+
+                <p>
+                    Follow the recommended order based
+                    on your prerequisites.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div id="learningPath"
+             class="learning-path">
+
+            Loading learning path...
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         LEARNING ACTIVITIES
+    ====================================== -->
+
+    <section class="learning-card">
+
+        <div class="learning-card-header">
+
+            <div>
+
+                <span class="topic-label">
+                    LEARNING ACTIVITIES
+                </span>
+
+                <h2>
+                    Learn · Practice · Build · Assess
+                </h2>
+
+                <p>
+                    Build real skills through different
+                    types of learning activities.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="activity-grid">
+
+
+            <div class="activity-card">
+
+                <div class="activity-icon">
+                    📖
+                </div>
+
+                <h3>
+                    Learn
+                </h3>
+
+                <p>
+                    Understand concepts through structured
+                    learning content.
+                </p>
+
+            </div>
+
+
+            <div class="activity-card">
+
+                <div class="activity-icon">
+                    💻
+                </div>
+
+                <h3>
+                    Practice
+                </h3>
+
+                <p>
+                    Solve problems and strengthen your
+                    understanding.
+                </p>
+
+            </div>
+
+
+            <div class="activity-card">
+
+                <div class="activity-icon">
+                    🛠️
+                </div>
+
+                <h3>
+                    Build
+                </h3>
+
+                <p>
+                    Apply your knowledge through projects
+                    and practical work.
+                </p>
+
+            </div>
+
+
+            <div class="activity-card">
+
+                <div class="activity-icon">
+                    📝
+                </div>
+
+                <h3>
+                    Assess
+                </h3>
+
+                <p>
+                    Test your knowledge and generate
+                    evidence of your skills.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         LEARNING INSIGHT
+    ====================================== -->
+
+    <section class="learning-insight">
+
+        <div class="insight-icon">
+            💡
+        </div>
+
+
+        <div>
+
+            <span class="topic-label">
+                WORKFORCEIQ INSIGHT
+            </span>
+
+            <h2 id="learningInsightTitle">
+                Your Personalized Recommendation
+            </h2>
+
+            <p id="learningInsight">
+                WorkforceIQ is analyzing your skills
+                and learning path.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         LEARNING ANALYTICS
+    ====================================== -->
+
+    <section class="analytics-section">
+
+        <div class="section-heading">
+
+            <span class="topic-label">
+                LEARNING ANALYTICS
+            </span>
+
+            <h2>
+                Your Learning Activity
+            </h2>
+
+            <p>
+                Understand how consistently you are
+                building your skills.
+            </p>
+
+        </div>
+
+
+        <!-- ANALYTICS SUMMARY -->
+
+        <div class="analytics-grid">
+
+
+            <div class="analytics-card">
+
+                <span>
+                    🔥 Learning Streak
+                </span>
+
+                <strong id="learningStreak">
+                    0 days
+                </strong>
+
+                <small>
+                    Keep learning every day
+                </small>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <span>
+                    ⏱️ Total Study Time
+                </span>
+
+                <strong id="analyticsStudyTime">
+                    0 min
+                </strong>
+
+                <small>
+                    Actual tracked learning time
+                </small>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <span>
+                    📚 Topics Completed
+                </span>
+
+                <strong id="topicsCompleted">
+                    0
+                </strong>
+
+                <small>
+                    Topics successfully completed
+                </small>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <span>
+                    🎯 Skills Completed
+                </span>
+
+                <strong id="skillsCompleted">
+                    0
+                </strong>
+
+                <small>
+                    Skills reaching 80% confidence
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- WEEKLY ACTIVITY -->
+
+        <div class="analytics-card large-analytics-card">
+
+            <div class="analytics-header">
+
+                <div>
+
+                    <span class="topic-label">
+                        WEEKLY ACTIVITY
+                    </span>
+
+                    <h3>
+                        Study Time This Week
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="weekly-chart">
+
+                <canvas id="weeklyStudyChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SKILL ACTIVITY -->
+
+        <div class="analytics-card large-analytics-card">
+
+            <div class="analytics-header">
+
+                <div>
+
+                    <span class="topic-label">
+                        SKILL ACTIVITY
+                    </span>
+
+                    <h3>
+                        Time Spent by Skill
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div id="skillStudyList"
+                 class="skill-study-list">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         BOTTOM ACTIONS
+    ====================================== -->
+
+    <div class="learning-actions">
+        
+
+        <a href="dashboard.html"
+           class="secondary-button">
+
+            ← Dashboard
+
+        </a>
+
+<a href="study-plan.html"
+   class="secondary-button">
+
+    📅 Weekly Study Plan
+
+</a>
+
+        <a href="progress.html"
+           class="primary-button">
+
+            View Progress →
+
+        </a>
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/learning.js"></script>
+
+
+</body>
+
+</html>

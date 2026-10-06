@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile Setup | Intelligent Workforce</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Workforce<span>IQ</span>
+        </div>
+
+        <div class="profile-step">
+            Step 1 of 3
+        </div>
+
+    </header>
+
+
+    <!-- Profile Setup -->
+
+    <main class="profile-page">
+
+        <div class="profile-container">
+
+            <div class="profile-heading">
+
+                <p class="section-label">
+                    GET STARTED
+                </p>
+
+                <h1>
+                    Build Your Career Profile
+                </h1>
+
+                <p>
+                    Tell us about yourself and choose the career
+                    you want to prepare for.
+                </p>
+
+            </div>
+
+
+            <!-- Progress -->
+
+            <div class="progress-bar">
+
+                <div class="progress-item active">
+                    <span>1</span>
+                    Profile
+                </div>
+
+                <div class="progress-line"></div>
+
+                <div class="progress-item">
+                    <span>2</span>
+                    Skills
+                </div>
+
+                <div class="progress-line"></div>
+
+                <div class="progress-item">
+                    <span>3</span>
+                    Readiness
+                </div>
+
+            </div>
+
+
+            <!-- Form -->
+
+            <form id="profileForm">
+
+                <div class="form-section">
+
+                    <h2>Personal Information</h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="education">
+                                Education
+                            </label>
+
+                            <select id="education" required>
+
+                                <option value="">
+                                    Select education
+                                </option>
+
+                                <option>
+                                    B.Tech CSE
+                                </option>
+
+                                <option>
+                                    B.Tech IT
+                                </option>
+
+                                <option>
+                                    BCA
+                                </option>
+
+                                <option>
+                                    MCA
+                                </option>
+
+                                <option>
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="year">
+                                Current Year
+                            </label>
+
+                            <select id="year" required>
+
+                                <option value="">
+                                    Select year
+                                </option>
+
+                                <option>
+                                    1st Year
+                                </option>
+
+                                <option>
+                                    2nd Year
+                                </option>
+
+                                <option>
+                                    3rd Year
+                                </option>
+
+                                <option>
+                                    4th Year
+                                </option>
+
+                                <option>
+                                    Graduate
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Career -->
+
+                <div class="form-section">
+
+                    <h2>Target Career</h2>
+
+                    <p class="form-help">
+                        Choose the role you want to become.
+                    </p>
+
+
+                    <div class="career-grid">
+
+                        <label class="career-card">
+
+                            <input
+                                type="radio"
+                                name="career"
+                                value="Java Backend Developer"
+                                required
+                            >
+
+                            <div class="career-content">
+
+                                <div class="career-icon">
+                                    ☕
+                                </div>
+
+                                <h3>
+                                    Java Backend Developer
+                                </h3>
+
+                                <p>
+                                    Java · Spring Boot · SQL · REST API
+                                </p>
+
+                            </div>
+
+                        </label>
+
+
+                        <label class="career-card">
+
+                            <input
+                                type="radio"
+                                name="career"
+                                value="Frontend Developer"
+                            >
+
+                            <div class="career-content">
+
+                                <div class="career-icon">
+                                    🌐
+                                </div>
+
+                                <h3>
+                                    Frontend Developer
+                                </h3>
+
+                                <p>
+                                    HTML · CSS · JavaScript · React
+                                </p>
+
+                            </div>
+
+                        </label>
+
+
+                        <label class="career-card">
+
+                            <input
+                                type="radio"
+                                name="career"
+                                value="Data Analyst"
+                            >
+
+                            <div class="career-content">
+
+                                <div class="career-icon">
+                                    📊
+                                </div>
+
+                                <h3>
+                                    Data Analyst
+                                </h3>
+
+                                <p>
+                                    SQL · Python · Excel · Data Visualization
+                                </p>
+
+                            </div>
+
+                        </label>
+
+
+                        <label class="career-card">
+
+                            <input
+                                type="radio"
+                                name="career"
+                                value="Cloud Engineer"
+                            >
+
+                            <div class="career-content">
+
+                                <div class="career-icon">
+                                    ☁️
+                                </div>
+
+                                <h3>
+                                    Cloud Engineer
+                                </h3>
+
+                                <p>
+                                    Linux · Networking · AWS · Docker
+                                </p>
+
+                            </div>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+<!-- Learning Preferences -->
+<div class="profile-section">
+
+    <h2>Learning Preferences</h2>
+
+    <p>
+        Tell WorkforceIQ how much time you can spend learning.
+    </p>
+
+    <div class="form-group">
+
+        <label for="studyHours">
+            How many hours can you study per day?
+        </label>
+
+        <select id="studyHours">
+
+            <option value="">
+                Select study time
+            </option>
+
+            <option value="1">
+                1 hour per day
+            </option>
+
+            <option value="2">
+                2 hours per day
+            </option>
+
+            <option value="3">
+                3 hours per day
+            </option>
+
+            <option value="4">
+                4 hours per day
+            </option>
+
+            <option value="5">
+                5+ hours per day
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="studyDays">
+            How many days can you study per week?
+        </label>
+
+        <select id="studyDays">
+
+            <option value="">
+                Select days
+            </option>
+
+            <option value="3">
+                3 days/week
+            </option>
+
+            <option value="4">
+                4 days/week
+            </option>
+
+            <option value="5">
+                5 days/week
+            </option>
+
+            <option value="6">
+                6 days/week
+            </option>
+
+            <option value="7">
+                7 days/week
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+                <!-- Interests -->
+
+                <div class="form-section">
+
+                    <h2>
+                        Career Goal
+                    </h2>
+
+                    <div class="form-group">
+
+                        <label for="goal">
+                            What is your main goal?
+                        </label>
+
+                        <select id="goal" required>
+
+                            <option value="">
+                                Select your goal
+                            </option>
+
+                            <option>
+                                Internship
+                            </option>
+
+                            <option>
+                                Campus Placement
+                            </option>
+
+                            <option>
+                                Off-Campus Job
+                            </option>
+
+                            <option>
+                                Career Preparation
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a href="index.html" class="back-btn">
+                        ← Back
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Continue to Skills →
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+<script src="js/auth.js"></script>
+<script src="js/profile.js"></script>
+
+</body>
+
+</html>

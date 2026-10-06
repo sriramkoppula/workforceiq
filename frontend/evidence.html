@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Evidence | WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/evidence.css">
+
+</head>
+
+<body>
+
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        Workforce<span>IQ</span>
+    </div>
+
+    <nav class="nav-links">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="skills.html">
+            Skills
+        </a>
+
+        <a href="evidence.html" class="active">
+            Evidence
+        </a>
+
+        <a href="roadmap.html">
+            Roadmap
+        </a>
+
+        <a href="progress.html">
+            Progress
+        </a>
+
+    </nav>
+
+    <div class="profile-step">
+        Step 3 of 3
+    </div>
+
+</header>
+
+
+<!-- =====================================
+     MAIN
+===================================== -->
+
+<main class="evidence-page">
+
+    <div class="evidence-container">
+
+
+        <!-- =================================
+             HEADING
+        ================================== -->
+
+        <div class="evidence-heading">
+
+            <p class="section-label">
+                SKILL EVIDENCE
+            </p>
+
+            <h1>
+                Prove What You Know
+            </h1>
+
+            <p>
+                Add evidence that supports your current
+                skill level.
+            </p>
+
+        </div>
+
+
+        <!-- =================================
+             INFORMATION
+        ================================== -->
+
+        <div class="info-box">
+
+            <strong>
+                Why evidence matters
+            </strong>
+
+            <p>
+                Your skill confidence is calculated from
+                assessments, projects, coding problems
+                and recent practice.
+            </p>
+
+        </div>
+
+
+        <!-- =================================
+             ADD EVIDENCE
+        ================================== -->
+
+        <div class="evidence-card">
+
+            <h2>
+                Add Evidence
+            </h2>
+
+            <div class="form-grid">
+
+
+                <!-- SKILL -->
+
+                <div class="form-group">
+
+                    <label for="skillSelect">
+                        Skill
+                    </label>
+
+                    <select id="skillSelect">
+
+                        <option value="">
+                            Select skill
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- EVIDENCE TYPE -->
+
+                <div class="form-group">
+
+                    <label for="evidenceType">
+                        Evidence Type
+                    </label>
+
+                    <select id="evidenceType">
+
+                        <option value="">
+                            Select evidence
+                        </option>
+
+                        <option value="assessment">
+                            Assessment
+                        </option>
+
+                        <option value="project">
+                            Project
+                        </option>
+
+                        <option value="problems">
+                            Coding Problems
+                        </option>
+
+                        <option value="practice">
+                            Recent Practice
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SCORE -->
+
+                <div class="form-group">
+
+                    <label for="evidenceScore">
+                        Evidence Score
+                    </label>
+
+                    <div class="score-input">
+
+                        <input
+                            type="number"
+                            id="evidenceScore"
+                            min="0"
+                            max="100"
+                            placeholder="0 - 100"
+                        >
+
+                        <span>%</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group full">
+
+                    <label for="evidenceDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="evidenceDescription"
+                        placeholder="Describe your evidence..."
+                        rows="3"
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="primary-btn"
+                id="addEvidenceButton"
+            >
+                + Add Evidence
+            </button>
+
+        </div>
+
+
+        <!-- =================================
+             EVIDENCE LIST
+        ================================== -->
+
+        <div class="evidence-card">
+
+            <div class="list-header">
+
+                <div>
+
+                    <h2>
+                        Your Evidence
+                    </h2>
+
+                    <p>
+                        Evidence you've added to your profile.
+                    </p>
+
+                </div>
+
+                <strong id="evidenceCount">
+                    0 Evidence
+                </strong>
+
+            </div>
+
+
+            <div id="evidenceList">
+
+                <div class="empty-evidence">
+
+                    <div>
+                        🔎
+                    </div>
+
+                    <h3>
+                        No evidence added yet
+                    </h3>
+
+                    <p>
+                        Add evidence to calculate your
+                        skill confidence.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             SCORE PREVIEW
+        ================================== -->
+
+        <div class="score-card">
+
+            <div>
+
+                <small>
+                    CURRENT READINESS
+                </small>
+
+                <h2 id="overallScore">
+                    0%
+                </h2>
+
+                <p>
+                    Based on your available evidence
+                </p>
+
+            </div>
+
+
+            <div
+                class="score-message"
+                id="scoreMessage"
+            >
+                Add evidence to see your readiness.
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             ACTIONS
+        ================================== -->
+
+        <div class="evidence-actions">
+
+            <a
+                href="skills.html"
+                class="back-btn"
+            >
+                ← Back
+            </a>
+
+            <button
+                type="button"
+                class="primary-btn"
+                id="viewReadinessButton"
+            >
+                View My Readiness →
+            </button>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+<script src="js/auth.js"></script>
+<script src="js/evidence.js"></script>
+
+</body>
+
+</html>

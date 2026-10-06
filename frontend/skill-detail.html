@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skill Details | WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/skill-detail.css">
+</head>
+
+<body>
+
+    <!-- ===============================
+         NAVBAR
+    ================================ -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Workforce<span>IQ</span>
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="skills.html">Skills</a>
+
+            <a href="evidence.html">Evidence</a>
+
+            <a href="roadmap.html">Roadmap</a>
+
+            <a href="progress.html">Progress</a>
+
+        </nav>
+
+        <div class="user-circle" id="userCircle">
+            U
+        </div>
+
+    </header>
+
+
+    <!-- ===============================
+         MAIN CONTENT
+    ================================ -->
+
+    <main class="skill-detail-container">
+
+        <!-- Back Button -->
+
+        <a href="dashboard.html" class="back-link">
+            ← Back to Dashboard
+        </a>
+
+
+        <!-- ===============================
+             SKILL HEADER
+        ================================ -->
+
+        <section class="skill-header-card">
+
+            <div>
+
+                <p class="section-label">
+                    SKILL DETAILS
+                </p>
+
+                <h1 id="skillName">
+                    Loading Skill...
+                </h1>
+
+                <p id="skillDescription">
+                    Loading skill information...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             CONFIDENCE CARD
+        ================================ -->
+
+        <section class="detail-card confidence-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Your Confidence</h2>
+
+                    <p>
+                        Your current confidence level for this skill
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="confidence-content">
+
+                <div class="confidence-score">
+
+                    <span id="skillConfidence">
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="confidence-bar">
+
+                    <div
+                        id="confidenceProgress"
+                        class="confidence-progress">
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="skillStatus"
+                    class="skill-status basic">
+
+                    BASIC
+
+                </div>
+
+            </div>
+
+
+            <!-- Skill Decay -->
+
+            <div
+                id="skillDecay"
+                class="skill-decay">
+
+                Checking skill freshness...
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             PREREQUISITES
+        ================================ -->
+
+        <section class="detail-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Prerequisites</h2>
+
+                    <p>
+                        Skills you should know before learning this skill
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="prerequisites"
+                class="prerequisites-list">
+
+                <p>
+                    Checking prerequisites...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             SKILL GAP
+        ================================ -->
+
+        <section class="detail-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Skill Gap</h2>
+
+                    <p>
+                        Understand how much you need to improve
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="skillGap"
+                class="skill-gap-message">
+
+                Analyzing your skill gap...
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             EVIDENCE
+        ================================ -->
+
+        <section class="detail-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Your Evidence</h2>
+
+                    <p>
+                        Projects, assessments and practice supporting your skill
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="evidence.html"
+                    class="secondary-button">
+
+                    + Add Evidence
+
+                </a>
+
+            </div>
+
+
+            <div
+                id="skillEvidence"
+                class="evidence-list">
+
+                <p>
+                    Loading evidence...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             RECOMMENDED ACTION
+        ================================ -->
+
+        <section class="detail-card recommended-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Recommended Action</h2>
+
+                    <p>
+                        What you should do next for this skill
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="recommendedAction"
+                class="recommended-action">
+
+                Analyzing your skill...
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             ACTION BUTTONS
+        ================================ -->
+
+        <section class="skill-actions">
+
+            <a
+                href="roadmap.html"
+                class="primary-button">
+
+                View My Roadmap →
+
+            </a>
+
+
+            <a
+                href="dashboard.html"
+                class="secondary-button">
+
+                Back to Dashboard
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- ===============================
+         JAVASCRIPT
+    ================================ -->
+<script src="js/auth.js"></script>
+<script src="js/skill-detail.js"></script>
+
+</body>
+
+</html>

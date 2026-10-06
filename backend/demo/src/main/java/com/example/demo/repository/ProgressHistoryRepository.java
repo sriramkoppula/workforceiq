@@ -1,0 +1,13 @@
+package com.example.demo.repository;
+
+import com.example.demo.ProgressHistory;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ProgressHistoryRepository
+        extends JpaRepository<ProgressHistory, Long> {
+
+    List<ProgressHistory>
+    findByUserIdOrderByCreatedAtAsc(Long userId);
+}

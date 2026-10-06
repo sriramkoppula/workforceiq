@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/register.css">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="auth-info">
+
+            <div class="brand">
+                Workforce<span>IQ</span>
+            </div>
+
+            <h1>
+                Start Your<br>
+                Career Journey.
+            </h1>
+
+            <p>
+                Create your WorkforceIQ account and discover
+                what skills you need to become career ready.
+            </p>
+
+            <div class="feature-list">
+
+                <div class="feature">
+                    <span>✓</span>
+                    <p>Build your personal skill profile</p>
+                </div>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <p>Discover your skill gaps</p>
+                </div>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <p>Follow a personalized roadmap</p>
+                </div>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <p>Track your learning progress</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- REGISTER CARD -->
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+
+                <h2>Create Account</h2>
+
+                <p>
+                    Start building your career-ready profile.
+                </p>
+
+            </div>
+
+
+            <form id="registerForm">
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <div class="password-hint">
+                        Password must contain at least 6 characters.
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <div class="terms">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required
+                        >
+
+                        <span>
+                            I agree to the WorkforceIQ
+                            <a href="#" onclick="return false;">
+                                Terms & Conditions
+                            </a>
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="register-button"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="registerMessage"
+                class="register-message"
+            ></div>
+
+
+            <!-- LOGIN -->
+
+            <div class="login-link">
+
+                <p>
+                    Already have an account?
+                    <a href="login.html">
+                        Login
+                    </a>
+                </p>
+
+            </div>
+
+
+            <!-- HOME -->
+
+            <div class="back-home">
+
+                <a href="index.html">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/register.js"></script>
+
+</body>
+
+</html>

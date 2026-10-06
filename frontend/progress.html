@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Progress History | WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/progress.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span>Workforce</span>IQ
+    </div>
+
+    <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="skills.html">Skills</a>
+        <a href="evidence.html">Evidence</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="progress.html" class="active">Progress</a>
+    </div>
+
+    <div class="user-circle" id="userCircle">
+        U
+    </div>
+
+</nav>
+
+
+<main class="progress-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="page-label">
+                PROGRESS TRACKING
+            </span>
+
+            <h1>Your Progress</h1>
+
+            <p id="careerText">
+                Track how your career readiness changes over time.
+            </p>
+
+        </div>
+
+        <a href="dashboard.html" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- CURRENT READINESS -->
+
+    <section class="current-progress-card">
+
+        <div>
+
+            <span>
+                CURRENT CAREER READINESS
+            </span>
+
+            <h2 id="currentReadiness">
+                0%
+            </h2>
+
+            <p id="progressMessage">
+                Keep building your skills.
+            </p>
+
+        </div>
+
+        <div class="progress-circle">
+            <span id="circleValue">
+                0%
+            </span>
+        </div>
+
+    </section>
+
+
+    <!-- PROGRESS CHART -->
+
+    <section class="progress-card">
+
+        <div class="card-header">
+
+            <div>
+                <h2>Readiness Over Time</h2>
+
+                <p>
+                    See how your readiness has changed.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="chart-container">
+
+            <canvas id="progressChart"></canvas>
+
+        </div>
+
+    </section>
+
+
+    <!-- HISTORY -->
+
+    <section class="progress-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>Progress History</h2>
+
+                <p>
+                    Previous readiness records.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div id="historyList">
+        </div>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            <span>
+                STARTING
+            </span>
+
+            <strong id="startingScore">
+                0%
+            </strong>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span>
+                CURRENT
+            </span>
+
+            <strong id="currentScore">
+                0%
+            </strong>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span>
+                IMPROVEMENT
+            </span>
+
+            <strong id="improvementScore">
+                0%
+            </strong>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/progress.js"></script>
+
+</body>
+
+</html>
