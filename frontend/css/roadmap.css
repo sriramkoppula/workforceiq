@@ -1,275 +1,743 @@
-/* =====================================
-   ROADMAP PAGE
-===================================== */
+/* =========================================================
+   WORKFORCEIQ — ROADMAP PAGE
+   Clean • Modern • Professional
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
 
 .roadmap-page {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 50px 25px;
+    min-height: calc(100vh - 72px);
+
+    padding: 45px 24px 70px;
+
+    background:
+        radial-gradient(
+            circle at 8% 8%,
+            rgba(99, 102, 241, 0.09),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 92% 18%,
+            rgba(139, 92, 246, 0.07),
+            transparent 30%
+        ),
+        #f7f9fc;
 }
 
 
-/* PAGE HEADER */
-
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 35px;
-}
-
-.step-label {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
-    opacity: 0.7;
-}
-
-.page-header h1 {
-    font-size: 38px;
-    margin-bottom: 8px;
-}
-
-.page-header p {
-    margin: 0;
-    opacity: 0.7;
-}
-
-.back-btn {
-    text-decoration: none;
-    padding: 12px 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    color: inherit;
-}
-
-
-/* NEXT SKILL */
-
-.next-skill-card {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-
-    padding: 28px;
-
-    border-radius: 18px;
-    border: 1px solid #e5e7eb;
-
-    margin-bottom: 45px;
-}
-
-.next-icon {
-    font-size: 42px;
-}
-
-.next-content {
-    flex: 1;
-}
-
-.next-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    opacity: 0.65;
-}
-
-.next-content h2 {
-    margin: 6px 0;
-    font-size: 28px;
-}
-
-.next-content p {
-    margin: 0;
-    opacity: 0.7;
-}
-
-#startLearningBtn {
-    border: none;
-    padding: 13px 22px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-
-/* SECTION */
-
-.section-heading {
-    margin-bottom: 25px;
-}
-
-.section-heading h2 {
-    font-size: 28px;
-    margin-bottom: 6px;
-}
-
-.section-heading p {
-    margin: 0;
-    opacity: 0.65;
-}
-
-
-/* ROADMAP */
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .roadmap-container {
-    position: relative;
-    padding: 10px 0;
+    width: 100%;
+    max-width: 1080px;
+
+    margin: 0 auto;
 }
+
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.back-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-bottom: 28px;
+
+    color: #64748b;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.back-link:hover {
+    color: #4f46e5;
+
+    transform: translateX(-2px);
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.roadmap-heading {
+    margin-bottom: 30px;
+}
+
+.roadmap-heading .section-label {
+    margin: 0 0 9px;
+
+    color: #6366f1;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
+}
+
+.roadmap-heading h1 {
+    margin: 0;
+
+    color: #172554;
+
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 800;
+
+    line-height: 1.1;
+
+    letter-spacing: -0.03em;
+}
+
+.roadmap-heading > p:last-child {
+    max-width: 680px;
+
+    margin: 12px 0 0;
+
+    color: #64748b;
+
+    font-size: 16px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   NEXT BEST SKILL
+========================================================= */
+
+.next-skill-card {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 25px;
+
+    padding: 30px 32px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172554 0%,
+            #312e81 55%,
+            #4c1d95 100%
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 16px 38px rgba(30, 41, 59, 0.18);
+}
+
+
+/* Decorative glow */
+
+.next-skill-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    right: -65px;
+    top: -80px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+/* Label */
+
+.next-skill-card small {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #c7d2fe;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+}
+
+
+/* Skill name */
+
+.next-skill-card h2 {
+    position: relative;
+    z-index: 1;
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 30px;
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+/* Description */
+
+.next-skill-card p {
+    position: relative;
+    z-index: 1;
+
+    max-width: 600px;
+
+    margin: 8px 0 0;
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.primary-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+
+    padding: 0 21px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6366f1,
+            #8b5cf6
+        );
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 750;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 18px rgba(79, 70, 229, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(79, 70, 229, 0.32);
+}
+
+
+/* =========================================================
+   ROADMAP CARD
+========================================================= */
+
+.roadmap-card {
+    margin-bottom: 25px;
+
+    padding: 30px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 21px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    box-shadow:
+        0 9px 28px rgba(15, 23, 42, 0.055);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.card-header {
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+.card-header h2 {
+    margin: 0;
+
+    color: #172554;
+
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.card-header p {
+    margin: 6px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   ROADMAP LIST
+========================================================= */
+
+.roadmap-list {
+    padding-top: 24px;
+}
+
+
+/* =========================================================
+   ROADMAP ITEMS
+
+   Supports the dynamic elements generated by roadmap.js.
+========================================================= */
 
 .roadmap-item {
     position: relative;
 
     display: flex;
-    align-items: center;
-    gap: 20px;
 
-    padding: 20px;
+    align-items: flex-start;
 
-    border: 1px solid #e5e7eb;
-    border-radius: 15px;
+    gap: 18px;
 
-    margin-bottom: 18px;
+    padding: 18px 0;
 
-    background: white;
+    border-bottom: 1px solid #edf0f5;
 }
 
-.roadmap-item:not(:last-child)::after {
-    content: "↓";
-
-    position: absolute;
-
-    left: 29px;
-    bottom: -27px;
-
-    font-size: 22px;
-
-    z-index: 2;
+.roadmap-item:last-child {
+    border-bottom: none;
 }
 
-.roadmap-number {
-    min-width: 42px;
-    height: 42px;
 
+/* =========================================================
+   STEP NUMBER
+========================================================= */
+
+.roadmap-number,
+.step-number {
     display: flex;
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
 
     border-radius: 50%;
 
-    font-weight: 700;
+    background: #eef2ff;
 
-    border: 2px solid #ddd;
-}
+    color: #4f46e5;
 
-.roadmap-info {
-    flex: 1;
-}
-
-.roadmap-info h3 {
-    margin: 0 0 5px;
-    font-size: 19px;
-}
-
-.roadmap-info p {
-    margin: 0;
-    font-size: 14px;
-    opacity: 0.65;
-}
-
-.roadmap-status {
     font-size: 13px;
-    font-weight: 700;
-    padding: 8px 13px;
-    border-radius: 20px;
+    font-weight: 800;
 }
 
 
-/* STATUS */
+/* =========================================================
+   ROADMAP CONTENT
+========================================================= */
 
-.status-completed {
-    border-left: 5px solid #22c55e;
+.roadmap-item h3,
+.roadmap-item h4 {
+    margin: 0 0 5px;
+
+    color: #172554;
+
+    font-size: 16px;
+    font-weight: 800;
 }
 
-.status-developing {
-    border-left: 5px solid #f59e0b;
-}
+.roadmap-item p {
+    margin: 0;
 
-.status-next {
-    border-left: 5px solid #3b82f6;
-}
+    color: #64748b;
 
-.status-locked {
-    border-left: 5px solid #9ca3af;
-    opacity: 0.7;
+    font-size: 13px;
+
+    line-height: 1.55;
 }
 
 
-/* TODAY */
+/* =========================================================
+   STATUS
+========================================================= */
 
-.today-card {
-    display: flex;
+.roadmap-status,
+.status,
+.status-badge {
+    display: inline-flex;
+
     align-items: center;
+
+    margin-top: 8px;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    background: #f1f5f9;
+
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.05em;
+
+    text-transform: uppercase;
+}
+
+
+/* Completed */
+
+.completed,
+.status-completed {
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+
+/* Current */
+
+.current,
+.in-progress,
+.status-current {
+    background: #eef2ff;
+
+    color: #4f46e5;
+}
+
+
+/* Missing / pending */
+
+.pending,
+.missing,
+.status-pending {
+    background: #fef3c7;
+
+    color: #b45309;
+}
+
+
+/* =========================================================
+   TODAY'S ACTION
+========================================================= */
+
+.today-action {
+    display: flex;
+
+    align-items: center;
+
     gap: 20px;
 
-    margin-top: 45px;
+    margin-bottom: 30px;
 
-    padding: 25px;
+    padding: 24px 27px;
 
-    border-radius: 16px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #c7d2fe;
+
+    border-radius: 19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff
+        );
 }
 
-.today-icon {
-    font-size: 35px;
+
+/* Icon */
+
+.action-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 5px 15px rgba(79, 70, 229, 0.10);
+
+    font-size: 24px;
 }
 
-.today-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    opacity: 0.65;
+
+/* Label */
+
+.today-action small {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #6366f1;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
 }
 
-.today-card h2 {
-    margin: 5px 0;
-}
 
-.today-card p {
+/* Title */
+
+.today-action h2 {
     margin: 0;
-    opacity: 0.7;
+
+    color: #172554;
+
+    font-size: 18px;
+    font-weight: 800;
 }
 
 
-/* RESPONSIVE */
+/* Description */
 
-@media (max-width: 700px) {
+.today-action p {
+    margin: 5px 0 0;
 
-    .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
+    color: #64748b;
 
-    .page-header h1 {
-        font-size: 30px;
+    font-size: 13px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.roadmap-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid #e2e8f0;
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.secondary-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+
+    padding: 0 18px;
+
+    border: 1px solid #dbe2ea;
+
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.secondary-btn:hover {
+    border-color: #c7d2fe;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+}
+
+
+/* =========================================================
+   USER CIRCLE
+========================================================= */
+
+.user-circle {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .roadmap-page {
+        padding: 35px 18px 55px;
     }
 
     .next-skill-card {
-        flex-direction: column;
         align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 26px;
     }
 
-    #startLearningBtn {
+    .next-skill-card .primary-btn {
         width: 100%;
     }
+}
 
-    .roadmap-item {
-        padding: 16px;
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 550px) {
+
+    .roadmap-page {
+        padding: 28px 14px 45px;
     }
 
-    .roadmap-status {
-        font-size: 11px;
+    .roadmap-heading h1 {
+        font-size: 31px;
+    }
+
+    .roadmap-heading > p:last-child {
+        font-size: 14px;
+    }
+
+    .next-skill-card,
+    .roadmap-card {
+        border-radius: 17px;
+    }
+
+    .next-skill-card {
+        padding: 22px;
+    }
+
+    .next-skill-card h2 {
+        font-size: 25px;
+    }
+
+    .roadmap-card {
+        padding: 22px;
+    }
+
+    .today-action {
+        align-items: flex-start;
+
+        padding: 20px;
+
+        gap: 15px;
+    }
+
+    .action-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .roadmap-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+    .roadmap-actions .primary-btn,
+    .roadmap-actions .secondary-btn {
+        width: 100%;
+
+        box-sizing: border-box;
     }
 }

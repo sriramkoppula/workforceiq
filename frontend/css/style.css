@@ -1,3 +1,5 @@
+@import "theme.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -9,9 +11,10 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f7f9fc;
-    color: #172033;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-page, #f8f9fa);
+    color: var(--text-primary, #09090b);
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 
@@ -225,6 +228,56 @@ body {
     color: #b23a3a;
 }
 
+/* Evidence Strength Badges */
+.strength-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.strength-badge.strength-strong {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.strength-badge.strength-moderate {
+    background: #e0e7ff;
+    color: #3730a3;
+    border: 1px solid #c7d2fe;
+}
+
+.strength-badge.strength-limited {
+    background: #fef9c3;
+    color: #854d0e;
+    border: 1px solid #fef08a;
+}
+
+.strength-badge.strength-none {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+}
+
+.evidence-count-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
 .next-skill {
     margin-top: 20px;
     padding: 18px;
@@ -398,4 +451,237 @@ footer p {
     .steps {
         grid-template-columns: 1fr;
     }
+}
+/* =====================================================
+   WORKFORCEIQ - MODERN GLOBAL NAVBAR
+===================================================== */
+
+.navbar {
+    height: 72px;
+    width: 100%;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid #e8eaf3;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.nav-brand a,
+.logo {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.7px;
+    color: #172554;
+}
+
+.logo span {
+    color: #6366f1;
+}
+
+
+/* Dashboard uses .nav-brand */
+.nav-brand a {
+    background: linear-gradient(
+        135deg,
+        #4f46e5,
+        #7c3aed
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+/* =====================================================
+   NAV LINKS
+===================================================== */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-links a {
+    position: relative;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    color: #64748b;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #4f46e5;
+    background: #f1f3ff;
+    transform: translateY(-1px);
+}
+
+.nav-links a.active {
+    color: #4f46e5;
+    background: #eef2ff;
+}
+
+
+/* Active indicator */
+
+.nav-links a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+    bottom: 3px;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #4f46e5,
+        #7c3aed
+    );
+}
+
+
+/* =====================================================
+   USER CIRCLE
+===================================================== */
+
+.user-circle {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #4f46e5,
+        #7c3aed
+    );
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    box-shadow:
+        0 6px 18px rgba(79, 70, 229, 0.25);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.user-circle:hover {
+    transform: translateY(-2px) scale(1.04);
+
+    box-shadow:
+        0 10px 24px rgba(79, 70, 229, 0.32);
+}
+
+
+/* =====================================================
+   MOBILE NAVBAR
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        gap: 2px;
+    }
+
+    .nav-links a {
+        padding: 9px 10px;
+        font-size: 13px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: auto;
+        min-height: 68px;
+
+        padding: 12px 16px;
+
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .nav-brand a,
+    .logo {
+        font-size: 21px;
+    }
+
+    .nav-links {
+        order: 3;
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        padding-bottom: 3px;
+
+        justify-content: flex-start;
+
+        scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-links a {
+        white-space: nowrap;
+    }
+
+    .user-circle {
+        width: 38px;
+        height: 38px;
+    }
+
 }

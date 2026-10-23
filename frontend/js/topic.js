@@ -1,8 +1,8 @@
-// ==========================================
+﻿// ==========================================
 // WORKFORCEIQ - TOPIC LEARNING
 // ==========================================
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = window.API_URL || "http://localhost:8080/api";
 
 const profile =
     JSON.parse(localStorage.getItem("workforceProfile")) || {};
@@ -837,7 +837,7 @@ function setupPracticeButton() {
         function () {
 
             window.location.href =
-                `practice.html?skill=${encodeURIComponent(skillName)}&topic=${encodeURIComponent(topicName)}`;
+                `problems.html?skill=${encodeURIComponent(skillName)}&topic=${encodeURIComponent(topicName)}`;
 
         }
     );

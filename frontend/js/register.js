@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+﻿document.addEventListener("DOMContentLoaded", function () {
 
     const registerForm = document.getElementById("registerForm");
 
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
 
             const response = await fetch(
-                "http://localhost:8080/api/users/register",
+                (window.API_URL || "http://localhost:8080/api") + "/users/register",
                 {
                     method: "POST",
                     headers: {

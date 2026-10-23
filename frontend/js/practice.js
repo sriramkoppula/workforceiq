@@ -264,6 +264,21 @@ const practiceData = {
 
 function getQuestions() {
 
+    if (typeof MustLearnService !== "undefined") {
+        const mlProblems = MustLearnService.getProblemsBySkillAndTopic(skillName, topicName);
+        if (mlProblems && mlProblems.length > 0) {
+            return mlProblems.map(p => ({
+                id: p.id,
+                title: p.title,
+                description: p.description,
+                difficulty: p.difficulty,
+                example: p.examples && p.examples[0]
+                    ? `Input: ${p.examples[0].input}\nOutput: ${p.examples[0].output}`
+                    : "Solve this problem according to the specifications."
+            }));
+        }
+    }
+
     const skillData =
         practiceData[skillName];
 

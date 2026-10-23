@@ -24,6 +24,24 @@ public class Evidence {
     @Column(nullable = false)
     private Integer score;
 
+    @Column(length = 255)
+    private String title;
+
+    @Column(name = "marks_obtained")
+    private Double marksObtained;
+
+    @Column(name = "max_marks")
+    private Double maxMarks;
+
+    @Column(name = "is_verified")
+    private Boolean isVerified = true;
+
+    @Column(name = "evidence_url", length = 500)
+    private String evidenceUrl;
+
+    @Column(name = "assessment_date")
+    private LocalDateTime assessmentDate;
+
     @Column(length = 1000)
     private String description;
 
@@ -35,9 +53,14 @@ public class Evidence {
 
     @PrePersist
     public void beforeSave() {
-
         if (createdAt == null) {
             createdAt = LocalDateTime.now();
+        }
+        if (assessmentDate == null) {
+            assessmentDate = createdAt;
+        }
+        if (isVerified == null) {
+            isVerified = true;
         }
     }
 
@@ -79,6 +102,54 @@ public class Evidence {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Double getMarksObtained() {
+        return marksObtained;
+    }
+
+    public void setMarksObtained(Double marksObtained) {
+        this.marksObtained = marksObtained;
+    }
+
+    public Double getMaxMarks() {
+        return maxMarks;
+    }
+
+    public void setMaxMarks(Double maxMarks) {
+        this.maxMarks = maxMarks;
+    }
+
+    public Boolean getIsVerified() {
+        return isVerified;
+    }
+
+    public void setIsVerified(Boolean isVerified) {
+        this.isVerified = isVerified;
+    }
+
+    public String getEvidenceUrl() {
+        return evidenceUrl;
+    }
+
+    public void setEvidenceUrl(String evidenceUrl) {
+        this.evidenceUrl = evidenceUrl;
+    }
+
+    public LocalDateTime getAssessmentDate() {
+        return assessmentDate;
+    }
+
+    public void setAssessmentDate(LocalDateTime assessmentDate) {
+        this.assessmentDate = assessmentDate;
     }
 
     public String getDescription() {

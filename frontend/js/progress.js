@@ -1,9 +1,9 @@
-// =====================================================
+﻿// =====================================================
 // WORKFORCEIQ - PROGRESS
 // Backend Connected Version
 // =====================================================
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = window.API_URL || "http://localhost:8080/api";
 
 let currentUser = null;
 let userProfile = null;
@@ -297,6 +297,21 @@ function calculateReadiness() {
     return Math.round(
         total / requiredSkills.length
     );
+}
+
+async function fetchBackendReadiness() {
+    try {
+        const response = await fetch(`${API_URL}/user-skills/user/${currentUser.id}/performance-summary`);
+        if (response.ok) {
+            const summary = await response.json();
+            if (summary.readinessScore !== null && summary.readinessScore !== undefined) {
+                return Math.round(summary.readinessScore);
+            }
+        }
+    } catch (e) {
+        console.warn("Backend summary error in progress:", e);
+    }
+    return calculateReadiness();
 }
 
 
@@ -700,124 +715,156 @@ function renderHistoryList() {
 function renderChart() {
 
     const canvas =
-        document.getElementById(
-            "progressChart"
-        );
+        document.getElementById("progressChart") ||
+        document.getElementById("readinessChart");
 
-    if (
-        !canvas ||
-        typeof Chart === "undefined"
-    ) {
-
+    if (!canvas || typeof Chart === "undefined") {
         return;
     }
 
-
     if (progressChart) {
-
         progressChart.destroy();
     }
 
-
     const labels =
-        progressHistory.map(item => {
-
-            if (!item.createdAt) {
-
-                return "";
-            }
-
-            return new Date(
-                item.createdAt
-            ).toLocaleDateString(
+        progressHistory.map(item =>
+            new Date(item.createdAt).toLocaleDateString(
                 undefined,
                 {
                     month: "short",
                     day: "numeric"
                 }
-            );
-        });
-
+            )
+        );
 
     const values =
         progressHistory.map(item =>
-            Number(
-                item.readinessScore
-            ) || 0
+            Number(item.readinessScore) || 0
         );
 
+    progressChart = new Chart(canvas, {
 
-    progressChart =
-        new Chart(
-            canvas,
-            {
+        type: "line",
 
-                type: "line",
+        data: {
 
-                data: {
+            labels: labels,
 
-                    labels: labels,
+            datasets: [
+                {
+                    label: "Readiness",
 
-                    datasets: [
+                    data: values,
 
-                        {
+                    borderColor: "#4f46e5",
 
-                            label:
-                                "Readiness",
+                    backgroundColor: "rgba(79, 70, 229, 0.10)",
 
-                            data:
-                                values,
+                    borderWidth: 3,
 
-                            tension:
-                                0.3,
+                    pointBackgroundColor: "#4f46e5",
 
-                            fill:
-                                false
-                        }
-                    ]
+                    pointBorderColor: "#ffffff",
+
+                    pointBorderWidth: 3,
+
+                    pointRadius: 5,
+
+                    pointHoverRadius: 7,
+
+                    tension: 0.35,
+
+                    fill: true
+                }
+            ]
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            interaction: {
+                intersect: false,
+                mode: "index"
+            },
+
+            plugins: {
+
+                legend: {
+                    display: false
                 },
 
+                tooltip: {
 
-                options: {
+                    backgroundColor: "#172033",
 
-                    responsive: true,
+                    titleColor: "#ffffff",
 
-                    maintainAspectRatio:
-                        false,
+                    bodyColor: "#ffffff",
 
-                    scales: {
+                    padding: 12,
 
-                        y: {
+                    displayColors: false,
 
-                            min: 0,
+                    callbacks: {
 
-                            max: 100,
+                        label: function(context) {
 
-                            ticks: {
+                            return " Readiness: " +
+                                context.parsed.y +
+                                "%";
 
-                                callback:
-                                    value =>
-                                        value + "%"
-                            }
-                        }
-                    },
-
-
-                    plugins: {
-
-                        tooltip: {
-
-                            callbacks: {
-
-                                label:
-                                    context =>
-                                        `Readiness: ${context.parsed.y}%`
-                            }
                         }
                     }
                 }
+            },
+
+            scales: {
+
+                x: {
+
+                    grid: {
+                        display: false
+                    },
+
+                    ticks: {
+                        color: "#7a8495",
+
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+
+                y: {
+
+                    min: 0,
+
+                    max: 100,
+
+                    ticks: {
+
+                        stepSize: 10,
+
+                        color: "#7a8495",
+
+                        callback: function(value) {
+                            return value + "%";
+                        }
+                    },
+
+                    grid: {
+
+                        color: "#edf0f4",
+
+                        drawBorder: false
+                    }
+                }
             }
-        );
+        }
+    });
 }
 
 
@@ -847,7 +894,7 @@ async function initializeProgress() {
 
 
     const readiness =
-        calculateReadiness();
+        await fetchBackendReadiness();
 
 
     await saveCurrentProgress(

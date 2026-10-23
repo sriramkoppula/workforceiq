@@ -1,0 +1,927 @@
+/* =====================================================
+   WORKFORCEIQ — MONOCHROME BLACK & WHITE DESIGN SYSTEM
+   Complete SaaS tokens & dark mode overrides.
+   Applied via [data-theme="dark"] on <html>.
+===================================================== */
+
+/* ── LIGHT THEME (Default) ── */
+:root {
+    /* Page & surface backgrounds */
+    --bg-page:           #f8f9fa;
+    --bg-page-alt:       #f4f4f5;
+    --bg-surface:        #ffffff;
+    --bg-surface-2:      #f4f4f5;
+    --bg-surface-3:      #e4e4e7;
+
+    /* Text hierarchy */
+    --text-primary:      #09090b;
+    --text-secondary:    #52525b;
+    --text-muted:        #71717a;
+    --text-faint:        #a1a1aa;
+    --text-inverse:      #ffffff;
+
+    /* Neutral borders & dividers */
+    --border-default:    #e4e4e7;
+    --border-light:      #f4f4f5;
+    --border-strong:     #d4d4d8;
+
+    /* Monochrome action / accent */
+    --accent:            #09090b;
+    --accent-light:      #f4f4f5;
+    --accent-hover:      #27272a;
+    --accent-subtle:     #e4e4e7;
+
+    /* Navbar */
+    --nav-bg:            rgba(255, 255, 255, 0.98);
+    --nav-border:        #e4e4e7;
+    --nav-link:          #52525b;
+    --nav-link-hover-bg: #f4f4f5;
+    --nav-link-active-bg:#f4f4f5;
+
+    /* Cards */
+    --card-bg:           #ffffff;
+    --card-border:       #e4e4e7;
+    --card-shadow:       0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
+
+    /* Inputs */
+    --input-bg:          #ffffff;
+    --input-border:      #d4d4d8;
+    --input-border-focus:#09090b;
+    --input-text:        #09090b;
+    --input-placeholder: #a1a1aa;
+
+    /* Buttons */
+    --btn-primary-bg:    #09090b;
+    --btn-primary-text:  #ffffff;
+    --btn-primary-hover: #27272a;
+    --btn-secondary-bg:  #ffffff;
+    --btn-secondary-border:#d4d4d8;
+    --btn-secondary-text:#18181b;
+    --btn-secondary-hover:#f4f4f5;
+
+    /* Semantic status colours (restrained monochrome with subtle cues) */
+    --success-bg:        #f4f4f5;
+    --success-text:      #09090b;
+    --success-border:    #d4d4d8;
+    --warning-bg:        #fefce8;
+    --warning-text:      #854d0e;
+    --warning-border:    #fef08a;
+    --danger-bg:         #fef2f2;
+    --danger-text:       #991b1b;
+    --danger-border:     #fecaca;
+    --info-bg:           #f4f4f5;
+    --info-text:         #18181b;
+    --info-border:       #e4e4e7;
+
+    /* Code editor */
+    --editor-bg:         #09090b;
+    --editor-text:       #f4f4f5;
+    --editor-border:     #27272a;
+
+    /* Charts */
+    --chart-grid:        rgba(0, 0, 0, 0.06);
+    --chart-label:       #71717a;
+
+    /* Misc */
+    --scrollbar-thumb:   #d4d4d8;
+    --scrollbar-track:   #f4f4f5;
+    --modal-overlay:     rgba(0, 0, 0, 0.65);
+
+    /* Toggle switch */
+    --toggle-bg:         #e4e4e7;
+    --toggle-knob:       #ffffff;
+    --toggle-border:     #d4d4d8;
+}
+
+/* ── DARK THEME ── */
+[data-theme="dark"] {
+    /* Page & surface backgrounds: solid near-black SaaS */
+    --bg-page:           #09090b;
+    --bg-page-alt:       #0c0c0e;
+    --bg-surface:        #121214;
+    --bg-surface-2:      #18181b;
+    --bg-surface-3:      #27272a;
+
+    /* Text hierarchy */
+    --text-primary:      #fafafa;
+    --text-secondary:    #a1a1aa;
+    --text-muted:        #71717a;
+    --text-faint:        #52525b;
+    --text-inverse:      #09090b;
+
+    /* Neutral borders & dividers */
+    --border-default:    #27272a;
+    --border-light:      #18181b;
+    --border-strong:     #3f3f46;
+
+    /* Monochrome action / accent */
+    --accent:            #fafafa;
+    --accent-light:      #18181b;
+    --accent-hover:      #e4e4e7;
+    --accent-subtle:     #27272a;
+
+    /* Navbar */
+    --nav-bg:            rgba(18, 18, 20, 0.98);
+    --nav-border:        #27272a;
+    --nav-link:          #a1a1aa;
+    --nav-link-hover-bg: #27272a;
+    --nav-link-active-bg:#27272a;
+
+    /* Cards */
+    --card-bg:           #121214;
+    --card-border:       #27272a;
+    --card-shadow:       0 4px 20px rgba(0, 0, 0, 0.5);
+
+    /* Inputs */
+    --input-bg:          #18181b;
+    --input-border:      #27272a;
+    --input-border-focus:#fafafa;
+    --input-text:        #fafafa;
+    --input-placeholder: #52525b;
+
+    /* Buttons */
+    --btn-primary-bg:    #fafafa;
+    --btn-primary-text:  #09090b;
+    --btn-primary-hover: #e4e4e7;
+    --btn-secondary-bg:  #18181b;
+    --btn-secondary-border:#27272a;
+    --btn-secondary-text:#fafafa;
+    --btn-secondary-hover:#27272a;
+
+    /* Semantic status colours */
+    --success-bg:        #18181b;
+    --success-text:      #4ade80;
+    --success-border:    #22c55e;
+    --warning-bg:        #2e1f0c;
+    --warning-text:      #fde047;
+    --warning-border:    #854d0e;
+    --danger-bg:         #2d1214;
+    --danger-text:       #fca5a5;
+    --danger-border:     #991b1b;
+    --info-bg:           #18181b;
+    --info-text:         #e4e4e7;
+    --info-border:       #3f3f46;
+
+    /* Code editor */
+    --editor-bg:         #09090b;
+    --editor-text:       #f4f4f5;
+    --editor-border:     #27272a;
+
+    /* Charts */
+    --chart-grid:        rgba(255, 255, 255, 0.08);
+    --chart-label:       #a1a1aa;
+
+    /* Misc */
+    --scrollbar-thumb:   #27272a;
+    --scrollbar-track:   #121214;
+    --modal-overlay:     rgba(0, 0, 0, 0.85);
+
+    /* Toggle switch */
+    --toggle-bg:         #27272a;
+    --toggle-knob:       #fafafa;
+    --toggle-border:     #3f3f46;
+}
+
+/* =====================================================
+   GLOBAL ELEMENTS & OVERRIDES
+===================================================== */
+
+body {
+    background-color: var(--bg-page) !important;
+    color: var(--text-primary) !important;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Page Containers */
+.dashboard-page,
+.skills-page,
+.evidence-page,
+.roadmap-page,
+.learning-page,
+.progress-page,
+.problems-page,
+.profile-page,
+.skill-detail-page,
+.skill-learning-page,
+.topic-page,
+.practice-page,
+.projects-page,
+.assessment-page,
+.study-plan-page {
+    background: var(--bg-page) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ── Headings ── */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+}
+
+p, span, label, small {
+    color: inherit;
+}
+
+/* ── Navbar ── */
+.navbar {
+    background: var(--nav-bg) !important;
+    border-bottom: 1px solid var(--nav-border) !important;
+}
+.logo, .nav-brand a {
+    color: var(--text-primary) !important;
+    font-weight: 800 !important;
+}
+.logo span {
+    color: var(--text-secondary) !important;
+}
+.nav-links a {
+    color: var(--nav-link) !important;
+    transition: color 0.15s ease, background 0.15s ease !important;
+    border-radius: 6px !important;
+}
+.nav-links a:hover {
+    background: var(--nav-link-hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+.nav-links a.active {
+    background: var(--nav-link-active-bg) !important;
+    color: var(--text-primary) !important;
+    font-weight: 700 !important;
+}
+.user-circle {
+    background: var(--accent) !important;
+    color: var(--text-inverse) !important;
+    font-weight: 700 !important;
+}
+.profile-step {
+    color: var(--text-secondary) !important;
+    font-weight: 600 !important;
+}
+
+/* ── Cards & Panels ── */
+.card,
+.feature-card,
+.skill-card,
+.evidence-card,
+.dashboard-card,
+.stat-card,
+.chart-card,
+.topic-card,
+.learning-card,
+.learning-hero,
+.learning-summary-card,
+.daily-goal-card,
+.learning-insight,
+.analytics-card,
+.continue-learning-card,
+.project-card,
+.roadmap-card,
+.assessment-card,
+.progress-card,
+.profile-section,
+.profile-card,
+.study-plan-card,
+.skill-detail-card,
+.problem-card,
+.info-box,
+.score-card,
+.weighting-card,
+.target-career,
+.add-skill-box,
+.current-skills,
+.skills-nav-card,
+.topics-nav-card,
+.filter-card,
+.problems-hero,
+.skill-progress-banner,
+.today-plan-card,
+.learning-path-item,
+.user-skill-card {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--card-border) !important;
+    color: var(--text-primary) !important;
+    border-radius: 14px !important;
+    box-shadow: var(--card-shadow) !important;
+    transition: background 0.2s ease, border-color 0.2s ease !important;
+}
+
+/* Specific Banner Replacements (No Purple/Pastel) */
+.dashboard-welcome {
+    background: #09090b !important;
+    color: #fafafa !important;
+    border: 1px solid #27272a !important;
+    border-radius: 16px !important;
+}
+.dashboard-welcome h1 {
+    color: #fafafa !important;
+}
+.dashboard-welcome .welcome-label {
+    color: #a1a1aa !important;
+}
+.dashboard-welcome #careerText,
+.dashboard-welcome p {
+    color: #d4d4d8 !important;
+}
+
+[data-theme="dark"] .dashboard-welcome {
+    background: #121214 !important;
+    border-color: #27272a !important;
+}
+
+/* ── Buttons ── */
+.primary-btn,
+.btn-primary,
+.btn-solve,
+.btn-submit-solution,
+.add-skill-button,
+#addSkillButton,
+#addEvidenceButton,
+#viewReadinessButton {
+    background: var(--btn-primary-bg) !important;
+    color: var(--btn-primary-text) !important;
+    border: 1px solid var(--btn-primary-bg) !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+}
+
+.primary-btn:hover,
+.btn-primary:hover,
+.btn-solve:hover,
+.btn-submit-solution:hover,
+.add-skill-button:hover,
+#addSkillButton:hover,
+#addEvidenceButton:hover,
+#viewReadinessButton:hover {
+    background: var(--btn-primary-hover) !important;
+    border-color: var(--btn-primary-hover) !important;
+}
+
+.back-btn,
+.btn-secondary,
+.modal-btn-secondary,
+.btn-reset-code,
+.btn-run-tests,
+.path-button,
+.change-btn {
+    background: var(--btn-secondary-bg) !important;
+    color: var(--btn-secondary-text) !important;
+    border: 1px solid var(--btn-secondary-border) !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+}
+
+.back-btn:hover,
+.btn-secondary:hover,
+.modal-btn-secondary:hover,
+.path-button:hover,
+.btn-reset-code:hover,
+.btn-run-tests:hover,
+.change-btn:hover {
+    background: var(--btn-secondary-hover) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ── Form Inputs & Selects ── */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+textarea,
+select {
+    background: var(--input-bg) !important;
+    border: 1px solid var(--input-border) !important;
+    color: var(--input-text) !important;
+    border-radius: 8px !important;
+    transition: border-color 0.15s ease, background 0.15s ease !important;
+}
+input::placeholder,
+textarea::placeholder {
+    color: var(--input-placeholder) !important;
+}
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--input-border-focus) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px var(--border-strong) !important;
+}
+select option {
+    background: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ── Pills, Badges & Chips ── */
+.skill-pill,
+.topic-pill,
+.prereq-chip,
+.filter-select {
+    background: var(--bg-surface-2) !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-default) !important;
+    border-radius: 8px !important;
+    transition: all 0.15s ease !important;
+}
+.skill-pill:hover,
+.topic-pill:hover {
+    background: var(--bg-surface-3) !important;
+    color: var(--text-primary) !important;
+}
+.skill-pill.active,
+.topic-pill.active {
+    background: var(--text-primary) !important;
+    color: var(--text-inverse) !important;
+    border-color: var(--text-primary) !important;
+}
+
+/* Status Badges */
+.status-badge,
+.strength-badge,
+.difficulty-badge,
+.priority-badge {
+    border: 1px solid var(--border-default) !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+}
+
+.diff-easy {
+    background: #f0fdf4 !important;
+    color: #166534 !important;
+    border-color: #bbf7d0 !important;
+}
+.diff-medium {
+    background: #fefce8 !important;
+    color: #854d0e !important;
+    border-color: #fef08a !important;
+}
+.diff-hard {
+    background: #fef2f2 !important;
+    color: #991b1b !important;
+    border-color: #fecaca !important;
+}
+
+[data-theme="dark"] .diff-easy {
+    background: #052e16 !important;
+    color: #4ade80 !important;
+    border-color: #166534 !important;
+}
+[data-theme="dark"] .diff-medium {
+    background: #422006 !important;
+    color: #fbbf24 !important;
+    border-color: #854d0e !important;
+}
+[data-theme="dark"] .diff-hard {
+    background: #450a0a !important;
+    color: #f87171 !important;
+    border-color: #991b1b !important;
+}
+
+/* Evidence Strength Badges */
+.strength-strong {
+    background: #f0fdf4 !important;
+    color: #166534 !important;
+    border-color: #bbf7d0 !important;
+}
+.strength-moderate, .strength-consistent {
+    background: #f4f4f5 !important;
+    color: #09090b !important;
+    border-color: #d4d4d8 !important;
+}
+.strength-limited, .strength-developing {
+    background: #fefce8 !important;
+    color: #854d0e !important;
+    border-color: #fef08a !important;
+}
+.strength-none {
+    background: #f4f4f5 !important;
+    color: #71717a !important;
+    border-color: #e4e4e7 !important;
+}
+
+[data-theme="dark"] .strength-strong {
+    background: #052e16 !important;
+    color: #4ade80 !important;
+    border-color: #166534 !important;
+}
+[data-theme="dark"] .strength-moderate,
+[data-theme="dark"] .strength-consistent {
+    background: #18181b !important;
+    color: #fafafa !important;
+    border-color: #3f3f46 !important;
+}
+[data-theme="dark"] .strength-limited,
+[data-theme="dark"] .strength-developing {
+    background: #422006 !important;
+    color: #fbbf24 !important;
+    border-color: #854d0e !important;
+}
+[data-theme="dark"] .strength-none {
+    background: #18181b !important;
+    color: #71717a !important;
+    border-color: #27272a !important;
+}
+
+/* ── Code Editor ── */
+.code-editor-textarea,
+#codeEditorInput {
+    background: var(--editor-bg) !important;
+    color: var(--editor-text) !important;
+    border: 1px solid var(--editor-border) !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+/* ── View Breakdown Modal ── */
+#breakdownModal.modal-overlay,
+.modal-overlay {
+    background: var(--modal-overlay) !important;
+}
+
+#breakdownModal .modal-box,
+.modal-overlay .modal-box,
+.modal-container {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--card-border) !important;
+    color: var(--text-primary) !important;
+}
+
+#breakdownModal .modal-header,
+.modal-header {
+    background: var(--bg-surface-2) !important;
+    border-bottom: 1px solid var(--border-default) !important;
+}
+
+#breakdownModal .modal-footer,
+.modal-footer {
+    background: var(--bg-surface-2) !important;
+    border-top: 1px solid var(--border-default) !important;
+}
+
+#breakdownModal .modal-score-banner {
+    background: var(--bg-surface-2) !important;
+    border: 1px solid var(--border-default) !important;
+}
+
+#breakdownModal .category-item {
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border-default) !important;
+}
+
+#breakdownModal .modal-formula-box {
+    background: var(--bg-surface-2) !important;
+    border-left: 4px solid var(--text-primary) !important;
+    border-top: 1px solid var(--border-default) !important;
+    border-right: 1px solid var(--border-default) !important;
+    border-bottom: 1px solid var(--border-default) !important;
+    color: var(--text-secondary) !important;
+}
+
+#breakdownModal .category-progress-track {
+    background: var(--border-default) !important;
+}
+
+#breakdownModal .category-progress-fill {
+    background: var(--text-primary) !important;
+}
+
+/* ── Must-Learn Problem Workspace Modal ── */
+.modal-left-pane {
+    background: var(--bg-surface) !important;
+    border-right: 1px solid var(--border-default) !important;
+    color: var(--text-primary) !important;
+}
+
+.modal-right-pane {
+    background: var(--bg-surface-2) !important;
+    color: var(--text-primary) !important;
+}
+
+.example-box,
+.hint-item,
+.hero-stat-box {
+    background: var(--bg-surface-2) !important;
+    border: 1px solid var(--border-default) !important;
+    color: var(--text-primary) !important;
+}
+
+.hint-trigger {
+    background: var(--bg-surface-2) !important;
+    color: var(--text-primary) !important;
+}
+
+.hint-content {
+    background: var(--bg-surface) !important;
+    color: var(--text-secondary) !important;
+    border-top: 1px solid var(--border-default) !important;
+}
+
+.collapsible-tests-card {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-default) !important;
+}
+
+.tests-card-header {
+    background: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+}
+
+.tests-card-body {
+    background: var(--bg-surface-2) !important;
+    border-top: 1px solid var(--border-default) !important;
+}
+
+.test-case-item {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-default) !important;
+    color: var(--text-primary) !important;
+}
+
+.test-case-info strong,
+.tests-header-title,
+.modal-title-wrap h2,
+.problem-desc-text {
+    color: var(--text-primary) !important;
+}
+
+.modal-breadcrumbs,
+.test-summary-text,
+.tests-accordion-arrow,
+.modal-close-btn {
+    color: var(--text-muted) !important;
+}
+
+.btn-editor-tool,
+.btn-reset-code,
+.btn-run-tests {
+    background: var(--btn-secondary-bg) !important;
+    border: 1px solid var(--btn-secondary-border) !important;
+    color: var(--btn-secondary-text) !important;
+}
+
+.btn-editor-tool:hover,
+.btn-reset-code:hover,
+.btn-run-tests:hover {
+    background: var(--btn-secondary-hover) !important;
+    color: var(--text-primary) !important;
+}
+
+.btn-submit-solution {
+    background: var(--btn-primary-bg) !important;
+    border: 1px solid var(--btn-primary-bg) !important;
+    color: var(--btn-primary-text) !important;
+}
+
+.btn-submit-solution:hover {
+    background: var(--btn-primary-hover) !important;
+    border-color: var(--btn-primary-hover) !important;
+}
+
+/* ── Learning Center specific nested elements ── */
+.goal-circle-inner {
+    background: var(--card-bg) !important;
+}
+
+.goal-circle-inner strong,
+.goal-time strong,
+.analytics-card > strong,
+.learning-summary-card strong,
+.activity-card h3,
+.learning-insight h2,
+.path-content h3 {
+    color: var(--text-primary) !important;
+}
+
+.goal-time,
+.goal-message,
+.activity-card,
+.learning-path > div,
+.path-number {
+    background: var(--bg-surface-2) !important;
+    border-color: var(--border-default) !important;
+    color: var(--text-secondary) !important;
+}
+
+.goal-circle-inner span,
+.goal-time span,
+.analytics-card > span,
+.analytics-card > small,
+.learning-summary-card span,
+.learning-summary-card small,
+.activity-card p,
+.path-time {
+    color: var(--text-muted) !important;
+}
+
+/* ── Theme Toggle Switch ── */
+#themeToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 30px;
+    padding: 2px;
+    border-radius: 20px;
+    border: 1px solid var(--toggle-border);
+    background: var(--toggle-bg);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+    position: relative;
+    outline: none;
+    margin-left: 12px;
+}
+
+#themeToggle:focus-visible {
+    box-shadow: 0 0 0 2px var(--border-strong);
+}
+
+#themeToggle .theme-icon {
+    font-size: 13px;
+    line-height: 1;
+    position: absolute;
+    transition: opacity 0.2s ease;
+    user-select: none;
+}
+
+#themeToggle .theme-icon-sun {
+    left: 7px;
+}
+
+#themeToggle .theme-icon-moon {
+    right: 7px;
+}
+
+#themeToggle .theme-knob {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--toggle-knob);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: 2px;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] #themeToggle .theme-knob {
+    transform: translateX(30px);
+}
+
+/* Anti-flash: disable transitions until theme is initialized */
+html.theme-loading * {
+    transition: none !important;
+}
+
+/* ── Nested Components & Specific Page Elements (Theme-Aware) ── */
+.section-label,
+.page-label,
+.tagline {
+    color: var(--text-secondary) !important;
+}
+
+/* Evidence items */
+.evidence-item {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-default) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--card-shadow) !important;
+}
+.evidence-item strong {
+    color: var(--text-primary) !important;
+}
+.evidence-item p {
+    color: var(--text-secondary) !important;
+}
+.evidence-score {
+    background: var(--bg-surface-2) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-default) !important;
+}
+
+/* Weighting Model Card & Nested Categories */
+.weighting-card {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--card-border) !important;
+}
+.weighting-card__title {
+    color: var(--text-primary) !important;
+}
+.weighting-card__desc {
+    color: var(--text-secondary) !important;
+}
+.weighting-card__icon {
+    background: var(--bg-surface-2) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-default) !important;
+}
+.weighting-card__footer {
+    border-top: 1px dashed var(--border-default) !important;
+    color: var(--text-muted) !important;
+}
+.weighting-cat {
+    background: var(--bg-surface-2) !important;
+    border: 1px solid var(--border-default) !important;
+    color: var(--text-primary) !important;
+}
+.weighting-cat__name {
+    color: var(--text-primary) !important;
+}
+.weighting-cat__sub {
+    color: var(--text-muted) !important;
+}
+.weighting-cat__badge {
+    background: var(--bg-surface-3) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-default) !important;
+}
+
+/* Roadmap items */
+.roadmap-item {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-default) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--card-shadow) !important;
+}
+.roadmap-item h3,
+.roadmap-item h4 {
+    color: var(--text-primary) !important;
+}
+.roadmap-item p {
+    color: var(--text-secondary) !important;
+}
+.roadmap-status,
+.status,
+.status-badge {
+    background: var(--bg-surface-2) !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-default) !important;
+}
+
+/* Confidence Slider & Value */
+#confidenceValue {
+    background: var(--bg-surface-2) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-default) !important;
+}
+.confidence-input label {
+    color: var(--text-secondary) !important;
+}
+input[type="range"] {
+    accent-color: var(--accent) !important;
+}
+
+/* Empty States */
+.empty-evidence,
+.empty-state {
+    background: var(--bg-surface-2) !important;
+    border: 2px dashed var(--border-strong) !important;
+    color: var(--text-secondary) !important;
+}
+.empty-evidence h3,
+.empty-state h3 {
+    color: var(--text-primary) !important;
+}
+.empty-evidence p,
+.empty-state p {
+    color: var(--text-muted) !important;
+}
+.empty-evidence > div,
+.empty-state > div {
+    background: var(--bg-surface-3) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Skill Analysis (Detailed Gap Rows) */
+.detailed-gap > div,
+.gap-item {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-default) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--card-shadow) !important;
+}
+.detailed-gap strong {
+    color: var(--text-primary) !important;
+}
+.detailed-gap .skill-row-score {
+    color: var(--accent, #4f46e5) !important;
+}
+[data-theme="dark"] .detailed-gap .skill-row-score {
+    color: #a5b4fc !important;
+}
+[data-theme="dark"] .detailed-gap > div:hover,
+[data-theme="dark"] .gap-item:hover {
+    background: var(--bg-surface-2) !important;
+    border-color: var(--border-strong) !important;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+

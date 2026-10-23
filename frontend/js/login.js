@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+﻿document.addEventListener("DOMContentLoaded", function () {
 
     const loginForm = document.getElementById("loginForm");
 
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
 
             const response = await fetch(
-                "http://localhost:8080/api/users/login",
+                (window.API_URL || "http://localhost:8080/api") + "/users/login",
                 {
                     method: "POST",
 

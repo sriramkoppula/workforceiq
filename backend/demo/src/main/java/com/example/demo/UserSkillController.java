@@ -1,6 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.dto.SkillScoreBreakdownDTO;
+import com.example.demo.dto.UserPerformanceSummaryDTO;
 import com.example.demo.repository.UserSkillRepository;
+import com.example.demo.service.PerformanceScoringService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,15 +12,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user-skills")
-@CrossOrigin(origins = "*")
 public class UserSkillController {
 
     private final UserSkillRepository userSkillRepository;
+    private final PerformanceScoringService performanceScoringService;
 
-    public UserSkillController(
-            UserSkillRepository userSkillRepository) {
-
+    public UserSkillController(UserSkillRepository userSkillRepository,
+                               PerformanceScoringService performanceScoringService) {
         this.userSkillRepository = userSkillRepository;
+        this.performanceScoringService = performanceScoringService;
     }
 
 
@@ -26,9 +29,7 @@ public class UserSkillController {
     // ==========================================
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<UserSkill>> getUserSkills(
-            @PathVariable Long userId) {
-
+    public ResponseEntity<List<UserSkill>> getUserSkills(@PathVariable Long userId) {
         return ResponseEntity.ok(
                 userSkillRepository.findByUserId(userId)
         );
@@ -36,114 +37,120 @@ public class UserSkillController {
 
 
     // ==========================================
-    // ADD NEW SKILL
+    // ADD NEW SKILL (Manual Confidence Removed)
     // ==========================================
 
     @PostMapping
-    public ResponseEntity<?> addSkill(
-            @RequestBody UserSkill skill) {
+    public ResponseEntity<?> addSkill(@RequestBody UserSkill skill) {
 
         if (skill.getUserId() == null) {
-
-            return ResponseEntity.badRequest()
-                    .body("User ID is required");
+            return ResponseEntity.badRequest().body("User ID is required");
         }
 
-        if (skill.getSkillName() == null ||
-                skill.getSkillName().trim().isEmpty()) {
-
-            return ResponseEntity.badRequest()
-                    .body("Skill name is required");
+        if (skill.getSkillName() == null || skill.getSkillName().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("Skill name is required");
         }
 
-        if (skill.getConfidence() == null) {
-
-            return ResponseEntity.badRequest()
-                    .body("Confidence is required");
-        }
-
-        if (skill.getConfidence() < 0 ||
-                skill.getConfidence() > 100) {
-
-            return ResponseEntity.badRequest()
-                    .body(
-                        "Confidence must be between 0 and 100"
-                    );
-        }
+        String skillName = skill.getSkillName().trim();
+        skill.setSkillName(skillName);
 
         /*
          * Do not create duplicate skills.
          */
-
-        if (userSkillRepository
-                .findByUserIdAndSkillName(
-                        skill.getUserId(),
-                        skill.getSkillName()
-                )
-                .isPresent()) {
-
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body(
-                        "Skill already exists. Use update."
-                    );
+        if (userSkillRepository.findByUserIdAndSkillName(skill.getUserId(), skillName).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Skill already exists in your profile.");
         }
 
-        UserSkill savedSkill =
-                userSkillRepository.save(skill);
+        // Calculate performance score automatically from recorded evidence
+        SkillScoreBreakdownDTO breakdown = performanceScoringService.calculateSkillBreakdown(
+                skill.getUserId(), skillName
+        );
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(savedSkill);
+        skill.setPerformanceScore(breakdown.getPerformanceScore());
+        skill.setConfidence(breakdown.getDisplayConfidence());
+        skill.setEvidenceStrength(breakdown.getEvidenceStrength());
+        skill.setEvidenceCount(breakdown.getEvidenceCount());
+        skill.setLastAssessedAt(breakdown.getLastAssessedAt());
+
+        UserSkill savedSkill = userSkillRepository.save(skill);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedSkill);
     }
 
 
     // ==========================================
-    // UPDATE CONFIDENCE
+    // UPDATE SKILL / RECALCULATE
     // ==========================================
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateSkill(
             @PathVariable Long id,
-            @RequestBody UserSkill skillData) {
+            @RequestBody(required = false) UserSkill skillData) {
 
-        UserSkill existingSkill =
-                userSkillRepository
-                        .findById(id)
-                        .orElse(null);
+        UserSkill existingSkill = userSkillRepository.findById(id).orElse(null);
 
         if (existingSkill == null) {
-
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Skill not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Skill not found");
         }
 
-        if (skillData.getConfidence() == null) {
-
-            return ResponseEntity.badRequest()
-                    .body("Confidence is required");
-        }
-
-        if (skillData.getConfidence() < 0 ||
-                skillData.getConfidence() > 100) {
-
-            return ResponseEntity.badRequest()
-                    .body(
-                        "Confidence must be between 0 and 100"
-                    );
-        }
-
-        existingSkill.setConfidence(
-                skillData.getConfidence()
+        // Automatically recalculate from evidence
+        UserSkill updatedSkill = performanceScoringService.recalculateSkillScore(
+                existingSkill.getUserId(), existingSkill.getSkillName()
         );
 
-        UserSkill updatedSkill =
-                userSkillRepository.save(
-                        existingSkill
-                );
-
         return ResponseEntity.ok(updatedSkill);
+    }
+
+
+    // ==========================================
+    // GET SKILL SCORE BREAKDOWN & EXPLANATION
+    // ==========================================
+
+    @GetMapping({"/user/{userId}/skill/{skillName}/breakdown", "/user/{userId}/skill-breakdown"})
+    public ResponseEntity<?> getSkillBreakdown(
+            @PathVariable Long userId,
+            @PathVariable(required = false) String skillName,
+            @RequestParam(value = "skill", required = false) String skillParam) {
+
+        String effectiveSkill = (skillName != null && !skillName.trim().isEmpty())
+                ? skillName.trim()
+                : (skillParam != null ? skillParam.trim() : "");
+
+        if (effectiveSkill.isEmpty()) {
+            return ResponseEntity.badRequest().body("Skill name is required");
+        }
+
+        SkillScoreBreakdownDTO breakdown = performanceScoringService.calculateSkillBreakdown(
+                userId, effectiveSkill
+        );
+
+        return ResponseEntity.ok(breakdown);
+    }
+
+
+    // ==========================================
+    // GET OVERALL PERFORMANCE & READINESS SUMMARY
+    // ==========================================
+
+    @GetMapping("/user/{userId}/performance-summary")
+    public ResponseEntity<UserPerformanceSummaryDTO> getUserPerformanceSummary(
+            @PathVariable Long userId) {
+
+        UserPerformanceSummaryDTO summary = performanceScoringService.getUserPerformanceSummary(userId);
+        return ResponseEntity.ok(summary);
+    }
+
+
+    // ==========================================
+    // RECALCULATE ALL SKILLS FOR USER
+    // ==========================================
+
+    @PostMapping("/user/{userId}/recalculate")
+    public ResponseEntity<List<UserSkill>> recalculateAllSkills(
+            @PathVariable Long userId) {
+
+        List<UserSkill> updatedList = performanceScoringService.recalculateAllSkillsForUser(userId);
+        return ResponseEntity.ok(updatedList);
     }
 
 
@@ -151,34 +158,21 @@ public class UserSkillController {
     // DELETE SKILL
     // ==========================================
 
-    @DeleteMapping(
-            "/user/{userId}/skill/{skillName}"
-    )
+    @DeleteMapping("/user/{userId}/skill/{skillName}")
     public ResponseEntity<?> deleteSkill(
             @PathVariable Long userId,
             @PathVariable String skillName) {
 
-        UserSkill existingSkill =
-                userSkillRepository
-                        .findByUserIdAndSkillName(
-                                userId,
-                                skillName
-                        )
-                        .orElse(null);
+        UserSkill existingSkill = userSkillRepository
+                .findByUserIdAndSkillName(userId, skillName)
+                .orElse(null);
 
         if (existingSkill == null) {
-
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Skill not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Skill not found");
         }
 
-        userSkillRepository.delete(
-                existingSkill
-        );
+        userSkillRepository.delete(existingSkill);
 
-        return ResponseEntity.ok(
-                "Skill deleted successfully"
-        );
+        return ResponseEntity.ok("Skill deleted successfully");
     }
 }

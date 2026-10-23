@@ -1,9 +1,38 @@
-﻿target/
+# ─── Build output ───────────────────────────────────────
+target/
 *.class
-*.log
+*.jar
+*.war
+build/
+
+# ─── IDE ────────────────────────────────────────────────
 .idea/
 .vscode/
 *.iml
-cp.txt
+*.iws
+*.ipr
+
+# ─── Secrets / credentials (NEVER commit these) ─────────
+.env
+.env.*
+!.env.example
+application-prod.properties
+application-secret.properties
+*.pem
+*.p12
+*.key
+
+# ─── Logs ───────────────────────────────────────────────
+*.log
+logs/
 build-error.txt
+cp.txt
+
+# ─── OS noise ───────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ─── Zips / temp ────────────────────────────────────────
 *.zip
+verify-layout.js

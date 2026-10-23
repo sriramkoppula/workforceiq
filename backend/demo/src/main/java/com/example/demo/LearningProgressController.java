@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/learning-progress")
-@CrossOrigin(origins = "*")
 public class LearningProgressController {
 
     private final LearningProgressRepository repository;

@@ -3,12 +3,13 @@
 // Backend Connected - Final Version
 // =====================================================
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = window.API_URL || "http://localhost:8080/api";
 
 let currentUser = null;
 let profile = null;
 let userSkills = [];
 let evidence = [];
+let performanceSummary = null;
 
 
 // =====================================================
@@ -252,9 +253,18 @@ async function loadSkills() {
             userSkills = [];
         }
 
+        // Map skill fields
+        userSkills = userSkills.map(skill => ({
+            id: skill.id,
+            skillName: skill.skillName,
+            confidence: Number(skill.confidence) || 0,
+            performanceScore: skill.performanceScore !== null && skill.performanceScore !== undefined
+                ? Number(skill.performanceScore) : null,
+            evidenceStrength: skill.evidenceStrength || "None",
+            evidenceCount: Number(skill.evidenceCount) || 0,
+            lastAssessedAt: skill.lastAssessedAt
+        }));
 
-        // Synchronize localStorage only.
-        // Dashboard calculations use backend data.
         localStorage.setItem(
             "workforceSkills",
             JSON.stringify(
@@ -262,7 +272,10 @@ async function loadSkills() {
                     skill => ({
                         id: skill.id,
                         name: skill.skillName,
-                        confidence: skill.confidence
+                        confidence: skill.confidence,
+                        performanceScore: skill.performanceScore,
+                        evidenceStrength: skill.evidenceStrength,
+                        evidenceCount: skill.evidenceCount
                     })
                 )
             )
@@ -605,82 +618,37 @@ function renderUserInfo() {
 
 function renderSummary() {
 
-    const requiredSkills =
-        getRequiredSkills();
+    const requiredSkills = getRequiredSkills();
+    const readiness = (performanceSummary && performanceSummary.readinessScore !== null)
+        ? Math.round(performanceSummary.readinessScore)
+        : calculateReadiness();
 
-
-    const readiness =
-        calculateReadiness();
-
+    const overallPerf = (performanceSummary && performanceSummary.overallPerformanceScore !== null)
+        ? Math.round(performanceSummary.overallPerformanceScore) + "%"
+        : "--%";
 
     let strong = 0;
     let developing = 0;
     let missing = 0;
 
-
-    requiredSkills.forEach(
-        skillName => {
-
-            const confidence =
-                getConfidence(
-                    skillName
-                );
-
-
-            if (
-                confidence >= 80
-            ) {
-
-                strong++;
-
-            } else if (
-                confidence > 0
-            ) {
-
-                developing++;
-
-            } else {
-
-                missing++;
-            }
+    requiredSkills.forEach(skillName => {
+        const skill = getUserSkill(skillName);
+        if (skill && skill.performanceScore !== null && skill.performanceScore >= 80) {
+            strong++;
+        } else if (skill && skill.performanceScore !== null && skill.performanceScore > 0) {
+            developing++;
+        } else {
+            missing++;
         }
-    );
+    });
 
-
-    setText(
-        "readinessScore",
-        readiness + "%"
-    );
-
-
-    setText(
-        "skillsCount",
-        userSkills.length
-    );
-
-
-    setText(
-        "evidenceCount",
-        evidence.length
-    );
-
-
-    setText(
-        "strongCount",
-        strong
-    );
-
-
-    setText(
-        "developingCount",
-        developing
-    );
-
-
-    setText(
-        "missingCount",
-        missing
-    );
+    setText("overallPerformanceScore", overallPerf);
+    setText("readinessScore", readiness + "%");
+    setText("skillsCount", userSkills.length);
+    setText("evidenceCount", evidence.length);
+    setText("strongCount", strong);
+    setText("developingCount", developing);
+    setText("missingCount", missing);
 }
 
 
@@ -690,95 +658,49 @@ function renderSummary() {
 
 function renderSkillGap() {
 
-    const container =
-        document.getElementById(
-            "detailedGap"
-        );
+    const container = document.getElementById("detailedGap");
+    if (!container) return;
 
-
-    if (!container) {
-        return;
-    }
-
-
-    const requiredSkills =
-        getRequiredSkills();
-
-
+    const requiredSkills = getRequiredSkills();
     container.innerHTML = "";
 
+    requiredSkills.forEach(skillName => {
+        const skill = getUserSkill(skillName);
+        const hasEvidence = skill && skill.performanceScore !== null && (skill.evidenceCount || 0) > 0;
+        const confidence = hasEvidence ? Math.round(skill.performanceScore) : 0;
+        const strength = skill ? (skill.evidenceStrength || "None") : "None";
+        let status = "Missing";
 
-    requiredSkills.forEach(
-        skillName => {
-
-            const confidence =
-                getConfidence(
-                    skillName
-                );
-
-
-            let status =
-                "Missing";
-
-
-            if (
-                confidence >= 80
-            ) {
-
-                status =
-                    "Strong";
-
-            } else if (
-                confidence > 0
-            ) {
-
-                status =
-                    "Developing";
-            }
-
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "gap-item";
-
-
-            item.innerHTML = `
-
-                <div>
-
-                    <strong>
-                        ${escapeHTML(
-                            skillName
-                        )}
-                    </strong>
-
-                    <span>
-                        ${status}
-                    </span>
-
-                </div>
-
-                <div>
-
-                    <span>
-                        ${confidence}%
-                    </span>
-
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                item
-            );
+        if (confidence >= 80) {
+            status = "Strong";
+        } else if (hasEvidence && confidence > 0) {
+            status = "Developing";
         }
-    );
+
+        const item = document.createElement("div");
+        item.className = "gap-item";
+        item.style.transition = "all 0.2s ease";
+        item.onclick = () => openBreakdownModal(skillName);
+
+        const scoreText = hasEvidence ? `${confidence}%` : `Not assessed`;
+
+        item.innerHTML = `
+            <div>
+                <strong>${escapeHTML(skillName)}</strong>
+                <div style="display: flex; gap: 6px; align-items: center; margin-top: 4px;">
+                    <span class="skill-status status-${status.toLowerCase()}">${status}</span>
+                    <span class="strength-badge strength-${strength.toLowerCase()}" style="font-size: 10px; padding: 1px 6px;">
+                        Evidence: ${strength}
+                    </span>
+                </div>
+            </div>
+            <div style="text-align: right; display: flex; align-items: center; justify-content: flex-end;">
+                <span class="skill-row-score" style="font-size: 16px; font-weight: 700; color: #4338ca;">${scoreText}</span>
+            </div>
+        `;
+
+        container.appendChild(item);
+    });
 }
 
 
@@ -1287,26 +1209,138 @@ async function initializeDashboard() {
 
 
     await loadSkills();
-
     await loadEvidence();
 
+    try {
+        const sumRes = await fetch(`${API_URL}/user-skills/user/${currentUser.id}/performance-summary`);
+        if (sumRes.ok) {
+            performanceSummary = await sumRes.json();
+        }
+    } catch (e) {
+        console.warn("Performance summary fetch error:", e);
+    }
 
     renderUserInfo();
-
     renderSummary();
-
     renderSkillGap();
-
     renderNextSkill();
-
     renderRecommendedLearning();
-
     renderRecentEvidence();
-
     renderRadar();
-
     setupDashboardButtons();
 }
+
+/* =====================================================
+   SCORE BREAKDOWN MODAL IN DASHBOARD
+===================================================== */
+window.openBreakdownModal = async function (skillName) {
+    const modal = document.getElementById("breakdownModal");
+    if (!modal) return;
+
+    const nameEl = document.getElementById("modalSkillName");
+    const strengthEl = document.getElementById("modalStrengthBadge");
+    const scoreEl = document.getElementById("modalPerformanceScore");
+    const statusEl = document.getElementById("modalStatusLabel");
+    const formulaEl = document.getElementById("modalFormulaExplanation");
+    const categoriesList = document.getElementById("modalCategoriesList");
+    const missingBox = document.getElementById("modalMissingBox");
+    const missingList = document.getElementById("modalMissingList");
+
+    nameEl.textContent = skillName;
+    scoreEl.textContent = "Loading...";
+    formulaEl.textContent = "Calculating latest performance score from server...";
+    categoriesList.innerHTML = "<p>Loading breakdown...</p>";
+
+    modal.style.display = "flex";
+
+    try {
+        const response = await fetch(
+            `${API_URL}/user-skills/user/${currentUser.id}/skill/${encodeURIComponent(skillName)}/breakdown`
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to fetch breakdown details.");
+        }
+
+        const data = await response.json();
+
+        nameEl.textContent = data.skillName;
+        strengthEl.textContent = `Evidence: ${data.evidenceStrength}`;
+        strengthEl.className = `strength-badge strength-${data.evidenceStrength.toLowerCase()}`;
+
+        if (data.performanceScore !== null) {
+            scoreEl.textContent = `${data.performanceScore}%`;
+        } else {
+            scoreEl.textContent = "Not enough evidence yet";
+        }
+
+        statusEl.textContent = data.statusLabel || "Not Assessed";
+        formulaEl.textContent = data.formulaExplanation || "No formula details available.";
+
+        // Render categories
+        categoriesList.innerHTML = "";
+        (data.categories || []).forEach(function (cat) {
+            const item = document.createElement("div");
+            item.className = "category-item";
+
+            const scoreText = cat.hasEvidence
+                ? `<strong>${cat.score}%</strong>`
+                : `<span class="category-missing">Missing (Not counted)</span>`;
+
+            const effWeightText = cat.hasEvidence
+                ? `(Effective weight: ${(cat.effectiveWeight * 100).toFixed(1)}%)`
+                : `(Base weight: ${(cat.baseWeight * 100).toFixed(0)}%)`;
+
+            const progressWidth = cat.hasEvidence ? cat.score : 0;
+
+            item.innerHTML = `
+                <div class="category-header">
+                    <div>
+                        <strong>${escapeHTML(cat.displayName)}</strong>
+                        <small class="category-weight">${effWeightText} · ${cat.evidenceCount} records</small>
+                    </div>
+                    <div class="category-score-val">
+                        ${scoreText}
+                    </div>
+                </div>
+                <div class="category-progress-track">
+                    <div class="category-progress-fill" style="width: ${progressWidth}%;"></div>
+                </div>
+            `;
+            categoriesList.appendChild(item);
+        });
+
+        // Missing categories
+        if (data.missingCategories && data.missingCategories.length > 0) {
+            missingBox.style.display = "block";
+            missingList.innerHTML = "";
+            data.missingCategories.forEach(function (cat) {
+                const li = document.createElement("li");
+                li.textContent = cat;
+                missingList.appendChild(li);
+            });
+        } else {
+            missingBox.style.display = "none";
+        }
+
+    } catch (error) {
+        console.error("Modal error:", error);
+        formulaEl.textContent = "Error loading breakdown: " + error.message;
+    }
+};
+
+window.closeBreakdownModal = function () {
+    const modal = document.getElementById("breakdownModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+};
+
+window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+        window.closeBreakdownModal();
+    }
+});
 
 
 // =====================================================

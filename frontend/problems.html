@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Must-Learn Problems - WorkforceIQ</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/problems.css">
+    <script src="js/theme.js"></script>
+</head>
+
+<body>
+
+    <!-- =========================================
+     NAVBAR
+========================================= -->
+    <header class="navbar">
+        <div class="logo">
+            Workforce<span>IQ</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="skills.html">Skills</a>
+            <a href="evidence.html">Evidence</a>
+            <a href="roadmap.html">Roadmap</a>
+            <a href="learning.html">Learning</a>
+            <a href="problems.html" class="active">Must-Learn Problems</a>
+            <a href="progress.html">Progress</a>
+        </nav>
+
+        <div class="user-circle" id="userCircle">
+            U
+        </div>
+    </header>
+
+
+    <!-- =========================================
+     MAIN PROBLEMS VIEW
+========================================= -->
+    <main class="problems-page">
+
+        <!-- HERO SECTION -->
+        <section class="problems-hero">
+            <div class="hero-content">
+                <span class="topic-label">ESSENTIAL CURRICULUM</span>
+                <h1>Topic-Wise Must-Learn Problems</h1>
+                <p>
+                    Master essential, high-priority problems curated by skill, topic, and difficulty.
+                    Completing verified problems builds your authentic WorkforceIQ Practical Coding evidence.
+                </p>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat-box">
+                    <strong id="statTotalProblems">0</strong>
+                    <span>Total</span>
+                </div>
+                <div class="hero-stat-box stat-solved">
+                    <strong id="statSolvedProblems">0</strong>
+                    <span>Solved</span>
+                </div>
+                <div class="hero-stat-box stat-progress">
+                    <strong id="statInProgressProblems">0</strong>
+                    <span>In Progress</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILL SELECTION PILLS -->
+        <section class="skills-nav-card">
+            <div class="skills-nav-header">
+                <h3>Select Skill</h3>
+                <span id="skillCompletionRatio" style="font-size: 12px; font-weight: 600; color: #4f46e5;">0%
+                    Complete</span>
+            </div>
+            <div id="skillPillsContainer" class="skill-pills">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- TOPICS SELECTION PILLS -->
+        <section class="topics-nav-card">
+            <div class="skills-nav-header">
+                <h3>Browse Topics</h3>
+                <span id="topicSelectedLabel" style="font-size: 12px; color: #64748b;">All Topics</span>
+            </div>
+            <div id="topicPillsContainer" class="topic-pills">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- SKILL PROGRESS BAR -->
+        <div class="skill-progress-banner">
+            <div class="skill-progress-info">
+                <div class="skill-progress-top">
+                    <span id="progressSkillTitle">Skill Completion Progress</span>
+                    <strong id="progressSkillPercent">0%</strong>
+                </div>
+                <div class="progress-track-bg">
+                    <div id="progressBarFill" class="progress-fill-bar" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FILTERS AND SEARCH TOOLBAR -->
+        <section class="controls-bar">
+            <div class="filters-group">
+                <select id="trackFilter" class="filter-select">
+                    <option value="ALL">All Tracks</option>
+                    <option value="Must-Solve">Must-Solve Problems</option>
+                    <option value="Coding Practice">Coding Practice</option>
+                </select>
+
+                <select id="difficultyFilter" class="filter-select">
+                    <option value="ALL">All Difficulties</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+
+                <select id="statusFilter" class="filter-select">
+                    <option value="ALL">All Statuses</option>
+                    <option value="NOT_STARTED">Not Started</option>
+                    <option value="IN_PROGRESS">In Progress</option>
+                    <option value="COMPLETED">Completed</option>
+                </select>
+
+                <select id="priorityFilter" class="filter-select">
+                    <option value="ALL">All Priorities</option>
+                    <option value="Must-Learn Core">Must-Learn Core</option>
+                    <option value="High Priority">High Priority</option>
+                    <option value="Standard Practice">Standard Practice</option>
+                </select>
+            </div>
+
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="problemSearchInput" class="search-input"
+                    placeholder="Search problems or concepts...">
+            </div>
+        </section>
+
+        <!-- PROBLEMS GRID -->
+        <section id="problemsGrid" class="problems-grid">
+            <!-- Rendered dynamically -->
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+     INTERACTIVE PROBLEM WORKSPACE MODAL
+========================================= -->
+    <div id="problemModal" class="modal-overlay">
+        <div class="modal-container">
+            <!-- MODAL HEADER -->
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <div class="modal-breadcrumbs">
+                        <span id="modalSkillName">Skill</span> &gt; <span id="modalTopicName">Topic</span>
+                    </div>
+                    <h2 id="modalProblemTitle">Problem Title</h2>
+                </div>
+                <button id="modalCloseBtn" class="modal-close-btn" title="Close Workspace">&times;</button>
+            </div>
+
+            <!-- MODAL BODY -->
+            <div class="modal-body">
+                <!-- LEFT COLUMN: PROBLEM STATEMENT -->
+                <div class="modal-left-pane">
+                    <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+                        <span id="modalDifficultyBadge" class="difficulty-badge diff-easy">Easy</span>
+                        <span id="modalPriorityBadge" class="priority-badge">Must-Learn Core</span>
+                    </div>
+
+                    <div class="modal-section-title">Learning Objective</div>
+                    <p id="modalObjectiveText"
+                        style="font-size: 13px; font-weight: 500; color: #1e293b; margin-top: 2px; margin-bottom: 16px;">
+                        Objective text...
+                    </p>
+
+                    <div class="modal-section-title">Prerequisites</div>
+                    <div id="modalPrereqsContainer" class="prereq-chips"></div>
+
+                    <div class="modal-section-title">Problem Description</div>
+                    <div id="modalDescriptionText" class="problem-desc-text"></div>
+
+                    <div class="modal-section-title">Examples</div>
+                    <div id="modalExamplesContainer"></div>
+
+                    <!-- HINTS ACCORDION -->
+                    <div class="hints-container">
+                        <div class="modal-section-title">Problem-Solving Hints</div>
+                        <div id="modalHintsContainer"></div>
+                    </div>
+
+                    <div id="modalReferenceWrap" style="margin-top: 16px; font-size: 12px;">
+                        <a id="modalRefLink" href="#" target="_blank"
+                            style="color: #4f46e5; text-decoration: none; font-weight: 600;">
+                            📖 Official Documentation & Reference &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: SOLUTION & TEST CASES -->
+                <div class="modal-right-pane">
+                    <div class="editor-header">
+                        <span>Solution Code / Implementation</span>
+                        <button id="btnResetCode" class="btn-reset-code">Reset Starter Code</button>
+                    </div>
+
+                    <textarea id="codeEditorInput" class="code-editor-textarea" spellcheck="false"
+                        placeholder="Write your solution here..."></textarea>
+
+                    <div class="tests-panel">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span
+                                style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase;">Evaluation
+                                & Test Cases</span>
+                            <span id="testSummaryLabel" style="font-size: 12px; color: #64748b;">Not evaluated
+                                yet</span>
+                        </div>
+
+                        <div id="testCasesContainer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL FOOTER -->
+            <div class="modal-footer">
+                <div id="modalFooterMessage" class="modal-footer-message" style="color: #64748b;">
+                    Run test verification before submitting your solution.
+                </div>
+
+                <div class="modal-actions">
+                    <button id="btnRunTests" class="btn-run-tests">▶ Run Tests</button>
+                    <button id="btnSubmitSolution" class="btn-submit-solution">Submit Solution & Record
+                        Evidence</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================
+     SCRIPTS
+========================================= -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <!-- Catalog batches must load BEFORE must-learn-problems-data.js so the
+         merge logic can detect and incorporate them. -->
+    <script src="js/catalog/java-oop.js"></script>
+    <script src="js/catalog/dsa.js"></script>
+    <script src="js/catalog/sql-dbms.js"></script>
+    <script src="js/catalog/python.js"></script>
+    <script src="js/catalog/frontend-dev.js"></script>
+    <script src="js/catalog/backend-dev.js"></script>
+    <script src="js/must-learn-problems-data.js"></script>
+    <script src="js/problems.js"></script>
+
+</body>
+
+</html>

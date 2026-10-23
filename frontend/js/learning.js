@@ -1,9 +1,9 @@
-// =====================================================
+﻿// =====================================================
 // WORKFORCEIQ - LEARNING CENTER
 // Backend Connected Version
 // =====================================================
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = window.API_URL || "http://localhost:8080/api";
 
 
 // =====================================================
@@ -385,8 +385,20 @@ async function loadSkills() {
                     name:
                         skill.skillName,
 
+                    skillName:
+                        skill.skillName,
+
                     confidence:
-                        skill.confidence
+                        skill.confidence,
+
+                    performanceScore:
+                        skill.performanceScore,
+
+                    evidenceStrength:
+                        skill.evidenceStrength || "None",
+
+                    evidenceCount:
+                        skill.evidenceCount || 0
                 }))
             )
         );
@@ -414,10 +426,19 @@ async function loadSkills() {
                     skill.id,
 
                 skillName:
-                    skill.name,
+                    skill.name || skill.skillName,
 
                 confidence:
-                    skill.confidence
+                    skill.confidence,
+
+                performanceScore:
+                    skill.performanceScore,
+
+                evidenceStrength:
+                    skill.evidenceStrength || "None",
+
+                evidenceCount:
+                    skill.evidenceCount || 0
             }));
     }
 }
@@ -593,13 +614,16 @@ function getConfidence(skillName) {
         return 0;
     }
 
+    const val = (skill.performanceScore !== undefined && skill.performanceScore !== null)
+        ? skill.performanceScore
+        : skill.confidence;
 
     return Math.max(
         0,
         Math.min(
             100,
             Number(
-                skill.confidence
+                val
             ) || 0
         )
     );

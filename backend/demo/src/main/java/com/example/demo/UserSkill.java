@@ -24,7 +24,19 @@ public class UserSkill {
     private String skillName;
 
     @Column(nullable = false)
-    private Integer confidence;
+    private Integer confidence = 0;
+
+    @Column(name = "performance_score")
+    private Double performanceScore;
+
+    @Column(name = "evidence_strength", length = 50)
+    private String evidenceStrength = "None";
+
+    @Column(name = "evidence_count")
+    private Integer evidenceCount = 0;
+
+    @Column(name = "last_assessed_at")
+    private java.time.LocalDateTime lastAssessedAt;
 
     public UserSkill() {
     }
@@ -59,5 +71,37 @@ public class UserSkill {
 
     public void setConfidence(Integer confidence) {
         this.confidence = confidence;
+    }
+
+    public Double getPerformanceScore() {
+        return performanceScore;
+    }
+
+    public void setPerformanceScore(Double performanceScore) {
+        this.performanceScore = performanceScore;
+    }
+
+    public String getEvidenceStrength() {
+        return evidenceStrength;
+    }
+
+    public void setEvidenceStrength(String evidenceStrength) {
+        this.evidenceStrength = evidenceStrength;
+    }
+
+    public Integer getEvidenceCount() {
+        return evidenceCount;
+    }
+
+    public void setEvidenceCount(Integer evidenceCount) {
+        this.evidenceCount = evidenceCount;
+    }
+
+    public java.time.LocalDateTime getLastAssessedAt() {
+        return lastAssessedAt;
+    }
+
+    public void setLastAssessedAt(java.time.LocalDateTime lastAssessedAt) {
+        this.lastAssessedAt = lastAssessedAt;
     }
 }

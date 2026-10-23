@@ -1,9 +1,9 @@
-// =====================================================
+﻿// =====================================================
 // WORKFORCEIQ - SKILL DETAIL
 // BACKEND CONNECTED
 // =====================================================
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = window.API_URL || "http://localhost:8080/api";
 
 let currentUser = null;
 let userSkills = [];
@@ -602,61 +602,10 @@ async function loadSkillDetail() {
 
 
     // =================================================
-    // CONFIDENCE
+    // PERFORMANCE SCORE & BREAKDOWN
     // =================================================
 
-    const confidenceElement =
-        document.getElementById(
-            "skillConfidence"
-        );
-
-    if (confidenceElement) {
-
-        confidenceElement.textContent =
-            confidence + "%";
-    }
-
-
-    // =================================================
-    // PROGRESS BAR
-    // =================================================
-
-    const progressBar =
-        document.getElementById(
-            "confidenceProgress"
-        );
-
-    if (progressBar) {
-
-        progressBar.style.width =
-            confidence + "%";
-    }
-
-
-    // =================================================
-    // STATUS
-    // =================================================
-
-    const status =
-        getStatus(
-            confidence
-        );
-
-    const statusElement =
-        document.getElementById(
-            "skillStatus"
-        );
-
-    if (statusElement) {
-
-        statusElement.textContent =
-            status.text;
-
-        statusElement.className =
-            "skill-status " +
-            status.className;
-    }
-
+    await renderCategoryBreakdown();
 
     // =================================================
     // PREREQUISITES
@@ -695,6 +644,105 @@ async function loadSkillDetail() {
     // =================================================
 
     setupLearningButton();
+}
+
+
+// =====================================================
+// CATEGORY PERFORMANCE BREAKDOWN
+// =====================================================
+
+async function renderCategoryBreakdown() {
+    const confidenceEl = document.getElementById("skillConfidence");
+    const progressBar = document.getElementById("confidenceProgress");
+    const statusEl = document.getElementById("skillStatus");
+    const strengthEl = document.getElementById("skillStrengthBadge");
+    const categoriesList = document.getElementById("categoryBreakdownList");
+    const formulaText = document.getElementById("breakdownFormulaText");
+
+    try {
+        const response = await fetch(
+            `${API_URL}/user-skills/user/${currentUser.id}/skill/${encodeURIComponent(skillName)}/breakdown`
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to fetch breakdown");
+        }
+
+        const data = await response.json();
+
+        // Update score & badges
+        if (data.performanceScore !== null) {
+            if (confidenceEl) confidenceEl.textContent = `${data.performanceScore}%`;
+            if (progressBar) progressBar.style.width = `${data.performanceScore}%`;
+        } else {
+            if (confidenceEl) confidenceEl.textContent = "Not assessed";
+            if (progressBar) progressBar.style.width = "0%";
+        }
+
+        if (statusEl) {
+            statusEl.textContent = data.statusLabel || "NOT ASSESSED";
+            statusEl.className = "skill-status " + (data.statusLabel ? data.statusLabel.toLowerCase() : "basic");
+        }
+
+        if (strengthEl) {
+            strengthEl.textContent = `Evidence: ${data.evidenceStrength}`;
+            strengthEl.className = `strength-badge strength-${data.evidenceStrength.toLowerCase()}`;
+        }
+
+        // Render categories list
+        if (categoriesList) {
+            categoriesList.innerHTML = "";
+            (data.categories || []).forEach(cat => {
+                const item = document.createElement("div");
+                item.className = "category-item";
+                item.style.border = "1px solid #e2e8f0";
+                item.style.borderRadius = "10px";
+                item.style.padding = "12px 16px";
+                item.style.background = "#ffffff";
+
+                const scoreText = cat.hasEvidence
+                    ? `<strong style="color: #4338ca; font-size: 15px;">${cat.score}%</strong>`
+                    : `<span style="color: #94a3b8; font-size: 12px; background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">Missing</span>`;
+
+                const effWeightText = cat.hasEvidence
+                    ? `Effective weight: ${(cat.effectiveWeight * 100).toFixed(1)}%`
+                    : `Base weight: ${(cat.baseWeight * 100).toFixed(0)}%`;
+
+                const width = cat.hasEvidence ? cat.score : 0;
+
+                item.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <div>
+                            <strong style="color: #1e293b; font-size: 14px;">${escapeHtml(cat.displayName)}</strong>
+                            <small style="color: #64748b; font-size: 11px; margin-left: 6px;">(${effWeightText} · ${cat.evidenceCount} records)</small>
+                        </div>
+                        <div>${scoreText}</div>
+                    </div>
+                    <div style="height: 6px; background: #e2e8f0; border-radius: 999px; overflow: hidden;">
+                        <div style="width: ${width}%; height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 999px;"></div>
+                    </div>
+                `;
+
+                categoriesList.appendChild(item);
+            });
+        }
+
+        // Formula explanation & missing categories
+        if (formulaText) {
+            formulaText.style.display = "block";
+            let html = `<strong>Calculation Formula:</strong><p style="margin: 4px 0 0;">${escapeHtml(data.formulaExplanation)}</p>`;
+            if (data.missingCategories && data.missingCategories.length > 0) {
+                html += `<p style="margin: 6px 0 0; color: #b45309;"><strong>Missing Categories:</strong> ${data.missingCategories.join(", ")}. <a href="evidence.html?skill=${encodeURIComponent(skillName)}" style="color: #4338ca; font-weight: 700;">+ Record evidence</a></p>`;
+            }
+            formulaText.innerHTML = html;
+        }
+
+    } catch (error) {
+        console.warn("Category breakdown loading error:", error);
+        if (categoriesList) {
+            categoriesList.innerHTML = "<p>Evidence records will appear here as you submit them.</p>";
+        }
+    }
 }
 
 
@@ -783,7 +831,7 @@ function renderPrerequisites() {
                     ${
                         completed
                             ? "✓ Completed"
-                            : "⚠ Needs Improvement"
+                            : "⚠️ Needs Improvement"
                     }
 
                 </span>

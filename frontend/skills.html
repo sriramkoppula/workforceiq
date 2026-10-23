@@ -13,8 +13,10 @@
     <title>Skills | Intelligent Workforce</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/skills.css">
 
+    <script src="js/theme.js"></script>
 </head>
 
 
@@ -47,6 +49,14 @@
 
             <a href="roadmap.html">
                 Roadmap
+            </a>
+
+            <a href="learning.html">
+                Learning
+            </a>
+
+            <a href="problems.html">
+                Problems
             </a>
 
             <a href="progress.html">
@@ -152,86 +162,6 @@
                             Select a skill
                         </option>
 
-                        <option value="Java">
-                            Java
-                        </option>
-
-                        <option value="OOP">
-                            OOP
-                        </option>
-
-                        <option value="DSA">
-                            DSA
-                        </option>
-
-                        <option value="SQL">
-                            SQL
-                        </option>
-
-                        <option value="DBMS">
-                            DBMS
-                        </option>
-
-                        <option value="Git">
-                            Git
-                        </option>
-
-                        <option value="HTML">
-                            HTML
-                        </option>
-
-                        <option value="CSS">
-                            CSS
-                        </option>
-
-                        <option value="JavaScript">
-                            JavaScript
-                        </option>
-
-                        <option value="Python">
-                            Python
-                        </option>
-
-                        <option value="C++">
-                            C++
-                        </option>
-
-                        <option value="AWS">
-                            AWS
-                        </option>
-
-                        <option value="REST API">
-                            REST API
-                        </option>
-
-                        <option value="Spring Boot">
-                            Spring Boot
-                        </option>
-
-                        <option value="Docker">
-                            Docker
-                        </option>
-
-                        <option value="React">
-                            React
-                        </option>
-
-                        <option value="Excel">
-                            Excel
-                        </option>
-
-                        <option value="Data Visualization">
-                            Data Visualization
-                        </option>
-
-                        <option value="Linux">
-                            Linux
-                        </option>
-
-                        <option value="Networking">
-                            Networking
-                        </option>
-
                     </select>
 
 
@@ -250,7 +180,6 @@
                             min="0"
                             max="100"
                             value="50"
-                            oninput="updateConfidence()"
                         >
 
                         <span id="confidenceValue">
@@ -264,8 +193,9 @@
                     <!-- ADD BUTTON -->
 
                     <button
+                        id="addSkillButton"
                         class="primary-btn add-btn"
-                        onclick="addSkill()"
+                        type="button"
                     >
                         + Add Skill
                     </button>
@@ -361,12 +291,56 @@
 
 
 
+    <div id="breakdownModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <div class="modal-breadcrumbs"><span id="modalSkillName">Skill</span> &gt; <span id="modalTopicName">Topic</span></div>
+            <h2 id="modalHeaderTitle" class="modal-header-title">Performance Breakdown</h2>
+            <div class="modal-header-badges">
+              <span id="modalStrengthBadge" class="strength-badge strength-none">Evidence: None</span>
+              <span id="modalEvidenceCountBadge" class="badge">📋 Loading...</span>
+              <span id="modalProvisionalBadge" class="badge" style="display:none">⚠️ Provisional</span>
+              <span id="modalLastAssessedAt" class="badge" style="display:none"></span>
+            </div>
+          </div>
+          <button id="modalCloseBtn" class="close-modal-btn" type="button" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-score-banner">
+            <div>
+              <small style="display: block; font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Verified Score</small>
+              <h1 id="modalPerformanceScore" class="modal-score-highlight">Loading...</h1>
+            </div>
+            <div style="text-align: right;">
+              <p id="modalStatusLabel" style="font-weight: 700; margin: 0; color: #1e293b;">Loading...</p>
+            </div>
+          </div>
+          <div class="modal-formula-box">
+            <strong class="formula-title">WorkforceIQ Scoring Formula</strong>
+            <p id="modalFormulaExplanation"></p>
+          </div>
+          <div class="modal-section-title">Category Breakdown</div>
+          <div class="categories-breakdown-list" id="modalCategoriesList"></div>
+          <div class="modal-missing-box" id="modalMissingBox" style="display:none">
+            <strong>Missing Categories</strong>
+            <ul id="modalMissingList"></ul>
+            <a href="#" class="add-evidence-link">+ Add evidence</a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="modalFooterCloseBtn" class="modal-btn-secondary" type="button">Close</button>
+          <a id="modalRecordEvidenceBtn" class="modal-btn-primary" href="#">+ Record Evidence</a>
+        </div>
+      </div>
+    </div>
+
     <!-- ==============================
          JAVASCRIPT
     =============================== -->
-<script src="js/auth.js"></script>
-<script src="js/skills.js"></script>
-
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/skills.js"></script>
 </body>
 
 </html>

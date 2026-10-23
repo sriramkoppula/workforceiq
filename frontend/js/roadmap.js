@@ -3,7 +3,7 @@
 // BACKEND CONNECTED
 // =====================================================
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = window.API_URL || "http://localhost:8080/api";
 
 let currentUser = null;
 let profile = {};
@@ -271,7 +271,10 @@ async function loadUserSkills() {
                     confidence:
                         Number(
                             skill.confidence
-                        ) || 0
+                        ) || 0,
+                    performanceScore: skill.performanceScore,
+                    evidenceStrength: skill.evidenceStrength || "None",
+                    evidenceCount: skill.evidenceCount || 0
                 })
             );
 
@@ -322,7 +325,11 @@ function loadSkillsFallback() {
                     confidence:
                         Number(
                             skill.confidence
-                        ) || 0
+                        ) || 0,
+
+                    performanceScore: skill.performanceScore,
+                    evidenceStrength: skill.evidenceStrength || "None",
+                    evidenceCount: skill.evidenceCount || 0
                 })
             );
 
@@ -379,13 +386,16 @@ function getConfidence(
         return 0;
     }
 
+    const val = (skill.performanceScore !== undefined && skill.performanceScore !== null)
+        ? skill.performanceScore
+        : skill.confidence;
 
     return Math.max(
         0,
         Math.min(
             100,
             Number(
-                skill.confidence
+                val
             ) || 0
         )
     );
@@ -592,6 +602,30 @@ function renderRoadmap() {
             }
 
 
+            const userSkill = userSkills.find(
+                s =>
+                    String(
+                        s.skillName ||
+                        s.name ||
+                        ""
+                    ).toLowerCase() ===
+                    skillName.toLowerCase()
+            );
+
+            const hasEvidence =
+                userSkill &&
+                ((userSkill.evidenceCount && userSkill.evidenceCount > 0) ||
+                    (userSkill.performanceScore !== null &&
+                        userSkill.performanceScore !== undefined));
+
+            const strength =
+                userSkill && userSkill.evidenceStrength
+                    ? userSkill.evidenceStrength
+                    : "None";
+
+            const scoreDisplay = hasEvidence ? `${confidence}%` : "Not assessed";
+
+
             item.innerHTML = `
 
                 <div class="roadmap-number">
@@ -616,18 +650,23 @@ function renderRoadmap() {
 
                     </div>
 
-                    <p>
-                        Confidence:
-                        <strong>
-                            ${confidence}%
-                        </strong>
-                    </p>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 6px 0;">
+                        <p style="margin: 0; font-size: 13px; color: var(--text-secondary, #64748b);">
+                            Performance:
+                            <strong style="color: var(--text-primary, #0f172a);">
+                                ${scoreDisplay}
+                            </strong>
+                        </p>
+                        <span class="strength-badge strength-${strength.toLowerCase()}" style="font-size: 10px; padding: 2px 7px;">
+                            ${strength === "None" ? "No Evidence" : strength}
+                        </span>
+                    </div>
 
                     <div class="roadmap-progress">
 
                         <div
                             class="roadmap-progress-bar"
-                            style="width:${confidence}%"
+                            style="width:${hasEvidence ? confidence : 0}%"
                         ></div>
 
                     </div>

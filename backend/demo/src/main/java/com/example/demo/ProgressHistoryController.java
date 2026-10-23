@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/progress")
-@CrossOrigin(origins = "*")
 public class ProgressHistoryController {
 
     private final ProgressHistoryRepository repository;

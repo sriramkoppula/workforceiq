@@ -1,10 +1,10 @@
-// ==========================================
+﻿// ==========================================
 // WORKFORCEIQ - LEARNING PROGRESS ENGINE
 // Backend + LocalStorage Sync
 // ==========================================
 
 const LEARNING_PROGRESS_API =
-    "http://localhost:8080/api/learning-progress";
+    (window.API_URL || "http://localhost:8080/api") + "/learning-progress";
 
 const TOPIC_PROGRESS_KEY =
     "workforceTopicProgress";

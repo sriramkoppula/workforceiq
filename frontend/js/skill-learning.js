@@ -1,8 +1,8 @@
-// =====================================================
+﻿// =====================================================
 // WORKFORCEIQ - SKILL LEARNING
 // =====================================================
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = window.API_URL || "http://localhost:8080/api";
 
 let currentUser = null;
 let userSkills = [];
@@ -421,9 +421,21 @@ function getConfidence(skillName) {
                 skillName.toLowerCase()
         );
 
-    return skill
-        ? Number(skill.confidence) || 0
-        : 0;
+    if (!skill) {
+        return 0;
+    }
+
+    const val = (skill.performanceScore !== undefined && skill.performanceScore !== null)
+        ? skill.performanceScore
+        : skill.confidence;
+
+    return Math.max(
+        0,
+        Math.min(
+            100,
+            Number(val) || 0
+        )
+    );
 }
 
 
@@ -646,16 +658,29 @@ function renderCurriculum(skillName) {
 
                 </div>
 
-                <button
-                    type="button"
-                    class="topic-button"
-                >
-                    ${
-                        completed
-                            ? "Review →"
-                            : "Learn →"
-                    }
-                </button>
+                <div style="display: flex; gap: 8px; align-items: center;">
+
+                    <a
+                        href="problems.html?skill=${encodeURIComponent(skillName)}&topic=${encodeURIComponent(topic)}"
+                        class="secondary-button"
+                        style="padding: 6px 12px; font-size: 12px; text-decoration: none; border-radius: 6px; font-weight: 600;"
+                        title="Must-Learn Problems for ${topic}"
+                    >
+                        🎯 Problems
+                    </a>
+
+                    <button
+                        type="button"
+                        class="topic-button"
+                    >
+                        ${
+                            completed
+                                ? "Review →"
+                                : "Learn →"
+                        }
+                    </button>
+
+                </div>
 
             `;
 
@@ -765,6 +790,33 @@ function renderHeader(skillName) {
             "skillConfidence"
         );
 
+    const strengthEl =
+        document.getElementById(
+            "skillEvidenceStrength"
+        );
+
+    const skill =
+        userSkills.find(
+            item =>
+                String(
+                    item.skillName ||
+                    item.name ||
+                    ""
+                ).toLowerCase() ===
+                skillName.toLowerCase()
+        );
+
+    const hasEvidence =
+        skill &&
+        ((skill.evidenceCount && skill.evidenceCount > 0) ||
+            (skill.performanceScore !== null &&
+                skill.performanceScore !== undefined));
+
+    const strength =
+        skill && skill.evidenceStrength
+            ? skill.evidenceStrength
+            : "None";
+
 
     if (name) {
         name.textContent =
@@ -783,11 +835,22 @@ function renderHeader(skillName) {
 
 
     if (confidence) {
+        if (hasEvidence) {
+            confidence.textContent =
+                getConfidence(
+                    skillName
+                ) + "%";
+        } else {
+            confidence.textContent =
+                "Not assessed";
+        }
+    }
 
-        confidence.textContent =
-            getConfidence(
-                skillName
-            ) + "%";
+    if (strengthEl) {
+        strengthEl.textContent =
+            strength === "None" ? "No Evidence" : `Evidence: ${strength}`;
+        strengthEl.className =
+            `strength-badge strength-${strength.toLowerCase()}`;
     }
 }
 
@@ -861,17 +924,8 @@ function setupPractice(skillName) {
     button.addEventListener(
         "click",
         () => {
-
-            const topics =
-                skillTopics[skillName] || [];
-
-            const topic =
-                topics[0] ||
-                skillName;
-
-
             window.location.href =
-                `practice.html?skill=${encodeURIComponent(skillName)}&topic=${encodeURIComponent(topic)}`;
+                `problems.html?skill=${encodeURIComponent(skillName)}`;
         }
     );
 }

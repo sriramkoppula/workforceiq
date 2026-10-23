@@ -16,4 +16,9 @@ public interface EvidenceRepository
             Long userId,
             String skillName
     );
+
+    void deleteByUserIdAndSkillName(
+            Long userId,
+            String skillName
+    );
 }

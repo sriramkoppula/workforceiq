@@ -1,0 +1,54 @@
+# ============================================================================
+# WorkforceIQ — GitHub Pages Deployment
+#
+# Publishes the contents of the frontend/ directory to GitHub Pages.
+# The deployed site serves index.html at the root of the Pages URL.
+#
+# Triggers on pushes to main and can be run manually from the Actions tab.
+# ============================================================================
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Grant GITHUB_TOKEN the permissions needed for Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, but do NOT cancel in-progress runs
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Configure GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 3. Upload only the frontend/ directory as the Pages artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./frontend"
+
+      # 4. Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

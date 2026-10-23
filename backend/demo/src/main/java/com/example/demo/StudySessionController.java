@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/study-sessions")
-@CrossOrigin(origins = "*")
 public class StudySessionController {
 
     private final StudySessionRepository repository;
