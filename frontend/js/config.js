@@ -18,7 +18,8 @@
   "use strict";
 
   // ── Production backend URL (update this after Render deployment) ────────────
-  var PRODUCTION_API_URL = "https://workforceiq-api.onrender.com";
+
+  var PRODUCTION_API_URL = "https://workforceiq-0r6o.onrender.com";
 
   // ── Local dev fallback ──────────────────────────────────────────────────────
   var LOCAL_API_URL = "http://localhost:8080";
