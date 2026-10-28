@@ -636,3 +636,114 @@ Learn Smarter. Identify Gaps. Become Career Ready.
 
 
 
+## Features
+
+- User registration and login
+- Profile setup and skill management
+- Skill gap identification and career readiness tracking
+- Personalized learning roadmaps and recommendations
+- Learning progress tracking
+- Coding practice with test cases
+- Evidence tracking for demonstrated skills
+- Dashboard for monitoring skill development and readiness
+
+## Technology Stack
+
+**Frontend**
+- HTML
+- CSS
+- JavaScript
+
+**Backend**
+- Java
+- Spring Boot
+- Maven
+
+**Database**
+- MySQL
+- Aiven MySQL for the deployed database
+
+**Deployment**
+- GitHub Pages for the frontend
+- Render for the backend
+
+## System Architecture
+
+1. Users interact with the web application through the frontend.
+2. The frontend sends API requests to the Spring Boot backend.
+3. The backend processes requests and stores or retrieves application data from MySQL.
+4. The dashboard displays skill information, learning progress, evidence, and readiness information.
+
+## Live Demo
+
+- **Frontend:** https://sriramkoppula.github.io/workforceiq/
+- **Backend health check:** https://workforceiq-0r6o.onrender.com/api/health
+- **GitHub repository:** https://github.com/sriramkoppula/workforceiq
+
+## Local Setup
+
+### Prerequisites
+
+- Java 21 or a compatible configured JDK
+- MySQL
+- Git
+- A web browser
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/sriramkoppula/workforceiq.git
+cd workforceiq
+```
+
+### 2. Configure the database
+
+Create a MySQL database named `workforceiq` for local development.
+
+Set the following environment variables to match your database configuration:
+
+- `DB_URL`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+
+Never commit database passwords or other secrets to GitHub.
+
+### 3. Run the backend
+
+Open a terminal in the backend Maven project directory:
+
+```bash
+cd backend/demo
+```
+
+On Windows PowerShell:
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+The backend uses port `8080` by default for local development.
+
+### 4. Run the frontend
+
+Serve the `frontend` directory using a local development server, such as the VS Code Live Server extension.
+
+Ensure the frontend API configuration points to the local backend at `http://localhost:8080` during local development.
+
+## Security Notes
+
+- Store database credentials in environment variables.
+- Do not commit passwords, API keys, or other secrets.
+- Use HTTPS for deployed application endpoints.
+- Keep production credentials private.
+
+## Future Improvements
+
+- Improve evidence-based skill scoring.
+- Expand skill assessments and coding practice.
+- Enhance career readiness analytics.
+- Add more learning resources and personalized recommendations.
+
+## License
+
+No license has been specified yet. Add a license before permitting others to reuse or distribute this project.
