@@ -3,7 +3,8 @@
 // Backend Connected Version
 // =====================================================
 
-const API_URL = window.API_URL || (window.API_URL || "https://workforceiq-0r6o.onrender.com/api") + "/users/" + userId + "/profile";
+
+const API_URL = window.API_URL || "https://workforceiq-0r6o.onrender.com/api";
 
 // =====================================================
 // GET LOGGED-IN USER
