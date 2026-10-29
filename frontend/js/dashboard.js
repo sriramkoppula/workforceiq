@@ -162,63 +162,55 @@ function getLoggedInUser() {
 
 
 // =====================================================
-// LOAD PROFILE
+// LOAD PROFILE  (cache-first for speed, background refresh)
 // =====================================================
 
 async function loadProfile() {
 
-    if (
-        !currentUser ||
-        !currentUser.id
-    ) {
-
-        window.location.href =
-            "login.html";
-
+    if (!currentUser || !currentUser.id) {
+        window.location.href = "login.html";
         return false;
     }
 
-
+    // --- Cache hit: serve immediately from localStorage if fresh (< 5 min) ---
     try {
+        const cached = JSON.parse(localStorage.getItem("workforceProfile"));
+        const cachedAt = Number(localStorage.getItem("workforceProfileCachedAt") || 0);
+        const FIVE_MIN = 5 * 60 * 1000;
 
-        const response =
-            await fetch(
-                `${API_URL}/users/${currentUser.id}`
-            );
-
-
-        if (!response.ok) {
-            throw new Error(
-                "Unable to load profile"
-            );
+        if (cached && cached.id && (Date.now() - cachedAt < FIVE_MIN)) {
+            profile = cached;
+            // Refresh in the background so next visit is up-to-date
+            fetch(`${API_URL}/users/${currentUser.id}`)
+                .then(r => r.ok ? r.json() : null)
+                .then(data => {
+                    if (data) {
+                        profile = data;
+                        localStorage.setItem("workforceProfile", JSON.stringify(data));
+                        localStorage.setItem("workforceProfileCachedAt", String(Date.now()));
+                    }
+                })
+                .catch(() => {});
+            return true;
         }
+    } catch (_) {}
 
+    // --- Cache miss or stale: fetch synchronously ---
+    try {
+        const response = await fetch(`${API_URL}/users/${currentUser.id}`);
 
-        profile =
-            await response.json();
+        if (!response.ok) throw new Error("Unable to load profile");
 
+        profile = await response.json();
 
-        localStorage.setItem(
-            "workforceProfile",
-            JSON.stringify(profile)
-        );
-
+        localStorage.setItem("workforceProfile", JSON.stringify(profile));
+        localStorage.setItem("workforceProfileCachedAt", String(Date.now()));
 
         return true;
 
     } catch (error) {
-
         console.error(error);
-
-
-        profile =
-            JSON.parse(
-                localStorage.getItem(
-                    "workforceProfile"
-                )
-            ) || null;
-
-
+        profile = JSON.parse(localStorage.getItem("workforceProfile")) || null;
         return !!profile;
     }
 }
@@ -1199,26 +1191,32 @@ async function initializeDashboard() {
     }
 
 
-    const profileLoaded =
-        await loadProfile();
-
+    const profileLoaded = await loadProfile();
 
     if (!profileLoaded) {
         return;
     }
 
-
-    await loadSkills();
-    await loadEvidence();
-
-    try {
-        const sumRes = await fetch(`${API_URL}/user-skills/user/${currentUser.id}/performance-summary`);
-        if (sumRes.ok) {
-            performanceSummary = await sumRes.json();
-        }
-    } catch (e) {
-        console.warn("Performance summary fetch error:", e);
-    }
+    // ── Parallelise all independent data fetches ──────────────────────────────
+    // Before: profile → skills → evidence → performance-summary (sequential)
+    // After:  profile (already done) + [skills, evidence, summary] in parallel
+    await Promise.all([
+        loadSkills(),
+        loadEvidence(),
+        (async () => {
+            try {
+                const sumRes = await fetch(
+                    `${API_URL}/user-skills/user/${currentUser.id}/performance-summary`
+                );
+                if (sumRes.ok) {
+                    performanceSummary = await sumRes.json();
+                }
+            } catch (e) {
+                console.warn("Performance summary fetch error:", e);
+            }
+        })()
+    ]);
+    // ─────────────────────────────────────────────────────────────────────────
 
     renderUserInfo();
     renderSummary();

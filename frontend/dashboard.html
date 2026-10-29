@@ -7,11 +7,16 @@
 
     <title>Dashboard | WorkforceIQ</title>
 
+    <!-- DNS prefetch for CDN — shaves ~50-150 ms off Chart.js load on cold visits -->
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/dashboard.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- defer: Chart.js loads in parallel; executes after HTML is parsed (non-blocking) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
     <script src="js/theme.js"></script>
 </head>
 

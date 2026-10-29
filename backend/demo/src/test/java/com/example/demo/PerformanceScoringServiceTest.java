@@ -285,12 +285,9 @@ public class PerformanceScoringServiceTest {
         when(userSkillRepository.findByUserId(1L)).thenReturn(Arrays.asList(skill1, skill2));
 
         Evidence ev1 = createEvidence(1L, "Java Fundamentals", "assessment", 90.0, 100.0, true);
-        when(evidenceRepository.findByUserIdAndSkillNameOrderByCreatedAtDesc(1L, "Java Fundamentals"))
-                .thenReturn(Collections.singletonList(ev1));
-
         Evidence ev2 = createEvidence(1L, "SQL", "assessment", 80.0, 100.0, true);
-        when(evidenceRepository.findByUserIdAndSkillNameOrderByCreatedAtDesc(1L, "SQL"))
-                .thenReturn(Collections.singletonList(ev2));
+        when(evidenceRepository.findByUserIdOrderByCreatedAtDesc(1L))
+                .thenReturn(Arrays.asList(ev1, ev2));
 
         UserPerformanceSummaryDTO summary = scoringService.getUserPerformanceSummary(1L);
 

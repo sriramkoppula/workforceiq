@@ -2,10 +2,19 @@ package com.example.demo;
 
 import jakarta.persistence.*;
 
+
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "evidence")
+@Table(
+    name = "evidence",
+    indexes = {
+        // Speeds up all findByUserId* and findByUserIdOrderByCreatedAtDesc queries
+        @Index(name = "idx_evidence_user_created", columnList = "userId, createdAt DESC"),
+        // Speeds up findByUserIdAndSkillNameOrderByCreatedAtDesc
+        @Index(name = "idx_evidence_user_skill", columnList = "userId, skillName")
+    }
+)
 public class Evidence {
 
     @Id

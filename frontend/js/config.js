@@ -45,4 +45,22 @@
   } else {
     console.info("[WorkforceIQ] Using PRODUCTION backend:", window.WIQ_API);
   }
+
+  // ── Render cold-start mitigation ───────────────────────────────────────────
+  // Render free tier spins down after 15 min of inactivity, causing 15-30s
+  // cold starts on the next real request. We fire a lightweight /api/health
+  // ping as early as possible (immediately when this script runs, before
+  // DOMContentLoaded) so the backend has maximum warm-up time before the
+  // user submits login credentials or the page's own API calls start.
+  // Fire-and-forget; errors are silently swallowed so this never breaks anything.
+  if (!isLocal) {
+    try {
+      fetch(window.WIQ_API + "/api/health", {
+        method: "GET",
+        keepalive: true,
+        // No credentials, no cookies — this is just a ping.
+        cache: "no-store"
+      }).catch(function () {});
+    } catch (_) {}
+  }
 })();

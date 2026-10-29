@@ -9,6 +9,11 @@ import jakarta.persistence.*;
         @UniqueConstraint(
             columnNames = {"user_id", "skill_name"}
         )
+    },
+    indexes = {
+        // The unique constraint above already covers (user_id, skill_name) lookups.
+        // This index on user_id alone ensures fast findByUserId() queries.
+        @Index(name = "idx_user_skills_user_id", columnList = "user_id")
     }
 )
 public class UserSkill {

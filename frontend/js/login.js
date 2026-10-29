@@ -1,4 +1,4 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
     const loginForm = document.getElementById("loginForm");
 
@@ -105,6 +105,7 @@
             ) {
 
                 const profile = {
+                    id: data.id,
                     name: data.name,
                     email: data.email,
                     education: data.education || "",
@@ -118,6 +119,10 @@
                 localStorage.setItem(
                     "workforceProfile",
                     JSON.stringify(profile)
+                );
+                localStorage.setItem(
+                    "workforceProfileCachedAt",
+                    String(Date.now())
                 );
             }
 

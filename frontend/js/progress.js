@@ -1,4 +1,4 @@
-﻿// =====================================================
+// =====================================================
 // WORKFORCEIQ - PROGRESS
 // Backend Connected Version
 // =====================================================
@@ -874,58 +874,27 @@ function renderChart() {
 
 async function initializeProgress() {
 
-    console.log(
-        "WorkforceIQ Progress loading..."
-    );
-
-
-    const authenticated =
-        await loadProfile();
+    const authenticated = await loadProfile();
 
     if (!authenticated) {
-
         return;
     }
 
+    // ── Parallel fetch: skills, history, and readiness summary ───────────────
+    // Previously sequential (3× round-trip). Now fires all three simultaneously.
+    const [, , readiness] = await Promise.all([
+        loadSkills(),
+        loadHistory(),
+        fetchBackendReadiness()
+    ]);
 
-    await loadSkills();
-
-    await loadHistory();
-
-
-    const readiness =
-        await fetchBackendReadiness();
-
-
-    await saveCurrentProgress(
-        readiness
-    );
-
+    await saveCurrentProgress(readiness);
 
     updateCareerText();
-
-    updateReadiness(
-        readiness
-    );
-
-    updateStatistics(
-        readiness
-    );
-
+    updateReadiness(readiness);
+    updateStatistics(readiness);
     renderHistoryList();
-
     renderChart();
-
-
-    console.log(
-        "Progress history:",
-        progressHistory
-    );
-
-    console.log(
-        "Current readiness:",
-        readiness
-    );
 }
 
 

@@ -615,8 +615,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     }
 
-    await loadSkills();
-    await loadEvidence();
+    // ── Load skills and evidence in parallel ─────────────────────────────────
+    await Promise.all([
+        loadSkills(),
+        loadEvidence()
+    ]);
 });
 
 function escapeHTML(value) {
