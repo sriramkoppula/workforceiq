@@ -106,6 +106,15 @@
         localStorage.removeItem(
             "workforceRememberMe"
         );
+        localStorage.removeItem("workforceProfile");
+        localStorage.removeItem("workforceProfileCachedAt");
+        localStorage.removeItem("workforceSkills");
+        localStorage.removeItem("workforceSkillsUserId");
+        localStorage.removeItem("workforceEvidence");
+        localStorage.removeItem("workforceEvidenceUserId");
+        localStorage.removeItem("workforcePerformanceSummary");
+        localStorage.removeItem("workforceSummaryUserId"
+        );
 
         window.location.href =
             "login.html";

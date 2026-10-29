@@ -33,6 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
             loginButton.textContent = "Logging in...";
         }
 
+        let warmUpTimer = setTimeout(function () {
+            if (loginButton && loginButton.disabled) {
+                loginButton.textContent = "Connecting to server...";
+            }
+        }, 3000);
+
         try {
 
             const response = await fetch(
@@ -73,6 +79,21 @@ document.addEventListener("DOMContentLoaded", function () {
              * Store only the information needed
              * by the frontend session.
              */
+
+            // Clear previous user's cached data on account switch
+            try {
+                const prevUser = JSON.parse(localStorage.getItem("workforceLoggedInUser") || "null");
+                if (prevUser && prevUser.id !== data.id) {
+                    localStorage.removeItem("workforceProfile");
+                    localStorage.removeItem("workforceProfileCachedAt");
+                    localStorage.removeItem("workforceSkills");
+                    localStorage.removeItem("workforceSkillsUserId");
+                    localStorage.removeItem("workforceEvidence");
+                    localStorage.removeItem("workforceEvidenceUserId");
+                    localStorage.removeItem("workforcePerformanceSummary");
+                    localStorage.removeItem("workforceSummaryUserId");
+                }
+            } catch (_) {}
 
             const loggedInUser = {
                 id: data.id,
@@ -176,6 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
         } finally {
+            clearTimeout(warmUpTimer);
 
             if (loginButton) {
 

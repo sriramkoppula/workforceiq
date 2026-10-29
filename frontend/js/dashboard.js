@@ -10,6 +10,7 @@ let profile = null;
 let userSkills = [];
 let evidence = [];
 let performanceSummary = null;
+let isSummaryLoading = false;
 
 
 // =====================================================
@@ -162,6 +163,72 @@ function getLoggedInUser() {
 
 
 // =====================================================
+// LOAD CACHED DASHBOARD DATA (OPTIMISTIC RENDER)
+// =====================================================
+
+function loadCachedDashboardData() {
+    if (!currentUser || !currentUser.id) return false;
+
+    let hasData = false;
+
+    // 1. Profile cache (scoped to currentUser)
+    try {
+        const cachedProfile = JSON.parse(localStorage.getItem("workforceProfile"));
+        if (cachedProfile && cachedProfile.id === currentUser.id) {
+            profile = cachedProfile;
+            hasData = true;
+        }
+    } catch (_) {}
+
+    // 2. Skills cache (scoped to currentUser)
+    try {
+        const skillsUserId = localStorage.getItem("workforceSkillsUserId");
+        if (skillsUserId === String(currentUser.id)) {
+            const cachedSkills = JSON.parse(localStorage.getItem("workforceSkills"));
+            if (Array.isArray(cachedSkills) && cachedSkills.length > 0) {
+                userSkills = cachedSkills.map(skill => ({
+                    id: skill.id,
+                    skillName: skill.skillName || skill.name,
+                    confidence: Number(skill.confidence) || 0,
+                    performanceScore: skill.performanceScore !== null && skill.performanceScore !== undefined
+                        ? Number(skill.performanceScore) : null,
+                    evidenceStrength: skill.evidenceStrength || "None",
+                    evidenceCount: Number(skill.evidenceCount) || 0,
+                    lastAssessedAt: skill.lastAssessedAt
+                }));
+                hasData = true;
+            }
+        }
+    } catch (_) {}
+
+    // 3. Evidence cache (scoped to currentUser)
+    try {
+        const evidenceUserId = localStorage.getItem("workforceEvidenceUserId");
+        if (evidenceUserId === String(currentUser.id)) {
+            const cachedEvidence = JSON.parse(localStorage.getItem("workforceEvidence"));
+            if (Array.isArray(cachedEvidence)) {
+                evidence = cachedEvidence;
+                hasData = true;
+            }
+        }
+    } catch (_) {}
+
+    // 4. Performance summary cache (scoped to currentUser)
+    try {
+        const summaryUserId = localStorage.getItem("workforceSummaryUserId");
+        if (summaryUserId === String(currentUser.id)) {
+            const cachedSummary = JSON.parse(localStorage.getItem("workforcePerformanceSummary"));
+            if (cachedSummary && cachedSummary.userId === currentUser.id) {
+                performanceSummary = cachedSummary;
+            }
+        }
+    } catch (_) {}
+
+    return hasData;
+}
+
+
+// =====================================================
 // LOAD PROFILE  (cache-first for speed, background refresh)
 // =====================================================
 
@@ -178,16 +245,17 @@ async function loadProfile() {
         const cachedAt = Number(localStorage.getItem("workforceProfileCachedAt") || 0);
         const FIVE_MIN = 5 * 60 * 1000;
 
-        if (cached && cached.id && (Date.now() - cachedAt < FIVE_MIN)) {
+        if (cached && cached.id === currentUser.id && (Date.now() - cachedAt < FIVE_MIN)) {
             profile = cached;
             // Refresh in the background so next visit is up-to-date
             fetch(`${API_URL}/users/${currentUser.id}`)
                 .then(r => r.ok ? r.json() : null)
                 .then(data => {
-                    if (data) {
+                    if (data && data.id === currentUser.id) {
                         profile = data;
                         localStorage.setItem("workforceProfile", JSON.stringify(data));
                         localStorage.setItem("workforceProfileCachedAt", String(Date.now()));
+                        renderUserInfo();
                     }
                 })
                 .catch(() => {});
@@ -203,14 +271,21 @@ async function loadProfile() {
 
         profile = await response.json();
 
-        localStorage.setItem("workforceProfile", JSON.stringify(profile));
-        localStorage.setItem("workforceProfileCachedAt", String(Date.now()));
+        if (profile && profile.id === currentUser.id) {
+            localStorage.setItem("workforceProfile", JSON.stringify(profile));
+            localStorage.setItem("workforceProfileCachedAt", String(Date.now()));
+        }
 
         return true;
 
     } catch (error) {
         console.error(error);
-        profile = JSON.parse(localStorage.getItem("workforceProfile")) || null;
+        try {
+            const fallback = JSON.parse(localStorage.getItem("workforceProfile"));
+            if (fallback && fallback.id === currentUser.id) {
+                profile = fallback;
+            }
+        } catch (_) {}
         return !!profile;
     }
 }
@@ -259,18 +334,11 @@ async function loadSkills() {
 
         localStorage.setItem(
             "workforceSkills",
-            JSON.stringify(
-                userSkills.map(
-                    skill => ({
-                        id: skill.id,
-                        name: skill.skillName,
-                        confidence: skill.confidence,
-                        performanceScore: skill.performanceScore,
-                        evidenceStrength: skill.evidenceStrength,
-                        evidenceCount: skill.evidenceCount
-                    })
-                )
-            )
+            JSON.stringify(userSkills)
+        );
+        localStorage.setItem(
+            "workforceSkillsUserId",
+            String(currentUser.id)
         );
 
     } catch (error) {
@@ -280,26 +348,32 @@ async function loadSkills() {
             error
         );
 
+        if (localStorage.getItem("workforceSkillsUserId") === String(currentUser.id)) {
+            try {
+                const local =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "workforceSkills"
+                        )
+                    ) || [];
 
-        // Fallback only if backend unavailable
-        const local =
-            JSON.parse(
-                localStorage.getItem(
-                    "workforceSkills"
-                )
-            ) || [];
-
-
-        userSkills =
-            local.map(
-                skill => ({
-                    skillName:
-                        skill.name,
-
-                    confidence:
-                        skill.confidence
-                })
-            );
+                userSkills =
+                    local.map(
+                        skill => ({
+                            id: skill.id,
+                            skillName:
+                                skill.skillName || skill.name,
+                            confidence:
+                                Number(skill.confidence) || 0,
+                            performanceScore: skill.performanceScore !== null && skill.performanceScore !== undefined
+                                ? Number(skill.performanceScore) : null,
+                            evidenceStrength: skill.evidenceStrength || "None",
+                            evidenceCount: Number(skill.evidenceCount) || 0,
+                            lastAssessedAt: skill.lastAssessedAt
+                        })
+                    );
+            } catch (_) {}
+        }
     }
 }
 
@@ -340,6 +414,10 @@ async function loadEvidence() {
                 evidence
             )
         );
+        localStorage.setItem(
+            "workforceEvidenceUserId",
+            String(currentUser.id)
+        );
 
     } catch (error) {
 
@@ -348,13 +426,18 @@ async function loadEvidence() {
             error
         );
 
-
-        evidence =
-            JSON.parse(
-                localStorage.getItem(
-                    "workforceEvidence"
-                )
-            ) || [];
+        if (localStorage.getItem("workforceEvidenceUserId") === String(currentUser.id)) {
+            try {
+                evidence =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "workforceEvidence"
+                        )
+                    ) || [];
+            } catch (_) {
+                evidence = [];
+            }
+        }
     }
 }
 
@@ -641,6 +724,23 @@ function renderSummary() {
     setText("strongCount", strong);
     setText("developingCount", developing);
     setText("missingCount", missing);
+
+    const readinessMsgEl = document.getElementById("readinessMessage");
+    if (readinessMsgEl) {
+        if (isSummaryLoading && !performanceSummary) {
+            readinessMsgEl.textContent = "Calculating readiness score...";
+        } else if (isSummaryLoading) {
+            readinessMsgEl.textContent = "Syncing latest readiness score...";
+        } else if (readiness >= 80) {
+            readinessMsgEl.textContent = "High readiness for target role!";
+        } else if (readiness >= 50) {
+            readinessMsgEl.textContent = "Making good progress towards career goal.";
+        } else if (userSkills.length > 0) {
+            readinessMsgEl.textContent = "Keep building evidence to improve readiness.";
+        } else {
+            readinessMsgEl.textContent = "Start adding your skills.";
+        }
+    }
 }
 
 
@@ -947,10 +1047,17 @@ function renderRadar() {
         );
 
 
-    if (
-        !canvas ||
-        typeof Chart === "undefined"
-    ) {
+    if (!canvas) {
+        return;
+    }
+
+    if (typeof Chart === "undefined") {
+        window.addEventListener("load", function onChartReady() {
+            window.removeEventListener("load", onChartReady);
+            if (typeof Chart !== "undefined") {
+                renderRadar();
+            }
+        });
         return;
     }
 
@@ -1191,41 +1298,70 @@ async function initializeDashboard() {
     }
 
 
-    const profileLoaded = await loadProfile();
-
-    if (!profileLoaded) {
-        return;
+    // ── 1. Immediate optimistic render from valid cache (0 ms perceived delay) ──
+    const hasCachedData = loadCachedDashboardData();
+    if (hasCachedData) {
+        renderUserInfo();
+        renderSummary();
+        renderSkillGap();
+        renderNextSkill();
+        renderRecommendedLearning();
+        renderRecentEvidence();
+        renderRadar();
+        setupDashboardButtons();
     }
 
-    // ── Parallelise all independent data fetches ──────────────────────────────
-    // Before: profile → skills → evidence → performance-summary (sequential)
-    // After:  profile (already done) + [skills, evidence, summary] in parallel
-    await Promise.all([
-        loadSkills(),
-        loadEvidence(),
-        (async () => {
-            try {
-                const sumRes = await fetch(
-                    `${API_URL}/user-skills/user/${currentUser.id}/performance-summary`
-                );
-                if (sumRes.ok) {
-                    performanceSummary = await sumRes.json();
-                }
-            } catch (e) {
-                console.warn("Performance summary fetch error:", e);
-            }
-        })()
-    ]);
-    // ─────────────────────────────────────────────────────────────────────────
+    // ── 2. Refresh core data (profile, skills, evidence) in background ──────────
+    // Does NOT block on the slow performance-summary endpoint!
+    isSummaryLoading = true;
+    if (!hasCachedData) {
+        renderUserInfo();
+        renderSummary();
+    }
 
-    renderUserInfo();
-    renderSummary();
-    renderSkillGap();
-    renderNextSkill();
-    renderRecommendedLearning();
-    renderRecentEvidence();
-    renderRadar();
-    setupDashboardButtons();
+    // Refresh core data in parallel
+    Promise.all([
+        loadProfile(),
+        loadSkills(),
+        loadEvidence()
+    ]).then(() => {
+        renderUserInfo();
+        renderSummary();
+        renderSkillGap();
+        renderNextSkill();
+        renderRecommendedLearning();
+        renderRecentEvidence();
+        renderRadar();
+        setupDashboardButtons();
+    }).catch(e => {
+        console.warn("Dashboard core sync error:", e);
+    });
+
+    // ── 3. Fetch performance summary independently in background ───────────────
+    // Does not delay skills or other dashboard UI; updates summary card when ready
+    fetch(`${API_URL}/user-skills/user/${currentUser.id}/performance-summary`)
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+            if (data && data.userId === currentUser.id) {
+                performanceSummary = data;
+                localStorage.setItem(
+                    "workforcePerformanceSummary",
+                    JSON.stringify(data)
+                );
+                localStorage.setItem(
+                    "workforceSummaryUserId",
+                    String(currentUser.id)
+                );
+            }
+        })
+        .catch(e => {
+            console.warn("Performance summary fetch error:", e);
+        })
+        .finally(() => {
+            isSummaryLoading = false;
+            renderSummary();
+            renderSkillGap();
+        });
 }
 
 /* =====================================================
