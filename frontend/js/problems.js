@@ -23,10 +23,20 @@ let latestTestRun = null;
 // =====================================================
 // INITIALIZATION
 // =====================================================
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
     initUser();
     parseUrlParams();
-    await loadUserProgress();
+
+    // 1. Immediate optimistic render from local storage (0 ms perceived delay)
+    try {
+        const local = localStorage.getItem("workforceProblemProgress");
+        if (local) {
+            userProgressMap = JSON.parse(local) || {};
+        }
+    } catch (e) {
+        userProgressMap = {};
+    }
+
     renderSkillPills();
     renderTopicPills();
     renderProblemsGrid();
@@ -39,6 +49,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (problemParam) {
         openProblemModal(problemParam);
     }
+
+    // 2. Fetch fresh progress from backend asynchronously in the background
+    loadUserProgress().then(() => {
+        renderProblemsGrid();
+        updateStatsAndProgress();
+    }).catch(() => {});
 });
 
 // =====================================================

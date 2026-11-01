@@ -1,4 +1,4 @@
-@import "theme.css";
+/* theme variables are linked directly in HTML head for non-blocking parallel parsing */
 
 * {
     margin: 0;

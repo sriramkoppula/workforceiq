@@ -4,7 +4,12 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "progress_history")
+@Table(
+    name = "progress_history",
+    indexes = {
+        @Index(name = "idx_progress_history_user", columnList = "user_id, created_at ASC")
+    }
+)
 public class ProgressHistory {
 
     @Id

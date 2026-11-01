@@ -540,6 +540,25 @@ async function loadBackendReadiness() {
 
     if (!scoreElement || !messageElement || !currentUser) return;
 
+    // Immediate optimistic render from cached performance summary
+    try {
+        const cachedSummary = JSON.parse(localStorage.getItem("workforcePerformanceSummary"));
+        const cachedR = localStorage.getItem("workforceReadiness");
+        if (cachedSummary && cachedSummary.userId === currentUser.id && cachedSummary.readinessScore !== null) {
+            const r = Math.round(cachedSummary.readinessScore);
+            scoreElement.textContent = `${r}%`;
+            if (r >= 80) {
+                messageElement.textContent = `Excellent readiness for ${cachedSummary.targetCareer || 'your career'}. Keep practicing and maintaining strong performance.`;
+            } else if (r >= 50) {
+                messageElement.textContent = `Developing readiness for ${cachedSummary.targetCareer || 'your career'}. Record more project and practical evidence to close gaps.`;
+            } else {
+                messageElement.textContent = `Early stage for ${cachedSummary.targetCareer || 'your target career'}. Complete assessments and coding problems to build evidence.`;
+            }
+        } else if (cachedR !== null) {
+            scoreElement.textContent = `${cachedR}%`;
+        }
+    } catch (_) {}
+
     try {
         const response = await fetch(`${API_URL}/user-skills/user/${currentUser.id}/performance-summary`);
         if (!response.ok) {

@@ -1,4 +1,4 @@
-﻿// =====================================================
+// =====================================================
 // WORKFORCEIQ - LEARNING CENTER
 // Backend Connected Version
 // =====================================================
@@ -2023,40 +2023,79 @@ function setupButtons() {
 
 async function initializeLearning() {
 
-    const authenticated =
-        await loadProfile();
-
-
-    if (!authenticated) {
+    if (!loggedInUser || !loggedInUser.id) {
+        window.location.href = "login.html";
         return;
     }
 
+    // 1. Immediate optimistic render from local cache (0 ms perceived delay)
+    let hasLocalData = false;
+    try {
+        const cachedProfile = JSON.parse(localStorage.getItem("workforceProfile"));
+        if (cachedProfile && cachedProfile.id === loggedInUser.id) {
+            profile = cachedProfile;
+            hasLocalData = true;
+        }
+        const cachedSkills = JSON.parse(localStorage.getItem("workforceSkills"));
+        if (Array.isArray(cachedSkills) && cachedSkills.length > 0) {
+            skills = cachedSkills.map(s => ({
+                id: s.id,
+                name: s.name || s.skillName,
+                skillName: s.name || s.skillName,
+                confidence: Number(s.confidence) || 0,
+                performanceScore: s.performanceScore,
+                evidenceStrength: s.evidenceStrength || "None",
+                evidenceCount: s.evidenceCount || 0
+            }));
+            hasLocalData = true;
+        }
+        const cachedEvidence = JSON.parse(localStorage.getItem("workforceEvidence"));
+        if (Array.isArray(cachedEvidence)) {
+            evidence = cachedEvidence;
+        }
+        const cachedSessions = JSON.parse(localStorage.getItem("workforceStudySessions"));
+        if (Array.isArray(cachedSessions)) {
+            studySessions = cachedSessions;
+        }
+    } catch (_) {}
 
-await loadSkills();
-await loadEvidence();
-await loadLearningProgress();
-await loadStudySessions();
+    if (hasLocalData && profile && profile.career) {
+        loadUser();
+        loadCareer();
+        loadSummary();
+        loadLearningPath();
+        loadContinueLearning();
+        loadTodayPlan();
+        loadInsight();
+        loadAnalytics();
+        loadSkillStudyList();
+        loadWeeklyChart();
+        setupButtons();
+    }
 
-loadUser();
-    loadCareer();
-
-    loadSummary();
-
-    loadLearningPath();
-
-    loadContinueLearning();
-
-    loadTodayPlan();
-
-    loadInsight();
-
-    loadAnalytics();
-
-    loadSkillStudyList();
-
-    loadWeeklyChart();
-
-    setupButtons();
+    // 2. Parallel background fetch (eliminates 5x sequential waterfall)
+    Promise.all([
+        loadProfile(),
+        loadSkills(),
+        loadEvidence(),
+        loadLearningProgress(),
+        loadStudySessions()
+    ]).then(([profileOk]) => {
+        if (!profileOk && !hasLocalData) return;
+        loadUser();
+        loadCareer();
+        loadSummary();
+        loadLearningPath();
+        loadContinueLearning();
+        loadTodayPlan();
+        loadInsight();
+        loadAnalytics();
+        loadSkillStudyList();
+        loadWeeklyChart();
+        setupButtons();
+    }).catch(e => {
+        console.warn("Learning background sync error:", e);
+    });
 }
 
 

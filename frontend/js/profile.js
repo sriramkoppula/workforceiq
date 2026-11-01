@@ -1,4 +1,4 @@
-﻿// =====================================================
+// =====================================================
 // WORKFORCEIQ - PROFILE
 // Backend Connected Version
 // =====================================================
@@ -777,10 +777,14 @@ function setupProfileForm() {
 
 document.addEventListener(
     "DOMContentLoaded",
-    async function() {
+    function() {
 
-        await loadProfile();
+        // Cache-first fill: immediately populate fields from localStorage (0 ms perceived delay)
+        loadLocalProfile();
 
         setupProfileForm();
+
+        // Background refresh from backend
+        loadProfile();
     }
 );

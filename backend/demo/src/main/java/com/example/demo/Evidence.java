@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
     name = "evidence",
     indexes = {
         // Speeds up all findByUserId* and findByUserIdOrderByCreatedAtDesc queries
-        @Index(name = "idx_evidence_user_created", columnList = "userId, createdAt DESC"),
+        @Index(name = "idx_evidence_user_created", columnList = "user_id, created_at DESC"),
         // Speeds up findByUserIdAndSkillNameOrderByCreatedAtDesc
-        @Index(name = "idx_evidence_user_skill", columnList = "userId, skillName")
+        @Index(name = "idx_evidence_user_skill", columnList = "user_id, skill_name")
     }
 )
 public class Evidence {

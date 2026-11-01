@@ -771,5 +771,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     loadSkillOptions();
-    await loadSkillsFromBackend();
+
+    // Cache-first render: render immediately from localStorage (0 ms perceived delay)
+    try {
+        const saved = JSON.parse(localStorage.getItem("workforceSkills")) || [];
+        if (Array.isArray(saved) && saved.length > 0) {
+            skills = saved;
+            renderSkills();
+        }
+    } catch (_) {}
+
+    // Refresh from backend in background without blocking initial paint
+    loadSkillsFromBackend();
 });

@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS `user_skills` (
   `last_assessed_at` DATETIME(6) DEFAULT NULL,
   `performance_score` DOUBLE DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_user_skills_user_skill` (`user_id`, `skill_name`)
+  UNIQUE KEY `UK_user_skills_user_skill` (`user_id`, `skill_name`),
+  KEY `idx_user_skills_user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 3. Evidence table
@@ -48,7 +49,9 @@ CREATE TABLE IF NOT EXISTS `evidence` (
   `is_verified` BIT(1) DEFAULT b'0',
   `assessment_date` DATETIME(6) DEFAULT NULL,
   `created_at` DATETIME(6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_evidence_user_created` (`user_id`, `created_at` DESC),
+  KEY `idx_evidence_user_skill` (`user_id`, `skill_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 4. Learning Progress table
@@ -60,7 +63,9 @@ CREATE TABLE IF NOT EXISTS `learning_progress` (
   `progress` INT NOT NULL DEFAULT 0,
   `completed` BIT(1) NOT NULL DEFAULT b'0',
   `updated_at` DATETIME(6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_learning_progress_user` (`user_id`, `updated_at` ASC),
+  KEY `idx_learning_progress_user_skill_topic` (`user_id`, `skill_name`, `topic_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 5. Problem Progress table
@@ -88,7 +93,8 @@ CREATE TABLE IF NOT EXISTS `progress_history` (
   `user_id` BIGINT NOT NULL,
   `readiness_score` INT NOT NULL,
   `created_at` DATETIME(6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_progress_history_user` (`user_id`, `created_at` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 7. Study Sessions table
@@ -98,5 +104,6 @@ CREATE TABLE IF NOT EXISTS `study_sessions` (
   `skill` VARCHAR(255) NOT NULL,
   `duration` BIGINT NOT NULL,
   `session_date` DATETIME(6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_study_sessions_user` (`user_id`, `session_date` ASC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

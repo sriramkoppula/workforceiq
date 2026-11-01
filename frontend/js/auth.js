@@ -108,8 +108,10 @@
         );
         localStorage.removeItem("workforceProfile");
         localStorage.removeItem("workforceProfileCachedAt");
+        localStorage.removeItem("workforceSkillsCachedAt");
         localStorage.removeItem("workforceSkills");
         localStorage.removeItem("workforceSkillsUserId");
+        localStorage.removeItem("workforceEvidenceCachedAt");
         localStorage.removeItem("workforceEvidence");
         localStorage.removeItem("workforceEvidenceUserId");
         localStorage.removeItem("workforcePerformanceSummary");

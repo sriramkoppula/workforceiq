@@ -297,6 +297,42 @@ async function loadProfile() {
 
 async function loadSkills() {
 
+    // --- Cache hit: return immediately if fresh (< 2 min) ---
+    try {
+        const cachedAt = Number(localStorage.getItem("workforceSkillsCachedAt") || 0);
+        const TWO_MIN = 2 * 60 * 1000;
+        const cachedUserId = localStorage.getItem("workforceSkillsUserId");
+        if (cachedUserId === String(currentUser.id) && (Date.now() - cachedAt < TWO_MIN)) {
+            const cachedSkills = JSON.parse(localStorage.getItem("workforceSkills"));
+            if (Array.isArray(cachedSkills) && cachedSkills.length > 0) {
+                userSkills = cachedSkills;
+                // Refresh in background
+                fetch(`${API_URL}/user-skills/user/${currentUser.id}`)
+                    .then(r => r.ok ? r.json() : null)
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            userSkills = data.map(skill => ({
+                                id: skill.id,
+                                skillName: skill.skillName,
+                                confidence: Number(skill.confidence) || 0,
+                                performanceScore: skill.performanceScore !== null && skill.performanceScore !== undefined
+                                    ? Number(skill.performanceScore) : null,
+                                evidenceStrength: skill.evidenceStrength || "None",
+                                evidenceCount: Number(skill.evidenceCount) || 0,
+                                lastAssessedAt: skill.lastAssessedAt
+                            }));
+                            localStorage.setItem("workforceSkills", JSON.stringify(userSkills));
+                            localStorage.setItem("workforceSkillsCachedAt", String(Date.now()));
+                            renderSkillGap();
+                            renderNextSkill();
+                            renderRadar();
+                        }
+                    }).catch(() => {});
+                return true;
+            }
+        }
+    } catch (_) {}
+
     try {
 
         const response =
@@ -339,6 +375,10 @@ async function loadSkills() {
         localStorage.setItem(
             "workforceSkillsUserId",
             String(currentUser.id)
+        );
+        localStorage.setItem(
+            "workforceSkillsCachedAt",
+            String(Date.now())
         );
 
     } catch (error) {
@@ -384,6 +424,31 @@ async function loadSkills() {
 
 async function loadEvidence() {
 
+    // --- Cache hit: return immediately if fresh (< 2 min) ---
+    try {
+        const cachedAt = Number(localStorage.getItem("workforceEvidenceCachedAt") || 0);
+        const TWO_MIN = 2 * 60 * 1000;
+        const cachedUserId = localStorage.getItem("workforceEvidenceUserId");
+        if (cachedUserId === String(currentUser.id) && (Date.now() - cachedAt < TWO_MIN)) {
+            const cachedEvidence = JSON.parse(localStorage.getItem("workforceEvidence"));
+            if (Array.isArray(cachedEvidence)) {
+                evidence = cachedEvidence;
+                // Refresh in background
+                fetch(`${API_URL}/evidence/user/${currentUser.id}`)
+                    .then(r => r.ok ? r.json() : null)
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            evidence = data;
+                            localStorage.setItem("workforceEvidence", JSON.stringify(evidence));
+                            localStorage.setItem("workforceEvidenceCachedAt", String(Date.now()));
+                            renderRecentEvidence();
+                        }
+                    }).catch(() => {});
+                return true;
+            }
+        }
+    } catch (_) {}
+
     try {
 
         const response =
@@ -417,6 +482,10 @@ async function loadEvidence() {
         localStorage.setItem(
             "workforceEvidenceUserId",
             String(currentUser.id)
+        );
+        localStorage.setItem(
+            "workforceEvidenceCachedAt",
+            String(Date.now())
         );
 
     } catch (error) {
@@ -1312,8 +1381,7 @@ async function initializeDashboard() {
     }
 
     // ── 2. Refresh core data (profile, skills, evidence) in background ──────────
-    // Does NOT block on the slow performance-summary endpoint!
-    isSummaryLoading = true;
+    isSummaryLoading = !performanceSummary;
     if (!hasCachedData) {
         renderUserInfo();
         renderSummary();

@@ -354,14 +354,32 @@ public class PerformanceScoringService {
     @Transactional
     public List<UserSkill> recalculateAllSkillsForUser(Long userId) {
         List<UserSkill> skills = userSkillRepository.findByUserId(userId);
-        List<UserSkill> updatedList = new ArrayList<>();
-
-        for (UserSkill skill : skills) {
-            UserSkill updated = recalculateSkillScore(userId, skill.getSkillName());
-            updatedList.add(updated);
+        if (skills.isEmpty()) {
+            return Collections.emptyList();
         }
 
-        return updatedList;
+        List<Evidence> allEvidence = evidenceRepository.findByUserIdOrderByCreatedAtDesc(userId);
+        Map<String, List<Evidence>> evidenceBySkill = new HashMap<>();
+        for (Evidence e : allEvidence) {
+            if (e.getSkillName() != null) {
+                evidenceBySkill.computeIfAbsent(e.getSkillName(), k -> new ArrayList<>()).add(e);
+            }
+        }
+
+        List<UserSkill> updatedList = new ArrayList<>(skills.size());
+        for (UserSkill skill : skills) {
+            List<Evidence> skillEvidence = evidenceBySkill.getOrDefault(skill.getSkillName(), Collections.emptyList());
+            SkillScoreBreakdownDTO breakdown = calculateSkillBreakdownFromEvidence(userId, skill.getSkillName(), skillEvidence);
+
+            skill.setPerformanceScore(breakdown.getPerformanceScore());
+            skill.setConfidence(breakdown.getDisplayConfidence());
+            skill.setEvidenceStrength(breakdown.getEvidenceStrength());
+            skill.setEvidenceCount(breakdown.getEvidenceCount());
+            skill.setLastAssessedAt(breakdown.getLastAssessedAt());
+            updatedList.add(skill);
+        }
+
+        return userSkillRepository.saveAll(updatedList);
     }
 
     /**
@@ -401,15 +419,7 @@ public class PerformanceScoringService {
 
         for (UserSkill s : userSkills) {
             // Use pre-loaded evidence list (no additional DB call).
-            // Defensive fallback: if bulk lookup returned nothing, query per skill (e.g. legacy mocks or selective caching)
-            List<Evidence> skillEvidence;
-            if (evidenceBySkill.containsKey(s.getSkillName())) {
-                skillEvidence = evidenceBySkill.get(s.getSkillName());
-            } else if (allEvidence == null || allEvidence.isEmpty()) {
-                skillEvidence = evidenceRepository.findByUserIdAndSkillNameOrderByCreatedAtDesc(userId, s.getSkillName());
-            } else {
-                skillEvidence = Collections.emptyList();
-            }
+            List<Evidence> skillEvidence = evidenceBySkill.getOrDefault(s.getSkillName(), Collections.emptyList());
 
             SkillScoreBreakdownDTO b = calculateSkillBreakdownFromEvidence(userId, s.getSkillName(), skillEvidence);
             breakdowns.add(b);

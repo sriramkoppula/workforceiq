@@ -1,4 +1,4 @@
-﻿// =====================================================
+// =====================================================
 // WORKFORCEIQ - SKILL DETAIL
 // BACKEND CONNECTED
 // =====================================================
@@ -556,94 +556,40 @@ async function loadSkillDetail() {
     }
 
 
-    // Load actual backend data
-    await loadUserSkills();
+    // 1. Immediate optimistic render from local cache (0 ms perceived delay)
+    loadSkillsFromLocalStorage();
+    loadEvidenceFromLocalStorage();
 
-    await loadSkillEvidence();
+    function renderCommonUI() {
+        const conf = getConfidence();
 
+        const nameElement = document.getElementById("skillName");
+        if (nameElement) nameElement.textContent = skillName;
 
-    const confidence =
-        getConfidence();
+        const descriptionElement = document.getElementById("skillDescription");
+        if (descriptionElement) {
+            descriptionElement.textContent = skillDescriptions[skillName] || "Skill required for your selected career path.";
+        }
 
-
-    // =================================================
-    // SKILL NAME
-    // =================================================
-
-    const nameElement =
-        document.getElementById(
-            "skillName"
-        );
-
-    if (nameElement) {
-
-        nameElement.textContent =
-            skillName;
+        renderPrerequisites();
+        renderSkillGap(conf);
+        renderEvidence();
+        renderRecommendedAction(conf);
+        setupLearningButton();
     }
 
+    renderCommonUI();
 
-    // =================================================
-    // DESCRIPTION
-    // =================================================
-
-    const descriptionElement =
-        document.getElementById(
-            "skillDescription"
-        );
-
-    if (descriptionElement) {
-
-        descriptionElement.textContent =
-            skillDescriptions[
-                skillName
-            ] ||
-            "Skill required for your selected career path.";
-    }
-
-
-    // =================================================
-    // PERFORMANCE SCORE & BREAKDOWN
-    // =================================================
-
-    await renderCategoryBreakdown();
-
-    // =================================================
-    // PREREQUISITES
-    // =================================================
-
-    renderPrerequisites();
-
-
-    // =================================================
-    // SKILL GAP
-    // =================================================
-
-    renderSkillGap(
-        confidence
-    );
-
-
-    // =================================================
-    // EVIDENCE
-    // =================================================
-
-    renderEvidence();
-
-
-    // =================================================
-    // RECOMMENDED ACTION
-    // =================================================
-
-    renderRecommendedAction(
-        confidence
-    );
-
-
-    // =================================================
-    // LEARNING BUTTON
-    // =================================================
-
-    setupLearningButton();
+    // 2. Parallel background fetch (eliminates sequential waterfall)
+    Promise.all([
+        loadUserSkills(),
+        loadSkillEvidence(),
+        renderCategoryBreakdown()
+    ]).then(() => {
+        renderCommonUI();
+    }).catch(e => {
+        console.warn("Skill detail sync error:", e);
+    });
 }
 
 

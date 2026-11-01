@@ -1051,36 +1051,41 @@ async function initializeRoadmap() {
     currentUser =
         getLoggedInUser();
 
-
     if (!currentUser) {
         return;
     }
 
-
     loadProfile();
-
-
     updateCareer();
 
+    // Cache-first instant render (0 ms perceived delay)
+    try {
+        const local = JSON.parse(localStorage.getItem("workforceSkills")) || [];
+        if (Array.isArray(local) && local.length > 0) {
+            userSkills = local.map(s => ({
+                id: s.id,
+                skillName: s.name || s.skillName,
+                confidence: Number(s.confidence) || 0,
+                performanceScore: s.performanceScore,
+                evidenceStrength: s.evidenceStrength || "None",
+                evidenceCount: s.evidenceCount || 0
+            }));
+            updateSummary();
+            renderRoadmap();
+            updateNextSkillCard();
+            updateTodayAction();
+        }
+    } catch (_) {}
 
-    await loadUserSkills();
-
-
-    updateSummary();
-
-
-    renderRoadmap();
-
-
-    updateNextSkillCard();
-
-
-    updateTodayAction();
-
-
-    console.log(
-        "WorkforceIQ Roadmap loaded."
-    );
+    // Background sync: load latest skills from backend
+    loadUserSkills().then(() => {
+        updateSummary();
+        renderRoadmap();
+        updateNextSkillCard();
+        updateTodayAction();
+    }).catch(e => {
+        console.warn("Roadmap background sync error:", e);
+    });
 }
 
 

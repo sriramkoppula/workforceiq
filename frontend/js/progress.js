@@ -92,6 +92,13 @@ async function loadProfile() {
     }
 
     try {
+        const cached = JSON.parse(localStorage.getItem("workforceProfile"));
+        if (cached && cached.id === currentUser.id) {
+            userProfile = cached;
+        }
+    } catch (_) {}
+
+    try {
 
         const response = await fetch(
             `${API_URL}/users/${currentUser.id}`
@@ -874,27 +881,64 @@ function renderChart() {
 
 async function initializeProgress() {
 
-    const authenticated = await loadProfile();
-
-    if (!authenticated) {
+    currentUser = getCurrentUser();
+    if (!currentUser || !currentUser.id) {
+        window.location.href = "login.html";
         return;
     }
 
-    // ── Parallel fetch: skills, history, and readiness summary ───────────────
-    // Previously sequential (3× round-trip). Now fires all three simultaneously.
-    const [, , readiness] = await Promise.all([
+    // 1. Immediate optimistic render from local cache (0 ms perceived delay)
+    let hasLocalData = false;
+    let cachedReadiness = 0;
+    try {
+        const cachedProfile = JSON.parse(localStorage.getItem("workforceProfile"));
+        if (cachedProfile && cachedProfile.id === currentUser.id) {
+            userProfile = cachedProfile;
+            hasLocalData = true;
+        }
+        const cachedSkills = JSON.parse(localStorage.getItem("workforceSkills"));
+        if (Array.isArray(cachedSkills) && cachedSkills.length > 0) {
+            userSkills = cachedSkills.map(s => ({ id: s.id, skillName: s.name || s.skillName, confidence: s.confidence }));
+            hasLocalData = true;
+        }
+        const cachedHist = JSON.parse(localStorage.getItem("workforceProgressHistory"));
+        if (Array.isArray(cachedHist) && cachedHist.length > 0) {
+            progressHistory = cachedHist;
+            hasLocalData = true;
+        }
+        const r = localStorage.getItem("workforceReadiness");
+        if (r !== null) {
+            cachedReadiness = Number(r) || 0;
+        }
+    } catch (_) {}
+
+    if (hasLocalData) {
+        updateCareerText();
+        updateReadiness(cachedReadiness);
+        updateStatistics(cachedReadiness);
+        renderHistoryList();
+        renderChart();
+    }
+
+    // 2. Parallel background sync
+    Promise.all([
+        loadProfile(),
         loadSkills(),
         loadHistory(),
         fetchBackendReadiness()
-    ]);
-
-    await saveCurrentProgress(readiness);
-
-    updateCareerText();
-    updateReadiness(readiness);
-    updateStatistics(readiness);
-    renderHistoryList();
-    renderChart();
+    ]).then(([profileOk, , , readiness]) => {
+        if (!profileOk) return;
+        const finalReadiness = readiness !== undefined ? readiness : cachedReadiness;
+        updateCareerText();
+        updateReadiness(finalReadiness);
+        updateStatistics(finalReadiness);
+        renderHistoryList();
+        renderChart();
+        // Save history asynchronously in background (non-blocking)
+        saveCurrentProgress(finalReadiness).catch(() => {});
+    }).catch(e => {
+        console.warn("Background progress sync error:", e);
+    });
 }
 
 
