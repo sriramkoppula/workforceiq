@@ -20,7 +20,7 @@
 }
 
 .back-link:hover {
-    color: #312e81;
+    color: #0f172a;
 }
 
 
@@ -37,7 +37,7 @@
 
     background: linear-gradient(
         135deg,
-        #eef2ff,
+        #eff6ff,
         #f8fafc
     );
 
@@ -55,7 +55,7 @@
 
     letter-spacing: 1.5px;
 
-    color: #4f46e5;
+    color: #2563eb;
 
     margin-bottom: 10px;
 }
@@ -105,7 +105,7 @@
 
 .difficulty-box strong {
     font-size: 18px;
-    color: #312e81;
+    color: #0f172a;
 }
 
 
@@ -228,7 +228,7 @@
 
     border-radius: 50%;
 
-    background: #eef2ff;
+    background: #eff6ff;
 
     color: #4338ca;
 
@@ -344,7 +344,7 @@
 }
 
 .progress-header strong {
-    color: #312e81;
+    color: #0f172a;
 }
 
 .progress-track {
@@ -364,7 +364,7 @@
 
     width: 0%;
 
-    background: #4f46e5;
+    background: #2563eb;
 
     border-radius: 10px;
 
@@ -377,7 +377,7 @@
 .submission-card {
     background: #fafaff;
 
-    border-color: #c7d2fe;
+    border-color: #bfdbfe;
 }
 
 .submission-actions {
@@ -413,7 +413,7 @@
 }
 
 .primary-button {
-    background: #312e81;
+    background: #0f172a;
 
     color: white;
 }
@@ -425,13 +425,13 @@
 .secondary-button {
     background: white;
 
-    color: #312e81;
+    color: #0f172a;
 
-    border: 1px solid #c7d2fe;
+    border: 1px solid #bfdbfe;
 }
 
 .secondary-button:hover {
-    background: #eef2ff;
+    background: #eff6ff;
 }
 
 .completion-message {

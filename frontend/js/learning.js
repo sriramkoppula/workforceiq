@@ -1953,17 +1953,18 @@ function loadWeeklyChart() {
 
                     datasets: [
                         {
-                            label:
-                                "Study Hours",
-
-                            data:
-                                values,
-
-                            tension:
-                                0.3,
-
-                            fill:
-                                false
+                            label: "Study Hours",
+                            data: values,
+                            tension: 0.35,
+                            fill: true,
+                            borderColor: "#2563eb",
+                            backgroundColor: "rgba(37, 99, 235, 0.12)",
+                            pointBackgroundColor: "#2563eb",
+                            pointBorderColor: "#ffffff",
+                            pointBorderWidth: 2,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            borderWidth: 2.5
                         }
                     ]
                 },

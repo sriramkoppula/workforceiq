@@ -1168,14 +1168,17 @@ function renderRadar() {
 
                     datasets: [
                         {
-                            label:
-                                "Skill Confidence",
-
-                            data:
-                                values,
-
-                            fill:
-                                true
+                            label: "Skill Confidence",
+                            data: values,
+                            fill: true,
+                            backgroundColor: "rgba(37, 99, 235, 0.18)",
+                            borderColor: "#2563eb",
+                            pointBackgroundColor: "#2563eb",
+                            pointBorderColor: "#ffffff",
+                            pointHoverBackgroundColor: "#ffffff",
+                            pointHoverBorderColor: "#2563eb",
+                            pointRadius: 3,
+                            borderWidth: 2
                         }
                     ]
                 },

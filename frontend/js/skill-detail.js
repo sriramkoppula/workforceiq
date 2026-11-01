@@ -665,7 +665,7 @@ async function renderCategoryBreakdown() {
                         <div>${scoreText}</div>
                     </div>
                     <div style="height: 6px; background: #e2e8f0; border-radius: 999px; overflow: hidden;">
-                        <div style="width: ${width}%; height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 999px;"></div>
+                        <div style="width: ${width}%; height: 100%; background: #2563eb; border-radius: 999px;"></div>
                     </div>
                 `;
 

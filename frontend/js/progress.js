@@ -763,13 +763,13 @@ function renderChart() {
 
                     data: values,
 
-                    borderColor: "#4f46e5",
+                    borderColor: "#2563eb",
 
-                    backgroundColor: "rgba(79, 70, 229, 0.10)",
+                    backgroundColor: "rgba(37, 99, 235, 0.12)",
 
                     borderWidth: 3,
 
-                    pointBackgroundColor: "#4f46e5",
+                    pointBackgroundColor: "#2563eb",
 
                     pointBorderColor: "#ffffff",
 

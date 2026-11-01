@@ -24,7 +24,7 @@
             rgba(139, 92, 246, 0.07),
             transparent 30%
         ),
-        #f7f9fc;
+        #f8fafc;
 }
 
 
@@ -64,7 +64,7 @@
 }
 
 .back-link:hover {
-    color: #4f46e5;
+    color: #2563eb;
 
     transform: translateX(-2px);
 }
@@ -81,7 +81,7 @@
 .roadmap-heading .section-label {
     margin: 0 0 9px;
 
-    color: #6366f1;
+    color: #2563eb;
 
     font-size: 12px;
     font-weight: 800;
@@ -94,7 +94,7 @@
 .roadmap-heading h1 {
     margin: 0;
 
-    color: #172554;
+    color: #0f172a;
 
     font-size: clamp(32px, 4vw, 44px);
     font-weight: 800;
@@ -142,8 +142,8 @@
     background:
         linear-gradient(
             135deg,
-            #172554 0%,
-            #312e81 55%,
+            #0f172a 0%,
+            #0f172a 55%,
             #4c1d95 100%
         );
 
@@ -180,7 +180,7 @@
 
     margin-bottom: 8px;
 
-    color: #c7d2fe;
+    color: #bfdbfe;
 
     font-size: 11px;
     font-weight: 800;
@@ -245,7 +245,7 @@
     background:
         linear-gradient(
             135deg,
-            #6366f1,
+            #2563eb,
             #8b5cf6
         );
 
@@ -311,7 +311,7 @@
 .card-header h2 {
     margin: 0;
 
-    color: #172554;
+    color: #0f172a;
 
     font-size: 23px;
     font-weight: 800;
@@ -378,9 +378,9 @@
 
     border-radius: 50%;
 
-    background: #eef2ff;
+    background: #eff6ff;
 
-    color: #4f46e5;
+    color: #2563eb;
 
     font-size: 13px;
     font-weight: 800;
@@ -395,7 +395,7 @@
 .roadmap-item h4 {
     margin: 0 0 5px;
 
-    color: #172554;
+    color: #0f172a;
 
     font-size: 16px;
     font-weight: 800;
@@ -457,9 +457,9 @@
 .current,
 .in-progress,
 .status-current {
-    background: #eef2ff;
+    background: #eff6ff;
 
-    color: #4f46e5;
+    color: #2563eb;
 }
 
 
@@ -489,14 +489,14 @@
 
     padding: 24px 27px;
 
-    border: 1px solid #c7d2fe;
+    border: 1px solid #bfdbfe;
 
     border-radius: 19px;
 
     background:
         linear-gradient(
             135deg,
-            #eef2ff,
+            #eff6ff,
             #f5f3ff
         );
 }
@@ -533,7 +533,7 @@
 
     margin-bottom: 5px;
 
-    color: #6366f1;
+    color: #2563eb;
 
     font-size: 10px;
     font-weight: 800;
@@ -547,7 +547,7 @@
 .today-action h2 {
     margin: 0;
 
-    color: #172554;
+    color: #0f172a;
 
     font-size: 18px;
     font-weight: 800;
@@ -619,11 +619,11 @@
 }
 
 .secondary-btn:hover {
-    border-color: #c7d2fe;
+    border-color: #bfdbfe;
 
-    background: #eef2ff;
+    background: #eff6ff;
 
-    color: #4f46e5;
+    color: #2563eb;
 }
 
 
@@ -645,8 +645,8 @@
     background:
         linear-gradient(
             135deg,
-            #4f46e5,
-            #7c3aed
+            #2563eb,
+            #1d4ed8
         );
 
     color: #ffffff;

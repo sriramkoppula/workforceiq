@@ -20,7 +20,7 @@
 }
 
 .back-link:hover {
-    color: #312e81;
+    color: #0f172a;
 }
 
 
@@ -38,7 +38,7 @@
 
     background: linear-gradient(
         135deg,
-        #eef2ff,
+        #eff6ff,
         #f8fafc
     );
 
@@ -55,7 +55,7 @@
 
     letter-spacing: 1.5px;
 
-    color: #4f46e5;
+    color: #2563eb;
 
     margin-bottom: 10px;
 }
@@ -181,7 +181,7 @@
 .assessment-rules strong {
     display: block;
 
-    color: #312e81;
+    color: #0f172a;
 
     font-size: 24px;
 
@@ -220,7 +220,7 @@
 }
 
 .primary-button {
-    background: #312e81;
+    background: #0f172a;
 
     color: white;
 }
@@ -232,13 +232,13 @@
 .secondary-button {
     background: white;
 
-    color: #312e81;
+    color: #0f172a;
 
-    border: 1px solid #c7d2fe;
+    border: 1px solid #bfdbfe;
 }
 
 .secondary-button:hover {
-    background: #eef2ff;
+    background: #eff6ff;
 }
 
 
@@ -267,7 +267,7 @@
 
     border-radius: 20px;
 
-    background: #eef2ff;
+    background: #eff6ff;
 
     color: #4338ca;
 
@@ -295,7 +295,7 @@
 
     width: 0%;
 
-    background: #4f46e5;
+    background: #2563eb;
 
     transition: width 0.3s ease;
 }
@@ -342,15 +342,15 @@
 .assessment-option:hover {
     border-color: #a5b4fc;
 
-    background: #eef2ff;
+    background: #eff6ff;
 }
 
 .assessment-option.selected {
-    border-color: #4f46e5;
+    border-color: #2563eb;
 
-    background: #eef2ff;
+    background: #eff6ff;
 
-    color: #312e81;
+    color: #0f172a;
 
     font-weight: 700;
 }
@@ -416,15 +416,15 @@
     justify-content: center;
     align-items: center;
 
-    background: #eef2ff;
+    background: #eff6ff;
 
-    border: 10px solid #c7d2fe;
+    border: 10px solid #bfdbfe;
 }
 
 .score-circle strong {
     font-size: 32px;
 
-    color: #312e81;
+    color: #0f172a;
 }
 
 #resultMessage {
@@ -487,7 +487,7 @@
 .insight-card {
     background: #fafaff;
 
-    border-color: #c7d2fe;
+    border-color: #bfdbfe;
 }
 
 .insight-card h2 {

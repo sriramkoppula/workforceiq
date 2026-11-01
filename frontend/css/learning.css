@@ -9,7 +9,7 @@
 
 body {
     margin: 0;
-    background: #f6f8fc;
+    background: #f8fafc;
     color: #172033;
     font-family: Inter, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
@@ -54,7 +54,7 @@ body {
 
     margin-bottom: 9px;
 
-    color: #4f46e5;
+    color: #2563eb;
 
     font-size: 11px;
     font-weight: 800;
@@ -92,9 +92,9 @@ body {
 
     flex-shrink: 0;
 
-    background: #f0efff;
+    background: #eff6ff;
 
-    border: 1px solid #dedcff;
+    border: 1px solid #dbeafe;
     border-radius: 18px;
 
     font-size: 34px;
@@ -237,7 +237,7 @@ body {
 
     width: 4px;
 
-    background: #4f46e5;
+    background: #2563eb;
 }
 
 #continueSkill {
@@ -269,7 +269,7 @@ body {
 }
 
 .continue-progress-top strong {
-    color: #4f46e5;
+    color: #2563eb;
 
     font-size: 14px;
 }
@@ -289,7 +289,7 @@ body {
     width: 0;
     height: 100%;
 
-    background: #4f46e5;
+    background: #2563eb;
 
     border-radius: inherit;
 
@@ -322,8 +322,8 @@ body {
 
     color: #ffffff;
 
-    background: #4f46e5;
-    border: 1px solid #4f46e5;
+    background: #2563eb;
+    border: 1px solid #2563eb;
 
     box-shadow: 0 5px 14px rgba(79, 70, 229, 0.18);
 }
@@ -338,7 +338,7 @@ body {
 .secondary-button {
     padding: 11px 17px;
 
-    color: #4f46e5;
+    color: #2563eb;
 
     background: #f5f5ff;
     border: 1px solid #dedfff;
@@ -430,8 +430,8 @@ body {
     border-radius: 50%;
 
     background: conic-gradient(
-        #4f46e5 0deg,
-        #4f46e5 0deg,
+        #2563eb 0deg,
+        #2563eb 0deg,
         #edf0f5 0deg,
         #edf0f5 360deg
     );
@@ -555,7 +555,7 @@ body {
     width: 0;
     height: 100%;
 
-    background: #4f46e5;
+    background: #2563eb;
 
     border-radius: inherit;
 
@@ -577,7 +577,7 @@ body {
 }
 
 .daily-goal-footer a {
-    color: #4f46e5;
+    color: #2563eb;
 
     font-weight: 700;
     text-decoration: none;
@@ -616,7 +616,7 @@ body {
 }
 
 .today-plan-meta span {
-    color: #4f46e5;
+    color: #2563eb;
     background: #f1f0ff;
 }
 
@@ -695,7 +695,7 @@ body {
 
     margin-bottom: 15px;
 
-    background: #f0efff;
+    background: #eff6ff;
 
     border-radius: 10px;
 
@@ -1089,7 +1089,7 @@ body {
 .learning-path-item:hover {
     transform: translateY(-2px);
 
-    border-color: #cfd2f5;
+    border-color: #bfdbfe;
 
     box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
 }
@@ -1107,9 +1107,9 @@ body {
     width: 38px;
     height: 38px;
 
-    color: #4f46e5;
+    color: #2563eb;
 
-    background: #f0efff;
+    background: #eff6ff;
 
     border-radius: 50%;
 
@@ -1195,8 +1195,8 @@ body {
 /* Current */
 
 .path-status.current {
-    color: #4f46e5;
-    background: #f0efff;
+    color: #2563eb;
+    background: #eff6ff;
 }
 
 
@@ -1229,7 +1229,7 @@ body {
 
     padding: 8px 12px;
 
-    color: #4f46e5;
+    color: #2563eb;
 
     background: #f5f5ff;
 
