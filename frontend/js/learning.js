@@ -652,7 +652,7 @@ function prerequisitesCompleted(
 
     const required =
         prerequisites[
-            skillName
+        skillName
         ] || [];
 
 
@@ -678,7 +678,7 @@ function getNextSkill() {
 
     const requiredSkills =
         careerSkills[
-            profile.career
+        profile.career
         ] || [];
 
 
@@ -715,7 +715,7 @@ function getLearningSkills() {
 
     const requiredSkills =
         careerSkills[
-            profile.career
+        profile.career
         ] || [];
 
 
@@ -908,7 +908,7 @@ function loadSummary() {
 
     const requiredSkills =
         careerSkills[
-            profile.career
+        profile.career
         ] || [];
 
 
@@ -925,7 +925,7 @@ function loadSummary() {
 
             remainingHours +=
                 learningTime[
-                    skill
+                skill
                 ] || 0;
         }
     );
@@ -944,7 +944,7 @@ function loadSummary() {
 
             const hours =
                 learningTime[
-                    skill
+                skill
                 ] || 0;
 
 
@@ -967,7 +967,7 @@ function loadSummary() {
                 total +
                 (
                     learningTime[
-                        skill
+                    skill
                     ] || 0
                 ),
             0
@@ -1102,7 +1102,7 @@ function loadLearningPath() {
 
     const requiredSkills =
         careerSkills[
-            profile?.career
+        profile?.career
         ] || [];
 
 
@@ -1177,7 +1177,7 @@ function loadLearningPath() {
 
             const estimatedHours =
                 learningTime[
-                    skill
+                skill
                 ] || 0;
 
 
@@ -1195,11 +1195,10 @@ function loadLearningPath() {
 
                 <div class="path-number">
 
-                    ${
-                        completed
-                            ? "✓"
-                            : index + 1
-                    }
+                    ${completed
+                    ? "✓"
+                    : index + 1
+                }
 
                 </div>
 
@@ -1232,9 +1231,8 @@ function loadLearningPath() {
                 </span>
 
 
-                ${
-                    unlocked
-                        ? `
+                ${unlocked
+                    ? `
                             <a
                                 href="skill-detail.html?skill=${encodeURIComponent(skill)}"
                                 class="path-button"
@@ -1242,7 +1240,7 @@ function loadLearningPath() {
                                 View →
                             </a>
                         `
-                        : ""
+                    : ""
                 }
 
             `;
@@ -1533,7 +1531,7 @@ function loadInsight() {
 
     const prerequisiteList =
         prerequisites[
-            nextSkill
+        nextSkill
         ] || [];
 
 
@@ -1624,28 +1622,28 @@ function loadAnalytics() {
     // =========================================
 
     const studySessions =
-    Array.isArray(learningStudySessions)
-        ? learningStudySessions
-        : [];
+        Array.isArray(learningStudySessions)
+            ? learningStudySessions
+            : [];
 
 
-const totalSeconds =
-    studySessions.reduce(
-        (
-            total,
-            session
-        ) =>
-            total +
+    const totalSeconds =
+        studySessions.reduce(
             (
-                Number(
-                    session.duration
-                ) || 0
-            ),
-        0
-    );
+                total,
+                session
+            ) =>
+                total +
+                (
+                    Number(
+                        session.duration
+                    ) || 0
+                ),
+            0
+        );
 
-const totalMinutes =
-    totalSeconds / 60;
+    const totalMinutes =
+        totalSeconds / 60;
 
 
     const analyticsStudyTime =
@@ -1720,8 +1718,8 @@ function calculateStudyStreak(
                 new Date(
                     session.sessionDate
                 )
-                .toISOString()
-                .split("T")[0];
+                    .toISOString()
+                    .split("T")[0];
 
 
             dates.add(date);
@@ -1784,7 +1782,7 @@ function loadSkillStudyList() {
 
     const requiredSkills =
         careerSkills[
-            profile?.career
+        profile?.career
         ] || [];
 
 
@@ -1862,10 +1860,10 @@ function loadWeeklyChart() {
     }
 
 
-  const sessions =
-    Array.isArray(learningStudySessions)
-        ? learningStudySessions
-        : [];
+    const sessions =
+        Array.isArray(learningStudySessions)
+            ? learningStudySessions
+            : [];
 
 
     const labels = [];
@@ -1907,10 +1905,10 @@ function loadWeeklyChart() {
             sessions
                 .filter(
                     session =>
-                       session.sessionDate &&
-new Date(session.sessionDate)
-    .toISOString()
-    .split("T")[0] === key
+                        session.sessionDate &&
+                        new Date(session.sessionDate)
+                            .toISOString()
+                            .split("T")[0] === key
                 )
                 .reduce(
                     (
@@ -2023,6 +2021,9 @@ function setupButtons() {
 
 async function initializeLearning() {
 
+    // Restore the logged-in user from localStorage
+    loggedInUser = getLoggedInUser();
+
     if (!loggedInUser || !loggedInUser.id) {
         window.location.href = "login.html";
         return;
@@ -2057,7 +2058,7 @@ async function initializeLearning() {
         if (Array.isArray(cachedSessions)) {
             studySessions = cachedSessions;
         }
-    } catch (_) {}
+    } catch (_) { }
 
     if (hasLocalData && profile && profile.career) {
         loadUser();
